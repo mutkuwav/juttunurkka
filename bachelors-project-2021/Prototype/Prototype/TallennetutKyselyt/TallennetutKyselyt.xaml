@@ -30,7 +30,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
        
         
         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-            <ImageButton Source="backBtn.png"
+            <ImageButton Source="back_btn.png"
                          BackgroundColor="Transparent"
                          HorizontalOptions="Start"
                          Clicked="BackBtnClicked"
