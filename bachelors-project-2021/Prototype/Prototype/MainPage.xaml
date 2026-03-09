@@ -116,7 +116,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         LineBreakMode="WordWrap"
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="Center"
-                        FontFamily="LineSeed"
+                        FontFamily="LineSeedRegular"
                         Margin="10,20,10,40" />
 
                     <Label Text="AVAA JUTTUNURKKA JA ODOTA OPETTAJAN OHJEITA"
@@ -128,7 +128,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                         Padding="0"
                         LineBreakMode="WordWrap"
-                        FontFamily="LineSeed"
+                        FontFamily="LineSeedRegular"
                         Margin="10,0,10,0"
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="Center"/>
@@ -161,7 +161,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                HorizontalOptions="Start"
                                FontSize="30"
                                TextColor="Black"
-                               FontFamily="LineSeed"
+                               FontFamily="LineSeedRegular"
                                LineBreakMode="WordWrap"/>
 
                             <Image Source="lukko.png"
