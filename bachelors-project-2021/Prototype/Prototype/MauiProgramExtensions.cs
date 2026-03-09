@@ -16,6 +16,9 @@ public static class MauiProgramExtensions
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("BebasNeue-Regular.ttf", "BebasNeue");
 				fonts.AddFont("Roboto-Medium.ttf", "RobotoMedium");
+				fonts.AddFont("LINESeedJP-Regular.ttf", "LineSeed");
+				fonts.AddFont("LINESeedJP-thin.ttf", "LineSeedThin");
+				fonts.AddFont("LINESeedJP-Bold.ttf", "LineSeedBold");
             });
 
 #if DEBUG
