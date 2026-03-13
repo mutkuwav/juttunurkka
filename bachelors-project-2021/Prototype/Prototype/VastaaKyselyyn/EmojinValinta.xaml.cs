@@ -27,6 +27,7 @@ using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui;
+using Prototype;
 
 namespace Prototype
 {
@@ -180,8 +181,15 @@ namespace Prototype
         private async void Vastaa_Clicked(object sender, EventArgs e)
         {
             cts.Cancel(); //cancel task if button clicked
+
             await Main.GetInstance().client.SendResult(answer.ToString());
-            await Navigation.PushAsync(new EmojiAnswered(answer));
+            
+            if (answer == 7) { 
+                await Navigation.PushAsync(new OmanEmojinPiirto());
+            } else { 
+                await Navigation.PushAsync(new EmojiAnswered(answer)); 
+            }
+
         }
     }
 }

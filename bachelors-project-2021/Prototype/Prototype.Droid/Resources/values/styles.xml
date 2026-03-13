@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-    <style name="MainTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Remove the action bar -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-		<item name="android:statusBarColor">@color/colorPrimary</item>
-		<item name="colorAccent">@color/colorAccent</item>
+    <!-- Use a MaterialComponents theme so Material widgets can resolve required attributes -->
+    <style name="MainTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Keep statusBarColor for API 21+ devices -->
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 </resources>

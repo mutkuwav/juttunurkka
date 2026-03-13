@@ -71,8 +71,14 @@ namespace Prototype
                 new() { Title = "Naurujoogatuokio", ImageSource = "yoga.png" },
                 new() { Title = "Katsotaan video", ImageSource = "video.png" },
                 new() { Title = "Kerrotaan vitsi", ImageSource = "joke.png" },
+            }},
+
+            { 7, new List<Activity>() {
+                new() { Title = "Kerrotaan tarina", ImageSource = "thought.png" },
+                new() { Title = "Katsotaan video", ImageSource = "video.png" },
+                new() { Title = "Kerrotaan vitsi", ImageSource = "joke.png" },
             }}
-		};
+        };
 	
 		public static class Network {
 			public static int ServerUDPClientPort = 43256;

@@ -15,12 +15,51 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+
+/*
+    This is an automated UI test suite that checks whether a teacher can:
+
+    Log in with correct credentials ? success
+    Log in with wrong credentials ? gets error
+
+    Create a new "juttunurkka" session by going through a multi-step wizard
+
+    pick question
+    pick emojis/reactions
+    pick activities
+    give name & code
+    open the session
+
+
+    All steps are done by finding elements mostly by visible text (Finnish words like "Jatka", "Opettaja", "Luo uusi juttunurkka", "VIRHE", etc.).
+ */
+
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium;
 
 namespace PrototypeUITestAndroid;
+
+
+/*
+ 1. UITestBase class
+? The common base that all tests inherit from
+Main things it does:
+
+Starts an Android emulator driver (Appium connects to it)
+? App package: com.companyname.prototype
+? Main screen: some activity called MainActivity
+Sets implicit wait = 10 seconds (elements can take a bit to appear)
+Has helper methods everyone can use:
+ResetToMainScreen() ? presses Back button 1ñ2 times
+ClickContinueButton() ? clicks button that says "Jatka"
+NavigateToTeacherLogin() ? clicks button that says "Opettaja"
+
+
+Runs once before all tests ([OneTimeSetUp])
+Cleans up once after all tests ([OneTimeTearDown])
+ */
 
 public class UITestBase
 {
@@ -128,6 +167,17 @@ public class UITestBase
 
 [TestFixture, Order(1)]
 
+/// <summary>
+/// Teacher login UI tests
+/// 
+/// Verifies:
+/// ï Failed login ? shows "VIRHE" error
+/// ï Successful login ("opettaja" / "opehuone") ? reaches teacher dashboard ("Luo uusi juttunurkka" visible)
+/// 
+/// Tests are ordered and reset app state between runs.
+/// Uses Finnish button/text locators and positional XPath for fields.
+/// </summary>
+
 public class LoginTests : UITestBase
 {
     [Test, Order (1)]
@@ -182,6 +232,32 @@ public class LoginTests : UITestBase
 }
 
 [TestFixture, Order (2)]
+
+/*
+        JuttunurkkaTests class
+    ? Tests creating a new "juttunurkka" 
+    (these run after login tests ñ [Order(2)])
+
+    What happens in this test (TestCreatingJuttunurkka):
+
+        Automatically logs in as teacher in [OneTimeSetUp]
+
+        Clicks "Luo uusi juttunurkka"
+
+        Chooses question: "Mit‰ kuuluu t‰n‰‰n?"
+
+        Selects two emojis (first + second checkbox)
+
+        Picks activities from two different lists
+
+        Enters name = "Test1" and code = "123"
+
+        Clicks through all "Jatka" and finally "Valmis"
+
+        Chooses "Kyll‰" (open the session)
+
+        Checks that the waiting screen appears ? "Odotetaan osallistujia"
+ */
 public class JuttunurkkaTests : UITestBase
 {
     [OneTimeSetUp]
