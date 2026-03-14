@@ -27,9 +27,6 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup>
-	  <AndroidResource Update="Resources\drawable\emoji7.png">
-	    <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-	  </AndroidResource>
 	  <AndroidResource Update="Resources\drawable\emoji7lowres.png">
 	    <Generator>MSBuild:UpdateGeneratedFiles</Generator>
 	  </AndroidResource>

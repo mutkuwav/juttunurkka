@@ -26,45 +26,19 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              NavigationPage.HasBackButton="False"
              Background="#FFEA7F">
 
-    <StackLayout Padding="20" Spacing="18">
+    <Grid RowDefinitions="Auto, *, Auto, Auto"
+          Padding="16"
+          RowSpacing="16">
 
-        <Label Text="Piirrä oma emoji"
-               FontFamily="Bebasneue"
-               FontAttributes="Bold"
-               Margin="0,10,0,0"
-               FontSize="25"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               LineHeight="1.3" />
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" VerticalOptions="Center">
 
-        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-            <BoxView x:Name="colorPreview"
-                     WidthRequest="36" HeightRequest="36"
-                     CornerRadius="18"
-                     Color="Black"
-                     VerticalOptions="Center" />
-
-            <!-- Valittavat värit nappeina -->
-            <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                <Button BackgroundColor="#2196F3" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#4CAF50" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#FFEB3B" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#F44336" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#FF9800" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#000000" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#FFFFFF" BorderColor="#000000" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#9C27B0" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#E91E63" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-                <Button BackgroundColor="#795548" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
-            </HorizontalStackLayout>
-
-            <Label 
-                Text="Kumi" 
-                VerticalOptions="Center" />
             
             <Switch 
                 x:Name="eraserSwitch" 
                 Toggled="OnEraserToggled" 
+                VerticalOptions="Center" />
+            <Label 
+                Text="Kumi" 
                 VerticalOptions="Center" />
 
             <Label 
@@ -85,16 +59,60 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             
         </HorizontalStackLayout>
 
-        <GraphicsView x:Name="drawingView"
+        <Grid Grid.Row="1"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+
+            <GraphicsView x:Name="drawingView"
                       WidthRequest="400"
                       HeightRequest="400"
                       HorizontalOptions="Center"
                       VerticalOptions="Center"
                       BackgroundColor="Transparent">
-        </GraphicsView>
+            </GraphicsView>
 
-        <!-- Progress Bar -->
-        <ProgressBar x:Name="progressBar"
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="8">
+            <HorizontalStackLayout Spacing="8">
+
+                <BoxView x:Name="colorPreview"
+                         WidthRequest="36" HeightRequest="36"
+                         CornerRadius="18"
+                         Color="Black"
+                         VerticalOptions="Center" />
+
+                <!-- Valittavat värit nappeina -->
+
+                <Button BackgroundColor="#2196F3" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#4CAF50" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#FFEB3B" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#F44336" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#FF9800" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#000000" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#FFFFFF" BorderColor="#000000" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#9C27B0" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#E91E63" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#795548" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <Button Grid.Row="3"
+                    HorizontalOptions="Center"
+                    Text="Tallenna Emoji"
+                    WidthRequest="200"
+                    Clicked="OnSaveClicked"
+                    Padding="20,10"
+                    FontSize=" 18"
+                    BackgroundColor="GreenYellow"
+                    TextColor="Black"
+                />
+
+
+
+                <!-- Progress Bar -->
+        <ProgressBar Grid.Row="4"
+            x:Name="progressBar"
             FlowDirection="LeftToRight"
             Progress="1"
             VerticalOptions="CenterAndExpand" 
@@ -103,16 +121,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             ScaleY="15"
             ProgressColor="#FEBA4F"/>
 
-        <Button
-            Text="Tallenna Emoji"
-            WidthRequest="200"
-            Clicked="OnSaveClicked"
-            Padding="20,10"
-            FontSize=" 18"
-            BackgroundColor="GreenYellow"
-            TextColor="Black"
-        /> 
-
-    </StackLayout>
+        
+    </Grid>
 
 </ContentPage>

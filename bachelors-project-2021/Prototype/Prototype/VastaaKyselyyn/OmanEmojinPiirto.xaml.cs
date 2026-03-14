@@ -155,7 +155,7 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
             savedImageBytes = stream.ToArray();
             await DisplayAlert("Tallennettu", "Emoji lähetetty opettajalle", "OK");
 
-            await Navigation.PushAsync(new EmojiAnswered(7));
+            await Navigation.PushAsync(new EmojiAnswered(7, savedImageBytes));
 
         }
         catch (Exception ex)
@@ -218,7 +218,8 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
         }
     }
     */
-
+    
+    /*
     public byte[]? getDrawingAsImage()
     {
         if (savedImageBytes != null)
@@ -227,7 +228,7 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
         }
         throw new InvalidOperationException("No drawing has been saved yet.");
     }
-
+    */
 
     private class DrawnLine
     {

@@ -26,18 +26,27 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EmojiAnswered : ContentPage
     {
-        public string EmojiImageSource { get; set; }
+        public ImageSource EmojiImageSource { get; set; }
 
         private readonly int _selectedEmojiId;
         private readonly int _remainingTime = 5;
 
-        public EmojiAnswered(int selectedEmojiId)
+        public EmojiAnswered(int selectedEmojiId, byte[]? drawnEmojiBytes = null)
         { 
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
 
             _selectedEmojiId = selectedEmojiId;
-            EmojiImageSource = $"emoji{_selectedEmojiId}.png";
+
+            if (_selectedEmojiId == 7 && drawnEmojiBytes is { Length: > 0 })
+            {
+                EmojiImageSource = ImageSource.FromStream(() => new MemoryStream(drawnEmojiBytes));
+            }
+            else
+            {
+                EmojiImageSource = ImageSource.FromFile($"emoji{_selectedEmojiId}.png");
+            }
+         
 
             BindingContext = this;
 
