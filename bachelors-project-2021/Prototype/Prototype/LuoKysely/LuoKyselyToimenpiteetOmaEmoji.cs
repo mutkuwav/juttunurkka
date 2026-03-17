@@ -18,7 +18,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,7 +29,7 @@ using Microsoft.Maui;
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LuoKyselyToimenpiteetVasynyt : ContentPage
+    public partial class LuoKyselyToimenpiteetOmaEmoji : ContentPage
     {
 
         public IList<CollectionItem> Items { get; set; }
@@ -68,7 +67,7 @@ namespace Prototype
             }
         }
 
-        public LuoKyselyToimenpiteetVasynyt()
+        public LuoKyselyToimenpiteetOmaEmoji()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
@@ -78,13 +77,12 @@ namespace Prototype
             int numero = 0;
             foreach (var individual in SurveyManager.GetInstance().GetSurvey().emojis)
             {
-                if (individual.Name == "Väsynyt")
+                if (individual.Name == "OmaEmoji")
                 {
-                    var activities = new List<Activity>(Const.activities[4]);
+                    var activities = new List<Activity>(Const.activities[6]);
                     activities.Add(new Activity { Title = "Luo oma vaihtoehto..." });
                     Items.Add(new CollectionItem(individual, activities));
                     break;
-
                 }
                 else
                 {
@@ -97,11 +95,7 @@ namespace Prototype
             int emojiNumber = numero + 1;
             String title = "Aktiviteetti " + emojiNumber + "/" + selectedEmojis;
             MyStringProperty = title;
-
         }
-
-
-
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is CollectionView cv && cv.BindingContext is CollectionItem item)
@@ -130,7 +124,7 @@ namespace Prototype
                         {
                             if (!string.IsNullOrWhiteSpace(syote) && !item.ActivityChoises.Any(activity => activity.Title == syote))
                             {
-                                var newActivity = new Activity { Title = syote, ImageSource = "dice.png"};
+                                var newActivity = new Activity { Title = syote, ImageSource = "dice.png" };
                                 item.ActivityChoises.Insert(item.ActivityChoises.Count - 1, newActivity);
                                 item.Selected.Add(newActivity);
                             }
@@ -142,7 +136,6 @@ namespace Prototype
                 }
             }
         }
-
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
@@ -171,7 +164,7 @@ namespace Prototype
             int numero = 0;
             foreach (var individual in SurveyManager.GetInstance().GetSurvey().emojis)
             {
-                if (individual.Name == "Väsynyt")
+                if (individual.Name == "OmaEmoji")
                 {
                     SurveyManager.GetInstance().GetSurvey().emojis[numero].Activities = tempActivities;
                     break;
@@ -199,44 +192,36 @@ namespace Prototype
                 else if (name == "Neutraali")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
-
                 }
                 else if (name == "Vihainen")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
-
                 }
                 else if (name == "Väsynyt")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetVasynyt());
-
                 }
                 else if (name == "Miettivä")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetMiettiva());
-
                 }
                 else if (name == "Itkunauru")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetItkunauru());
-
                 }
                 else if (name == "OmaEmoji")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetOmaEmoji());
-
                 }
                 else { }
             }
             else
             {
                 await Navigation.PushAsync(new LuoKyselyLopetus());
-
             }
-
         }
 
-        //function which checks whether the user has selected at least 2 activity for each emoji.
+        //function which checks whether the user has selected at least 2 activities.
         private bool ActivitiesSet()
         {
             foreach (var item in Items)

@@ -209,7 +209,13 @@ namespace Prototype
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetItkunauru());
                 }
-                else { }
+                else if (name == "OmaEmoji")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetOmaEmoji());
+                }
+                else { 
+                    await Navigation.PushAsync(new LuoKyselyLopetus());
+                }
             }
             else
             {

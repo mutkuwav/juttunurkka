@@ -9,7 +9,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseMaui>true</UseMaui>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\Prototype\Prototype.csproj" />
 	</ItemGroup>

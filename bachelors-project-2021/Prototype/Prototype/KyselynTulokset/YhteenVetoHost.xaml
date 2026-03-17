@@ -70,6 +70,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                        Grid.Column="0"
                        Grid.Row="2"
                        Scale="{Binding resultScale[6]}"/>
+                
+                <Image Source="{Binding resultImages[7]}"
+                       Grid.Column="0"
+                       Grid.Row="2"
+                       Scale="{Binding resultScale[7]}"/>
             </Grid>
             <Button Text="Lopeta Kysely"
                     Margin="0, 0, 0, 20"

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Emmi Poutanen, Riina Kaipia
+
+This file is part of "Juttunurkka".
+
+Juttunurkka is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Juttunurkka is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.OmanEmojinPiirto"
+             Title="Juttunurkka"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             Background="#FFEA7F">
+
+    <Grid RowDefinitions="Auto, *, Auto, Auto"
+          Padding="16"
+          RowSpacing="16">
+
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" VerticalOptions="Center">
+
+            
+            <Switch 
+                x:Name="eraserSwitch" 
+                Toggled="OnEraserToggled" 
+                VerticalOptions="Center" />
+            <Label 
+                Text="Kumi" 
+                VerticalOptions="Center" />
+
+            <Label 
+                Text="Kynän koko" 
+                VerticalOptions="Center" />
+            
+            <Slider 
+                x:Name="thicknessSlider" 
+                Minimum="1" 
+                Maximum="40" 
+                Value="4" 
+                WidthRequest="120" 
+                ValueChanged="OnThicknessChanged" />
+
+            <Button 
+                Text="Tyhjennä" 
+                Clicked="OnClearClicked" />
+            
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="1"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+
+            <GraphicsView x:Name="drawingView"
+                      WidthRequest="400"
+                      HeightRequest="400"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center"
+                      BackgroundColor="Transparent">
+            </GraphicsView>
+
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="8">
+            <HorizontalStackLayout Spacing="8">
+
+                <BoxView x:Name="colorPreview"
+                         WidthRequest="36" HeightRequest="36"
+                         CornerRadius="18"
+                         Color="Black"
+                         VerticalOptions="Center" />
+
+                <!-- Valittavat värit nappeina -->
+
+                <Button BackgroundColor="#2196F3" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#4CAF50" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#FFEB3B" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#F44336" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#FF9800" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#000000" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#FFFFFF" BorderColor="#000000" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#9C27B0" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#E91E63" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+                <Button BackgroundColor="#795548" WidthRequest="34" HeightRequest="34" CornerRadius="17" Clicked="OnColorButtonClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <Button Grid.Row="3"
+                    HorizontalOptions="Center"
+                    Text="Tallenna Emoji"
+                    WidthRequest="200"
+                    Clicked="OnSaveClicked"
+                    Padding="20,10"
+                    FontSize=" 18"
+                    BackgroundColor="GreenYellow"
+                    TextColor="Black"
+                />
+
+
+
+                <!-- Progress Bar -->
+        <ProgressBar Grid.Row="4"
+            x:Name="progressBar"
+            FlowDirection="LeftToRight"
+            Progress="1"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            WidthRequest="300"
+            ScaleY="15"
+            ProgressColor="#FEBA4F"/>
+
+        
+    </Grid>
+
+</ContentPage>
