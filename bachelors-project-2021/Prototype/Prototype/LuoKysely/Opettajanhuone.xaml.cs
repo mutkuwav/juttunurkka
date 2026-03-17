@@ -36,12 +36,27 @@ namespace Prototype
         public string SelectedSurvey { get; set; }
         public IList<string> Surveys { get; set; }
 
+        //key for the preferences list
+        private const string onBoardingShownKey = "onBoardingShownKey";
+
         public Opettajanhuone()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             TallennetutKyselyt();
             BindingContext = this;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (!Preferences.Get(onBoardingShownKey, false))
+            {
+                OnBoardingBox.IsVisible = true;
+
+                Preferences.Set(onBoardingShownKey, true);
+            }
         }
 
         void TallennetutKyselyt()
@@ -114,6 +129,18 @@ namespace Prototype
 
             
         }
+
+
+        private void OnBoardingClicked(object sender, EventArgs e)
+        {
+            OnBoardingBox.IsVisible = true;
+        }
+
+        private void CloseOnBoardingClicked(object sender, EventArgs e)
+        {
+            OnBoardingBox.IsVisible = false;
+        }
+
 
 
     }

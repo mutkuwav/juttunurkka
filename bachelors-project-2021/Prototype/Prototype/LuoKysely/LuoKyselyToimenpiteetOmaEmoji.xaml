@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Riina Kaipia, Eemil Alamäki
+    
+This file is part of "Juttunurkka".
+
+Juttunurkka is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Juttunurkka is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.LuoKyselyToimenpiteetOmaEmoji"
+             Title="Juttunurkka"
+             BackgroundColor="#ffea7f">
+
+    <StackLayout Spacing="40">
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="Start"
+                     HorizontalOptions="CenterAndExpand"
+                     >
+            
+            <Label
+              Text="{Binding MyStringProperty}"
+              VerticalOptions="Start" 
+              HorizontalOptions="CenterAndExpand"
+              HorizontalTextAlignment="Center"
+              FontAttributes="Bold"
+              FontSize="25"
+              TextColor="Black" 
+              Margin="0,40,0,0"/>
+           
+            <Image Source="emoji7.png"
+                   WidthRequest="60"
+                   HeightRequest="60"
+                   Margin="0,30,0,0"
+            />
+        </StackLayout>
+
+        <Label Text="Valitse aktiviteetit hymiölle  
+               Valitse 2"
+            VerticalOptions="Start" 
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            FontSize="24"
+            TextColor="Black"   
+            Margin="0,-20,0,0"
+         />
+
+        <Button Text="Vaihtoehdot"
+            TextColor="black"
+            FontAttributes="Bold"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand" 
+            BorderColor="#4383EF"
+            BackgroundColor="White"
+            FontSize="22"
+            Margin="0,-95,0,0"
+            CornerRadius="10"
+            HeightRequest="50"
+            WidthRequest="340" 
+                IsVisible="true"/>
+
+        <!--"dropdown"-->
+        <Frame
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            x:Name="popupSelection"
+            HasShadow="True"
+            Margin="10,-50,10,10" 
+            WidthRequest="340"
+            HeightRequest="280"
+            Padding="1"
+            BackgroundColor="White"
+            BorderColor="#4383EF"
+            CornerRadius="10"
+            IsVisible="true">
+
+            <CollectionView 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="CenterAndExpand"
+          
+            HeightRequest="280" 
+            ItemsSource="{Binding Items} "  >
+
+                <CollectionView.ItemTemplate >
+                    <DataTemplate >
+
+
+                        <Grid Padding="1"
+                   RowDefinitions="Auto, *"
+                  ColumnDefinitions="Auto, *">
+                            <CollectionView x:Name="Collection" 
+                                            ItemsSource="{Binding ActivityChoises}"
+                                            SelectionMode="Multiple"
+                                            SelectedItems="{Binding Selected, Mode=TwoWay}"
+                                            SelectionChanged="OnSelectionChanged"
+                                            SelectionChangedCommandParameter="{Binding .}">
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="1"
+                                                  RowDefinitions="Auto, *"
+                                                  HeightRequest="80"
+                                                  WidthRequest="330"
+                                                  ColumnDefinitions="Auto, *"  >
+
+                                            <Label Text="{Binding Title}"
+                                                   TextColor="Black"
+                                                   FontSize="20"
+                                                   HeightRequest="60"
+                                                   WidthRequest="330"
+                                                   Margin="5,0,0,5" />
+
+
+                                            <!-- erotteluviiva -->
+                                            <BoxView HeightRequest="1"
+                                                        BackgroundColor="DarkGray"
+                                                        Grid.ColumnSpan="2"
+                                                        Grid.Row="2"
+                                                        VerticalOptions="End"/>
+
+
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+
+
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+
+
+
+        <Grid 
+            RowDefinitions="Auto, Auto"
+            ColumnDefinitions="Auto, Auto"
+            VerticalOptions="EndAndExpand"
+            HorizontalOptions="CenterAndExpand">
+            
+            
+            <Button Grid.Column="2" 
+                    Text="Jatka"
+                    Clicked="JatkaButtonClicked" 
+                    VerticalOptions="EndAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
+                    FontSize="19"
+                    Margin="20,0,10,40"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    WidthRequest="150"
+                    FontAttributes="Bold"
+                    BackgroundColor="#feba4f"
+                    TextColor="Black"
+                    BorderColor="Transparent"
+            />
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>

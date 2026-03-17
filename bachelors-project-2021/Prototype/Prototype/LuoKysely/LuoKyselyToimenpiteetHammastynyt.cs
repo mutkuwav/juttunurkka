@@ -179,6 +179,7 @@ namespace Prototype
                 }
             }
             int nextEmojiNumber = numero + 1;
+
             int luku = SurveyManager.GetInstance().GetSurvey().emojis.Count;
 
             if (nextEmojiNumber < luku)
@@ -218,7 +219,14 @@ namespace Prototype
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetItkunauru());
 
                 }
-                else { }
+                else if (name == "OmaEmoji")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetOmaEmoji());
+
+                }
+                else {
+                    await Navigation.PushAsync(new LuoKyselyLopetus());
+                }
             }
             else
             {

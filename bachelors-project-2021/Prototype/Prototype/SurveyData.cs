@@ -72,8 +72,13 @@ namespace Prototype
 					emojiResults.Add(6, 0);
 
 				}
+                else if (item.Name == "OmaEmoji")
+                {
+                    emojiResults.Add(7, 0);
 
-			}
+                }
+
+            }
 
 			/*	emojiResults.Add(0, 0);
 			emojiResults.Add(1, 0);

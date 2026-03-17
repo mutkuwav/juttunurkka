@@ -42,8 +42,9 @@ namespace Prototype
 			emojis.Add(new Emoji(4, "Väsynyt", "neutral", false, new List<Activity>(), "emoji4lowres.png"));
 			emojis.Add(new Emoji(5, "Miettivä", "neutral", false, new List<Activity>(), "emoji5lowres.png"));
 			emojis.Add(new Emoji(6, "Itkunauru", "neutral", false, new List<Activity>(), "emoji6lowres.png"));
+            emojis.Add(new Emoji(7, "OmaEmoji", "neutral", false, new List<Activity>(), "emoji7lowres.png"));
 
-			RoomCode = null;
+            RoomCode = null;
 			Name = null;
 		}
 		public Survey(string introMessage, List<Emoji> emojis, string RoomCode, string Name)
@@ -90,7 +91,11 @@ namespace Prototype
 			activities = activities.GetRange(0, 3);
 			tempEmojis.Add(new Emoji(6, "Itkunauru", "neutral", false, activities, "emoji6lowres.png"));
 
-			string TempRoomCode = GenerateRandomCode();
+            Const.activities.TryGetValue(7, out activities);
+            activities = activities.GetRange(0, 2);
+            tempEmojis.Add(new Emoji(7, "OmaEmoji", "neutral", false, activities, "blank_emoji_lowres.png"));
+
+            string TempRoomCode = GenerateRandomCode();
 
 			return new Survey(tempIntro, tempEmojis, TempRoomCode, "Oletus");
 		}

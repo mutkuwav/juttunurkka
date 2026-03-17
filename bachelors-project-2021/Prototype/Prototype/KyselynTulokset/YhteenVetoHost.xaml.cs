@@ -47,7 +47,7 @@ namespace Prototype
 			foreach (var item in Main.GetInstance().host.data.GetEmojiResults().OrderByDescending(item => item.Value))
 			{
                 sorted.Add(item.Key, item.Value);
-                count += item.Value;
+                count += item.Value; 
             }
 
             foreach (int key in sorted.Keys)
