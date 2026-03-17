@@ -130,17 +130,6 @@ namespace Prototype
 
         private async void Vastaa_Clicked(object sender, EventArgs e)
         {
-            cts.Cancel(); //cancel task if button clicked
-
-            await Main.GetInstance().client.SendResult(answer.ToString());
-            
-            if (answer == 7) { 
-                await Navigation.PushAsync(new OmanEmojinPiirto());
-            } else { 
-                await Navigation.PushAsync(new EmojiAnswered(answer)); 
-            }
-
-        }
             if (answer < 0)
             {
                 await DisplayAlert("Huom", "Valitse emoji ennen vastaamista.", "OK");
