@@ -18,6 +18,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.OdotetaanOsallistujiaOpettaja"
@@ -26,24 +27,24 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
     <StackLayout Padding="0,80,0,0" Spacing="25" VerticalOptions="FillAndExpand">
 
-            <Label 
-                Text="Odotetaan osallistujia" 
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                FontAttributes="Bold"
-                FontSize="30"
-                TextColor="Black" 
-                Margin="0,20,0,0"/>
+        <Label 
+            Text="Odotetaan osallistujia" 
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="30"
+            TextColor="Black" 
+            Margin="0,20,0,0"/>
 
         <StackLayout Spacing="40" HorizontalOptions="Center">
-            
+
             <Label Text="{Binding ParticipantsCount, StringFormat='Osallistujia: {0}'}"
                    FontSize="25"
                    FontAttributes="Bold"
                    TextColor="Black"
                    HorizontalOptions="Center" />
 
-            <Label Text="{Binding roomCode}"
+            <Label Text="{Binding RoomCode}"
                    FontSize="25"
                    FontAttributes="Bold"
                    TextColor="Black"
@@ -64,7 +65,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     BorderColor="Transparent"
                     HeightRequest="50"
                     WidthRequest="300"/>
-            
+
             <Button Text="Keskeytä"
                     Clicked="KeskeytaButtonClicked" 
                     BackgroundColor="#feba4e"
@@ -75,10 +76,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     CornerRadius="10"
                     HeightRequest="50"
                     WidthRequest="300"/>
-
-
-
-                
         </StackLayout>
 
     </StackLayout>

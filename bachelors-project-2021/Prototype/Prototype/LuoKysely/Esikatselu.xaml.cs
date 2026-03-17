@@ -1,7 +1,7 @@
 ﻿/*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
-
+          2026 Matias Meriläinen
 This file is part of "Juttunurkka".
 
 Juttunurkka is free software: you can redistribute it and/or modify

@@ -17,31 +17,24 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using System.ComponentModel;
-using Microsoft.Maui.Controls.Xaml;
-using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui;
+using Microsoft.Maui.Controls.PlatformConfiguration.TizenSpecific;
+using Microsoft.Maui.Controls.Xaml;
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdotetaanVastauksiaOpe : ContentPage, INotifyPropertyChanged
     {
+        private CancellationTokenSource cts;
 
-        CancellationTokenSource cts;
-        public string RoomCode { get; set; }
-
-        private int countdownSeconds = 60;
+        public string RoomCode => OnlineSession.Current.RoomCode;
 
         private int participantsCount;
-
         public int ParticipantsCount
         {
             get => participantsCount;
@@ -76,116 +69,126 @@ namespace Prototype
         public OdotetaanVastauksiaOpe()
         {
             InitializeComponent();
-            // Set as true for testing
-            NavigationPage.SetHasNavigationBar(this, false);
-            Survey s = SurveyManager.GetInstance().GetSurvey();
-            RoomCode = s.RoomCode;
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = this;
-
-            Host();
             StartUpdatingCounts();
         }
 
-        private async void Host()
+        protected override async void OnAppearing()
         {
-            Main.GetInstance().host?.DestroyHost();
-            Main.GetInstance().host = new SurveyHost(false);
+            base.OnAppearing();
 
-            if (!await Main.GetInstance().HostSurvey())
-            {
-                //host survey ended in a fatal unexpected error, aborting survey.
-                //pop to root and display error
-                await Navigation.PopToRootAsync();
-                await DisplayAlert("Kysely suljettiin automaattisesti3", "Tapahtui odottamaton virhe.", "OK");
-            }
-        }
-
-        async protected override void OnAppearing()
-        {
             cts = new CancellationTokenSource();
             var token = cts.Token;
-            base.OnAppearing();
 
             try
             {
                 await UpdateProgressBar(0, 60000, token);
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException)
             {
-                Console.WriteLine("Task cancelled", e.Message);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine("ex {0}", e.Message);
+                Console.WriteLine($"OnAppearing failed: {ex.Message}");
             }
-            finally
-            {
-                cts.Dispose();
-            }
-            
         }
 
-        async Task UpdateProgressBar(double Progress, uint time, CancellationToken token)
+        private async Task UpdateProgressBar(double progress, uint time, CancellationToken token)
         {
             var countdownTask = UpdateCountdownLabel(time, token);
 
-            await progressBar.ProgressTo(Progress, time, Easing.Linear);
+            await progressBar.ProgressTo(progress, time, Easing.Linear);
+
             if (token.IsCancellationRequested)
             {
                 token.ThrowIfCancellationRequested();
             }
 
             await countdownTask;
-            //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
+
             if (progressBar.Progress == 0)
-                {
-                    await Main.GetInstance().host.CloseSurvey();
-                    await Navigation.PushAsync(new LisätiedotHost());
-                }   
+            {
+                await FinishSurveyAndOpenResultsAsync();
+            }
         }
 
         private async Task UpdateCountdownLabel(uint totalTimeMs, CancellationToken token)
         {
             int totalSeconds = (int)(totalTimeMs / 1000);
+
             for (int i = totalSeconds; i >= 0; i--)
             {
                 if (token.IsCancellationRequested)
                 {
                     token.ThrowIfCancellationRequested();
                 }
+
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    countdownLabel.Text = i.ToString() + " s";
+                    countdownLabel.Text = i + " s";
                 });
+
                 await Task.Delay(1000, token);
             }
         }
 
-
-        private async void LopetaClicked(object sender, EventArgs e)
-        {
-        cts.Cancel(); //cancel task if button clicked
-
-            await Main.GetInstance().host.CloseSurvey();
-            await Navigation.PushAsync(new LisätiedotHost());
-        }
         private void StartUpdatingCounts()
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                var host = Main.GetInstance().host;
-                ParticipantsCount = host.clientCount;
-
-                // Laske vastanneet opiskelijat, jotka ovat tehneet vähintään yhden valinnan
-                RespondentsCount = host?.data?.GetEmojiResults()?.Where(kv => kv.Value > 0).Count() ?? 0;
-
-                return true;
+                _ = PollStatusOnceAsync();
+                return !OnlineSession.Current.SurveyClosed;
             });
         }
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        private async Task PollStatusOnceAsync()
+        {
+            try
+            {
+                var status = await Main.GetInstance().Api.GetRoomStatusAsync(OnlineSession.Current.RoomId);
+
+                OnlineSession.Current.JoinedCount = status.JoinedCount;
+                OnlineSession.Current.VotedCount = status.VotedCount;
+                OnlineSession.Current.SurveyClosed = status.SurveyClosed;
+
+                ParticipantsCount = status.JoinedCount;
+                RespondentsCount = status.VotedCount;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"PollStatusOnceAsync failed: {ex.Message}");
+            }
+        }
+
+        private async Task FinishSurveyAndOpenResultsAsync()
+        {
+            try
+            {
+                await Main.GetInstance().Api.CloseSurveyAsync(OnlineSession.Current.RoomId);
+                OnlineSession.Current.SurveyClosed = true;
+                OnlineSession.Current.EmojiResults = await Main.GetInstance().Api.GetEmojiResultsAsync(OnlineSession.Current.RoomId);
+
+                await Navigation.PushAsync(new LisätiedotHost());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"FinishSurveyAndOpenResultsAsync failed: {ex.Message}");
+                await DisplayAlert("Virhe", "Tulosten hakeminen epäonnistui.", "OK");
+            }
+        }
+
+        private async void LopetaClicked(object sender, EventArgs e)
+        {
+            cts?.Cancel();
+            await FinishSurveyAndOpenResultsAsync();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    }
+}

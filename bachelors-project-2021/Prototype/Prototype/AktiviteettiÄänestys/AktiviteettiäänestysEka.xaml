@@ -2,6 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -17,95 +18,87 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AktiviteettiäänestysEka"
-             BackgroundColor="#FFEA7F">
+             BackgroundColor="#FFEA7F"
+             NavigationPage.HasNavigationBar="False">
 
+    <Grid RowDefinitions="Auto,*,Auto,Auto"
+          Padding="24,60,24,30"
+          RowSpacing="20">
 
-    <StackLayout Padding="20">
+        <Label Grid.Row="0"
+               Text="MITÄ HALUAT TEHDÄ?"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="Black"
+               FontFamily="BebasNeue" />
 
-        <Label  Text="Mitä haluat tehdä?"
-                FontAttributes="Bold"
-                FontFamily="BebasNeue"
+        <Frame Grid.Row="1"
+               Padding="16"
+               CornerRadius="18"
+               BackgroundColor="#F4E18D"
+               BorderColor="Transparent"
+               HasShadow="False">
+
+            <VerticalStackLayout Spacing="18"
+                                 VerticalOptions="Center">
+
+                <Button x:Name="ActivityButton1"
+                        Text="Vaihtoehto 1"
+                        Clicked="OnButton1Clicked"
+                        BackgroundColor="#FEBA4F"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        CornerRadius="16"
+                        HeightRequest="92"
+                        BorderWidth="0"
+                        LineBreakMode="WordWrap"
+                        Padding="18,8"
+                        />
+
+                <Button x:Name="ActivityButton2"
+                        Text="Vaihtoehto 2"
+                        Clicked="OnButton2Clicked"
+                        BackgroundColor="#FEBA4F"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        CornerRadius="16"
+                        HeightRequest="92"
+                        BorderWidth="0"
+                        IsVisible="False"
+                        LineBreakMode="WordWrap"
+                        Padding="18,8"
+                       />
+
+            </VerticalStackLayout>
+        </Frame>
+
+        <ProgressBar Grid.Row="2"
+                     x:Name="progressBar"
+                     Progress="1"
+                     HorizontalOptions="Fill"
+                     HeightRequest="18"
+                     ScaleY="10"
+                     ProgressColor="#FEBA4F" />
+
+        <Button Grid.Row="3"
+                x:Name="SaveButton"
+                Text="TALLENNA"
+                Clicked="SaveAnswer"
+                IsEnabled="False"
+                BackgroundColor="#FEBA4F"
                 TextColor="Black"
-                FontSize="35"
-                HorizontalOptions="Center"
-                Margin="0,40,0,100"/>
-
-        <!-- Options Grid -->
-        <Grid ColumnDefinitions="*,*"
-          ColumnSpacing="15"
-          Padding="30"
-          HorizontalOptions="Center"
-          VerticalOptions="CenterAndExpand">
-            <!-- Button 1: Activity 1 -->
-            <Button Grid.Column="0"
-            x:Name="ActivityButton1"
-            Text="{Binding Items[0].ActivityChoises[0].Title}"
-            TextColor="Black"
-            FontAttributes="Bold"
-            FontSize="15"
-            FontFamily="RobotoMedium"
-            BackgroundColor="#feba4e"
-            BorderColor="#C381FD"
-            BorderWidth="{Binding ActivityButton1BorderWidth}"
-            CornerRadius="10"
-            HeightRequest="250"
-            WidthRequest="150"
-            VerticalOptions="Center"
-            ImageSource="{Binding Items[0].ActivityChoises[0].ImageSource}"
-            ContentLayout="Top, 20"
-            LineBreakMode="WordWrap"/>
-            <!-- Button 2: Activity 2 -->
-            <Button Grid.Column="1"
-            x:Name="ActivityButton2"
-            Text="{Binding Items[0].ActivityChoises[1].Title}"
-            TextColor="Black"
-            FontAttributes="Bold"
-            FontSize="15"
-            FontFamily="RobotoMedium"
-            BackgroundColor="#feba4e"
-            BorderColor="#C381FD"
-            BorderWidth="{Binding ActivityButton2BorderWidth}"
-            CornerRadius="10"
-            HeightRequest="250"
-            WidthRequest="150"
-            VerticalOptions="Center"
-            ImageSource="{Binding Items[0].ActivityChoises[1].ImageSource}"
-            ContentLayout="Top, 20"
-            LineBreakMode="WordWrap"/>
-        </Grid>
-
-        <!-- Progress Bar -->
-        <ProgressBar x:Name="progressBar"
-               FlowDirection="LeftToRight"
-               Progress="1"
-               VerticalOptions="CenterAndExpand" 
-               HorizontalOptions="CenterAndExpand"
-               WidthRequest="300"
-               ScaleY="15"
-               ProgressColor="#feba4e"
-               Margin="0,50,0,0"/>
-
-        <!-- Submit Button -->
-        <Button Text="TALLENNA"
-                x:Name="SaveButton"     
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                IsEnabled="False"    
-                FontSize="30"
-                TextColor="Black"
-                FontFamily="RobotoMedium"
                 FontAttributes="Bold"
-                BorderColor="Transparent"
-                CornerRadius="15"
-                HeightRequest="95"
-                WidthRequest="270"
-                BackgroundColor="#feba4e"
-                Margin="0,0,0,30"
-                Clicked="SaveAnswer"/>
-
-    </StackLayout>
-
+                FontSize="22"
+                CornerRadius="16"
+                HeightRequest="82"
+                HorizontalOptions="Fill" />
+    </Grid>
 </ContentPage>

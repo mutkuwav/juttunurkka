@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen
+2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -20,26 +21,20 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.Maui.Controls.Xaml;
-using Microsoft.Maui.Controls.Compatibility;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-
     public partial class TulostenOdotus : ContentPage, INotifyPropertyChanged
     {
-        
         public string RoomCode { get; set; }
         public int ParticipantsCount { get; set; }
+
         private int _answerCount;
         public int AnswerCount
         {
@@ -53,6 +48,7 @@ namespace Prototype
                 }
             }
         }
+
         private int _countSeconds = 35;
         private int _timeLeft = 35;
         public int TimeLeft
@@ -71,87 +67,94 @@ namespace Prototype
         public TulostenOdotus()
         {
             InitializeComponent();
-            Survey s = SurveyManager.GetInstance().GetSurvey();
-            RoomCode = s.RoomCode;
-            ParticipantsCount = Main.GetInstance().host.clientCount;
+
+            RoomCode = OnlineSession.Current.RoomCode;
+            ParticipantsCount = OnlineSession.Current.JoinedCount;
             AnswerCount = 0;
             BindingContext = this;
 
-            //poistetaan turha navigointipalkki
-            NavigationPage.SetHasNavigationBar(this, false);
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, false);
 
-            Console.WriteLine("Starting activity vote");
-            Main.GetInstance().host.StartActivityVote();
-
-            
-            //timer set to vote times, cooldowns, plus one extra
-            _countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
-            // TODO Xamarin.Forms.Device.StartTimer is no longer supported. Use Microsoft.Maui.Dispatching.DispatcherExtensions.StartTimer instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 _countSeconds--;
                 TimeLeft--;
 
-                AnswerCount = Main.GetInstance().host.GetActivityVoteAnswerCount();
+                _ = RefreshCountsAsync();
 
-                if (Main.GetInstance().host.isVoteConcluded)
-				{
+                if (_countSeconds <= 0)
+                {
                     return false;
                 }
-                    
 
-                 if (_countSeconds == 0) {
-                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-                    {
-                        return false;
-                    });
-
-                  
-                 }
-
-                return Convert.ToBoolean(_countSeconds);
+                return true;
             });
         }
 
         async protected override void OnAppearing()
         {
-           
             base.OnAppearing();
-            // This is now the real timer that triggers the navigation
-            // TODO: Use only one timer
             await UpdateProgressBar(0, 35000);
         }
 
-
-
-        async Task UpdateProgressBar(double Progress, uint time)
+        private async Task RefreshCountsAsync()
         {
-            await progressBar.ProgressTo(Progress, time, Easing.Linear);
-            //siirtyy eteenpäin automaattisesti 45 sekunnin jälkeen
-            if (progressBar.Progress == 0 && !Main.GetInstance().host.isVoteConcluded)
+            try
             {
-                await Main.GetInstance().host.CloseSurvey();
-                await Main.GetInstance().host.SendActivityVoteResults();
+                var roomStatus = await Main.GetInstance().Api.GetRoomStatusAsync(OnlineSession.Current.RoomId);
+                ParticipantsCount = roomStatus.JoinedCount;
+                OnPropertyChanged(nameof(ParticipantsCount));
+
+                var activityResults = await Main.GetInstance().Api.GetActivityResultsAsync(OnlineSession.Current.RoomId);
+                AnswerCount = activityResults.Values.Sum();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"RefreshCountsAsync failed: {ex.Message}");
+            }
+        }
+
+        async Task UpdateProgressBar(double progress, uint time)
+        {
+            await progressBar.ProgressTo(progress, time, Easing.Linear);
+
+            if (progressBar.Progress == 0)
+            {
+                await CloseVoteAndShowResults();
+            }
+        }
+
+        private async Task CloseVoteAndShowResults()
+        {
+            try
+            {
+                await Main.GetInstance().Api.CloseActivityVoteAsync(OnlineSession.Current.RoomId);
+                OnlineSession.Current.ActivityVoteOpen = false;
+                OnlineSession.Current.ActivityResults =
+                    await Main.GetInstance().Api.GetActivityResultsAsync(OnlineSession.Current.RoomId);
+
                 await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"CloseVoteAndShowResults failed: {ex.Message}");
+                await DisplayAlert("Virhe", "Tulosten haku epäonnistui.", "OK");
             }
         }
 
         async void GoToResultsClicked(object sender, EventArgs e)
         {
-            await Main.GetInstance().host.CloseSurvey();
-            await Main.GetInstance().host.SendActivityVoteResults();
-            await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+            await CloseVoteAndShowResults();
         }
 
         protected override bool OnBackButtonPressed()
         {
             return true;
-
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string propertyName)
+        protected new void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

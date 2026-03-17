@@ -2,7 +2,7 @@
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
-
+2026 Matias Meriläinen
 This file is part of "Juttunurkka".
 
 Juttunurkka is free software: you can redistribute it and/or modify
@@ -18,90 +18,119 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 using Button = Microsoft.Maui.Controls.Button;
 
 namespace Prototype
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AktiviteettiäänestysEka : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class AktiviteettiäänestysEka : ContentPage
+    {
         private CancellationTokenSource _cancellationTokenSource;
-        private int _countSeconds = 10;
+        private int _countSeconds = 30;
         private const double DefaultBorderWidth = 0;
         private const double SelectedBorderWidth = 6;
         private Button _selectedButton;
         private readonly QuestionToSpeech _questionToSpeechClient = new();
 
         public IList<CollectionItem> Items { get; set; }
-		public class CollectionItem
-		{
-			public int ID;
-			public string ImageSource { get; set; }
-			public IList<Activity> ActivityChoises { get; set; }
-			public string Selected { get; set; }
 
-            public CollectionItem(int ID, string ImageSource, IList<Activity> ActivityChoises)
-			{
-				this.ID = ID;
-				this.ImageSource = ImageSource;
-				this.ActivityChoises = ActivityChoises;
-				this.Selected = null;
-			}
-		}
+        public class CollectionItem
+        {
+            public int ID;
+            public string ImageSource { get; set; }
+            public IList<Activity> ActivityChoises { get; set; }
+            public string Selected { get; set; }
 
-		public AktiviteettiäänestysEka()
-		{
-			NavigationPage.SetHasBackButton(this, false);
-			InitializeComponent();
-
-			//alustus
-			Items = new List<CollectionItem>();
-			string img;
-
-			Console.WriteLine("Setting vote 1 page content");
-			foreach (var item in Main.GetInstance().client.voteCandidates1)
-			{
-				Console.WriteLine("Key: {0}, Value: {1}", item.Key, item.Value);
-				img = "emoji" + item.Key.ToString() + ".png";
-				Items.Add(new CollectionItem(item.Key, img, item.Value));
+            public CollectionItem(int id, string imageSource, IList<Activity> activityChoises)
+            {
+                ID = id;
+                ImageSource = imageSource;
+                ActivityChoises = activityChoises;
+                Selected = null;
             }
+        }
 
-			BindingContext = this;
+        public AktiviteettiäänestysEka()
+        {
+            Microsoft.Maui.Controls.NavigationPage.SetHasBackButton(this, false);
+            InitializeComponent();
 
-			Vote1();
+            Items = new List<CollectionItem>
+            {
+                new CollectionItem(0, string.Empty, OnlineSession.Current.ActivityCandidates)
+            };
+
+            BindingContext = this;
+
             ActivityButton1.Clicked += OnButton1Clicked;
             ActivityButton2.Clicked += OnButton2Clicked;
+
+            ConfigureButtons();
+            Vote1();
+        }
+
+        private void ConfigureButtons()
+        {
+            var activities = OnlineSession.Current.ActivityCandidates;
+
+            if (activities.Count > 0)
+            {
+                ActivityButton1.Text = activities[0].Title;
+            }
+
+            if (activities.Count > 1)
+            {
+                ActivityButton2.Text = activities[1].Title;
+                ActivityButton2.IsVisible = true;
+            }
+            else
+            {
+                ActivityButton2.IsVisible = false;
+            }
         }
 
         private async void OnButton1Clicked(object sender, EventArgs e)
         {
             SelectButton(ActivityButton1);
-            var title = Items[0].ActivityChoises[0].Title;
-            if (!string.IsNullOrEmpty(title))
+
+            if (OnlineSession.Current.ActivityCandidates.Count > 0)
             {
-                await _questionToSpeechClient.Speak(title);
+                var title = OnlineSession.Current.ActivityCandidates[0].Title;
+                if (!string.IsNullOrEmpty(title))
+                {
+                    await _questionToSpeechClient.Speak(title);
+                }
             }
         }
 
         private async void OnButton2Clicked(object sender, EventArgs e)
         {
             SelectButton(ActivityButton2);
-            var title = Items[0].ActivityChoises[1].Title;
-            if (!string.IsNullOrEmpty(title))
+
+            if (OnlineSession.Current.ActivityCandidates.Count > 1)
             {
-                await _questionToSpeechClient.Speak(title);
+                var title = OnlineSession.Current.ActivityCandidates[1].Title;
+                if (!string.IsNullOrEmpty(title))
+                {
+                    await _questionToSpeechClient.Speak(title);
+                }
             }
         }
 
         private void SelectButton(Button selectedButton)
         {
-            // Reset previously selected button
             if (_selectedButton != null)
             {
                 _selectedButton.BorderWidth = DefaultBorderWidth;
             }
 
-            // Set new selected button
             _selectedButton = selectedButton;
             _selectedButton.BorderWidth = SelectedBorderWidth;
             SaveButton.IsEnabled = true;
@@ -112,10 +141,8 @@ namespace Prototype
             _cancellationTokenSource = new CancellationTokenSource();
             var token = _cancellationTokenSource.Token;
 
-            _countSeconds = Main.GetInstance().client.vote1Time;
             double totalSeconds = _countSeconds;
 
-            // Update the ProgressBar and start the timer
             Dispatcher.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 if (token.IsCancellationRequested)
@@ -124,35 +151,19 @@ namespace Prototype
                 }
 
                 _countSeconds--;
+                progressBar.Progress = Math.Max(0, _countSeconds / totalSeconds);
 
-                // Update the ProgressBar
-                progressBar.Progress = _countSeconds / totalSeconds;
-
-                if (_countSeconds == 0)
-                {
-                    return false;
-                }
-
-                return true;
+                return _countSeconds > 0;
             });
 
             try
             {
-                await Task.Delay(Main.GetInstance().client.vote1Time * 1000, token);
+                await Task.Delay(_countSeconds * 1000, token);
 
                 if (!token.IsCancellationRequested)
                 {
-                    // Do we want to try to send the vote when survey is closing?
-                    //var answer = await SendActivityVote();
-                    bool success = await Main.GetInstance().client.ReceiveVoteResult();
-                    if (success)
-                    {
-                        //received result changing view
-                        await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
-                        return;
-                    }
-                    await DisplayAlert("VIRHE", "Tulosten haku epäonnistui", "OK");
-                    await Navigation.PushAsync(new MainPage());
+                    await DisplayAlert("Aika loppui", "Et ehtinyt äänestää aktiviteettia.", "OK");
+                    await Navigation.PushAsync(new ActivityAnswered(null, 0));
                 }
             }
             catch (TaskCanceledException)
@@ -162,12 +173,13 @@ namespace Prototype
         }
 
         private async void SaveAnswer(object sender, EventArgs e)
-		{
+        {
             if (_selectedButton == null)
             {
                 Console.WriteLine("No activity selected");
                 return;
             }
+
             _cancellationTokenSource?.Cancel();
 
             var answer = await SendActivityVote();
@@ -176,27 +188,23 @@ namespace Prototype
 
         private async Task<Activity?> SendActivityVote()
         {
-            var currentItem = Items[0];
             Activity answer = null;
 
-            if (_selectedButton == ActivityButton1)
+            if (_selectedButton == ActivityButton1 && OnlineSession.Current.ActivityCandidates.Count > 0)
             {
-                answer = currentItem.ActivityChoises[0];
+                answer = OnlineSession.Current.ActivityCandidates[0];
             }
-            else if (_selectedButton == ActivityButton2)
+            else if (_selectedButton == ActivityButton2 && OnlineSession.Current.ActivityCandidates.Count > 1)
             {
-                answer = currentItem.ActivityChoises[1];
+                answer = OnlineSession.Current.ActivityCandidates[1];
             }
 
             if (answer != null)
             {
-                var answerDict = new Dictionary<string, string>
-                {
-                    { "title", answer.Title },
-                    { "imageSource", answer.ImageSource }
-                };
-
-                await Main.GetInstance().client.SendVote1Result(answerDict);
+                await Main.GetInstance().Api.SubmitActivityVoteAsync(
+                    OnlineSession.Current.RoomId,
+                    OnlineSession.Current.DeviceId,
+                    answer.Title);
             }
             else
             {
@@ -205,5 +213,5 @@ namespace Prototype
 
             return answer;
         }
-	}
+    }
 }

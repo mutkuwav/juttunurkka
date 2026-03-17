@@ -1,106 +1,167 @@
-﻿
-/*
-Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
-          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
-		  2025 Emmi Poutanen
-
-This file is part of "Juttunurkka".
-
-Juttunurkka is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, version 3 of the License.
-
-Juttunurkka is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
+using Prototype.Services;
 
 namespace Prototype
-{	
-	//Singleton Main class
-	public class Main
-	{
-		private static Main instance = null;
-        /// <summary>
-        ///		Set this variable to true if you want to debug the application with two Android emulators
-		///		(one host and one client). This changes the behaviour of SurveyHost and SurveyClient. When true,
-		///		connection between host and client is handled only with TCP -client. Note that this requires also
-        ///		port forwardfor the host emulator forward tcp:8001 tcp:8000. Setting up UDP communication between
-		///		two android emulators is not very easy, so this is a workaround for that.
-        /// </summary>
-        private static readonly bool _testMode = false;
+{
+    public class Main
+    {
+        private static Main instance = null;
 
-		public enum MainState
-		{
-			Default = 0,
-			Browsing = 1,
-			Editing = 2,
-			Hosting = 3,
-			Participating = 4,
-			CreatingNew = 5
-		}
-		public MainState state;
-		public SurveyClient client = null;
-		public SurveyHost host = null;
-		
-		private Main() {
-			state = MainState.Default;
-		}
-		
-		public void BrowseSurveys() {
-			Console.WriteLine($"DEBUG: Browsing surveys");
-			state = MainState.Browsing;
-		}
+        public enum MainState
+        {
+            Default = 0,
+            Browsing = 1,
+            Editing = 2,
+            Hosting = 3,
+            Participating = 4,
+            CreatingNew = 5
+        }
 
-		public void EditSurvey() {
-			Console.WriteLine($"DEBUG: Editing selected survey");
-			state = MainState.Editing;
+        public MainState state;
+        public SurveyClient client = null;   // legacy
+        public SurveyHost host = null;       // legacy
 
-		}
-		public void CreateNewSurvey()
-		{
-			Console.WriteLine("Creating new survey");
-			state = MainState.CreatingNew;
-			SurveyManager.GetInstance().ResetSurvey();
-		}
+        public JuttunurkkaApiService Api { get; }
 
-		public async Task<bool> JoinSurvey(string RoomCode) {
-			Console.WriteLine($"DEBUG: Attempting new client instance with RoomCode: {RoomCode}");
-			client = new SurveyClient(_testMode);
-			bool success = await Task.Run(() => client.LookForHost(RoomCode));
-			if (success) {
-				state = MainState.Participating;
-			}
-			return success;
-		}	
+        private Main()
+        {
+            state = MainState.Default;
+            Api = new JuttunurkkaApiService();
+        }
 
-		public async Task<bool> HostSurvey() {
-			Console.WriteLine($"DEBUG: Creating new host instance with selected survey");
-			state = MainState.Hosting;
-			host = new SurveyHost(_testMode);
-			return await host.RunSurvey();
-		}
+        public void BrowseSurveys()
+        {
+            state = MainState.Browsing;
+        }
 
-		public MainState GetMainState() {
-			return state;
-		}
-		
-		//Singleton instance getter
-		public static Main GetInstance() {
-			if (instance != null) {
-				return instance;
-			}
-			instance = new Main();
-			return instance;
-		}
-	}
+        public void EditSurvey()
+        {
+            state = MainState.Editing;
+        }
+
+        public void CreateNewSurvey()
+        {
+            state = MainState.CreatingNew;
+            SurveyManager.GetInstance().ResetSurvey();
+        }
+
+        public async Task<bool> JoinSurvey(string roomCode)
+        {
+            try
+            {
+                var result = await Api.JoinRoomAsync(roomCode, OnlineSession.Current.DeviceId);
+
+                OnlineSession.Current.ResetSessionData();
+                OnlineSession.Current.RoomId = result.RoomId;
+                OnlineSession.Current.RoomCode = roomCode;
+                OnlineSession.Current.IntroMessage = result.IntroMessage;
+                OnlineSession.Current.Emojis = MapServerEmojis(result.Emojis);
+
+                state = MainState.Participating;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"JoinSurvey failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> HostSurvey()
+        {
+            try
+            {
+                var survey = SurveyManager.GetInstance().GetSurvey();
+
+                var room = await Api.CreateRoomAsync();
+                await Api.PublishSurveyAsync(room.RoomId, survey);
+
+                OnlineSession.Current.ResetSessionData();
+                OnlineSession.Current.RoomId = room.RoomId;
+                OnlineSession.Current.RoomCode = room.RoomCode;
+                OnlineSession.Current.IntroMessage = survey.introMessage;
+                OnlineSession.Current.Emojis = GetSelectedSurveyEmojis(survey);
+
+                survey.RoomCode = room.RoomCode;
+
+                state = MainState.Hosting;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"HostSurvey failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        private List<Emoji> GetSelectedSurveyEmojis(Survey survey)
+        {
+            var selected = survey.emojis.Where(e => e.IsChecked).ToList();
+            if (selected.Count == 0)
+            {
+                selected = survey.emojis.ToList();
+            }
+
+            return selected.Select(CloneEmoji).ToList();
+        }
+
+        private List<Emoji> MapServerEmojis(List<JuttunurkkaApiService.EmojiLiteDto> serverEmojis)
+        {
+            var defaults = new Survey().emojis.ToDictionary(e => e.ID, e => e);
+
+            var result = new List<Emoji>();
+            foreach (var item in serverEmojis)
+            {
+                if (defaults.TryGetValue(item.Id, out var template))
+                {
+                    var clone = CloneEmoji(template);
+                    clone.Name = item.Name;
+                    result.Add(clone);
+                }
+                else
+                {
+                    result.Add(new Emoji
+                    {
+                        ID = item.Id,
+                        Name = item.Name,
+                        ImageSource = $"emoji{item.Id}lowres.png"
+                    });
+                }
+            }
+
+            return result;
+        }
+
+        private Emoji CloneEmoji(Emoji source)
+        {
+            return new Emoji
+            {
+                ID = source.ID,
+                Name = source.Name,
+                Impact = source.Impact,
+                IsChecked = source.IsChecked,
+                Activities = source.Activities?.ToList() ?? new List<Activity>(),
+                ImageSource = source.ImageSource
+            };
+        }
+
+        public MainState GetMainState()
+        {
+            return state;
+        }
+
+        public static Main GetInstance()
+        {
+            if (instance != null)
+            {
+                return instance;
+            }
+
+            instance = new Main();
+            return instance;
+        }
+    }
 }

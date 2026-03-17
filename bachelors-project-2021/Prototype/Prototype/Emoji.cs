@@ -43,7 +43,7 @@ namespace Prototype
 			this.ID = ID;
 			this.Name = Name;
 			this.Impact = impact;
-			this.IsChecked = IsChecked;
+			this.IsChecked = isChecked;
 			this.Activities = activities;
 			this.ImageSource = ImageSource;
 		}

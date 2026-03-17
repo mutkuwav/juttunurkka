@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -19,22 +20,29 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
+
 namespace Prototype
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ActivityAnswered : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ActivityAnswered : ContentPage
+    {
         public Activity ActivityToShow { get; set; }
 
-        private readonly Activity? _votedAcitivy;
-		private readonly int _remainingTime;
+        private readonly Activity? _votedActivity;
+        private readonly int _remainingTime;
         private bool _voteResultReceived = false;
 
         public ActivityAnswered(Activity? votedActivity, int remainingTime)
-		{
-			_votedAcitivy = votedActivity;
-			_remainingTime = remainingTime;
-			NavigationPage.SetHasBackButton(this, false);
+        {
+            _votedActivity = votedActivity;
+            _remainingTime = remainingTime <= 0 ? 30 : remainingTime;
+
+            Microsoft.Maui.Controls.NavigationPage.SetHasBackButton(this, false);
             ActivityToShow = votedActivity ?? new Activity();
             InitializeComponent();
             BindingContext = this;
@@ -47,10 +55,7 @@ namespace Prototype
             int totalSeconds = _remainingTime;
             int elapsed = 0;
 
-            // Cancellation token to cancel both tasks if needed
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-
-            // Start a task to listen for the results while countdown is running
             var listenTask = ListenForResultsAsync(cancellationTokenSource.Token);
 
             while (elapsed < totalSeconds)
@@ -58,45 +63,45 @@ namespace Prototype
                 if (cancellationTokenSource.Token.IsCancellationRequested)
                     break;
 
-                // Update progress bar
                 double progress = 1.0 - (double)elapsed / totalSeconds;
                 progressBar.Progress = progress;
 
                 await Task.Delay(1000);
                 elapsed++;
             }
-            progressBar.Progress = 0;
 
-            await Task.Delay(5000);
-            // Timeout, Cancel listen task and handle timeout
+            progressBar.Progress = 0;
+            await Task.Delay(1000);
+
             cancellationTokenSource.Cancel();
 
             if (!_voteResultReceived)
             {
-                // If no result received yet, show error and navigate to the main page
                 await DisplayAlert("VIRHE", "Tulosten haku epäonnistui", "OK");
                 await Navigation.PushAsync(new MainPage());
             }
         }
 
-        // Listen for vote results asynchronously
         private async Task ListenForResultsAsync(CancellationToken cancellationToken)
         {
             try
             {
-                // Loop to try receiving results every 1 second
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    bool success = await Main.GetInstance().client.ReceiveVoteResult();
-                    if (success)
+                    var candidateState = await Main.GetInstance().Api.GetActivityCandidatesAsync(OnlineSession.Current.RoomId);
+
+                    if (!candidateState.VoteOpen)
                     {
+                        OnlineSession.Current.ActivityVoteOpen = false;
+                        OnlineSession.Current.ActivityResults =
+                            await Main.GetInstance().Api.GetActivityResultsAsync(OnlineSession.Current.RoomId);
+
                         _voteResultReceived = true;
-                        // If successful, navigate to the results page and cancel the countdown
                         await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
                         break;
                     }
 
-                    await Task.Delay(1000);
+                    await Task.Delay(1000, cancellationToken);
                 }
             }
             catch (Exception ex)

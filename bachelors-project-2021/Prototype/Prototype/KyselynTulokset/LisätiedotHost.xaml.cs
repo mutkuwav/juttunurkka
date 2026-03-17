@@ -2,6 +2,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Joni Lapinkoski
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -18,6 +19,7 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.Maui.Controls;
@@ -32,18 +34,16 @@ namespace Prototype
         public LisätiedotHost()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = this;
             LoadHostEmojiResults();
         }
 
-        void LoadHostEmojiResults()
+        private void LoadHostEmojiResults()
         {
-            var raw = Main
-                .GetInstance()
-                .host
-                .data
-                .GetEmojiResults()
+            var emojiMap = OnlineSession.Current.Emojis.ToDictionary(e => e.ID, e => e);
+
+            var raw = OnlineSession.Current.EmojiResults
                 .OrderByDescending(kv => kv.Value)
                 .ToList();
 
@@ -51,27 +51,38 @@ namespace Prototype
             const double maxBarHeight = 200;
             const double minBarHeight = 30;
 
-            var barColors = new[] { Colors.Blue, Colors.Red, Colors.Green };
-            var survey = SurveyManager.GetInstance().GetSurvey();
+            var barColors = new[] { Colors.Blue, Colors.Red, Colors.Green, Colors.Orange, Colors.Purple, Colors.Teal, Colors.Gray };
 
             for (int i = 0; i < raw.Count; i++)
             {
                 var kv = raw[i];
 
-                double rawH = (kv.Value / maxCount) * maxBarHeight;
-                double heightPx = Math.Max(rawH, minBarHeight);
+                string title = emojiMap.TryGetValue(kv.Key, out var emoji) ? emoji.Name : $"Emoji {kv.Key}";
+                string image = emojiMap.TryGetValue(kv.Key, out var emoji2) ? emoji2.ImageSource : $"emoji{kv.Key}lowres.png";
+
+                double rawHeight = (kv.Value / maxCount) * maxBarHeight;
+                double heightPx = Math.Max(rawHeight, minBarHeight);
 
                 Results.Add(new HostResultItem
                 {
-                    Image = $"emoji{kv.Key}lowres.png",
-                    Title = survey.emojis[i].Name,
-                    Amount = kv.Value.ToString(),   // "0" if zero
+                    Image = image,
+                    Title = title,
+                    Amount = kv.Value.ToString(),
                     ScalePx = heightPx,
-                    Color = barColors.Length > i
-                                ? barColors[i]
-                                : Colors.Gray
+                    Color = barColors.Length > i ? barColors[i] : Colors.Gray
                 });
             }
+        }
+
+        private List<Activity> GetWinningEmojiActivities()
+        {
+            var winningEmojiId = OnlineSession.Current.EmojiResults
+                .OrderByDescending(kv => kv.Value)
+                .Select(kv => kv.Key)
+                .FirstOrDefault();
+
+            var emoji = OnlineSession.Current.Emojis.FirstOrDefault(e => e.ID == winningEmojiId);
+            return emoji?.Activities?.ToList() ?? new List<Activity>();
         }
 
         async void KeskeytäClicked(object sender, EventArgs e)
@@ -79,16 +90,33 @@ namespace Prototype
             bool ok = await DisplayAlert("Haluatko varmasti sulkea huoneen?", "", "Kyllä", "Ei");
             if (!ok) return;
 
-            if (Main.GetInstance().state == Main.MainState.Participating)
-                Main.GetInstance().client.DestroyClient();
-            else
-                Main.GetInstance().host.DestroyHost();
-
             await Navigation.PopToRootAsync();
         }
 
         async void JatkaClicked(object sender, EventArgs e)
-            => await Navigation.PushAsync(new TulostenOdotus());
+        {
+            try
+            {
+                var activities = GetWinningEmojiActivities();
+                if (activities.Count == 0)
+                {
+                    await DisplayAlert("Virhe", "Aktiviteettivaihtoehtoja ei löytynyt.", "OK");
+                    return;
+                }
+
+                OnlineSession.Current.ActivityCandidates = activities;
+                OnlineSession.Current.ActivityResults = new Dictionary<string, int>();
+                OnlineSession.Current.ActivityVoteOpen = true;
+
+                await Main.GetInstance().Api.StartActivityVoteAsync(OnlineSession.Current.RoomId, activities);
+                await Navigation.PushAsync(new TulostenOdotus());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"JatkaClicked failed: {ex.Message}");
+                await DisplayAlert("Virhe", "Aktiviteettiäänestyksen käynnistys epäonnistui.", "OK");
+            }
+        }
     }
 
     public class HostResultItem

@@ -23,7 +23,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.OdotetaanVastauksiaOpe"
              Title="Juttunurkka"
              BackgroundColor="#ffea7f">
-            
+
     <ContentPage.Content>
         <StackLayout>
             <Label 
@@ -42,16 +42,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                   ColumnDefinitions="Auto, *"
                   RowDefinitions="Auto, Auto, Auto">
 
-                <Label Text="Avainkoodi:"
-                       FontSize="25"
-                       TextColor="Black"
-                       Grid.Row="0" Grid.Column="0" />
-
-                <Label Text="{Binding RoomCode}"
-                       FontSize="25"
-                       TextColor="Black"
-                       Grid.Row="0" Grid.Column="1"
-                       HorizontalTextAlignment="End"/>
+                
 
                 <Label Text="Osallistujia:"
                        FontSize="25"
@@ -74,8 +65,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                        TextColor="Black"
                        Grid.Row="2" Grid.Column="1" 
                        HorizontalTextAlignment="End"/>
-             </Grid>
-
+            </Grid>
 
             <StackLayout
                 VerticalOptions="Start"
@@ -84,25 +74,24 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Spacing="10">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label
-                    Text="Aikaa jäljellä:"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start"
-                    FontAttributes="Bold"
-                    FontSize="25"
-                    TextColor="Black"/>
+                        Text="Aikaa jäljellä:"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Start"
+                        FontAttributes="Bold"
+                        FontSize="25"
+                        TextColor="Black"/>
 
                     <Label
-                    x:Name="countdownLabel"
-                    Text="60"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Start"
-                    FontSize="25"
-                    FontAttributes="Bold"
-                    TextColor="Black"
-                    Margin="50,0,0,0"
-                />
+                        x:Name="countdownLabel"
+                        Text="60"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        Margin="50,0,0,0"/>
                 </StackLayout>
-                
+
                 <ProgressBar x:Name="progressBar"
                              Progress="1"
                              VerticalOptions="CenterAndExpand"
@@ -127,9 +116,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     WidthRequest="270"
                     Clicked="LopetaClicked"
                     Margin="0,60,0,30"
-                    LineBreakMode="WordWrap"
-                    />
-
+                    LineBreakMode="WordWrap"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

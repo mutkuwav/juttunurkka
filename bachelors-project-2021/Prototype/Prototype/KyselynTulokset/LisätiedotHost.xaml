@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Joni Lapinkoski
-    
+    2026 Matias Meriläinen
 This file is part of "Juttunurkka".
 Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LisätiedotHost"
@@ -28,101 +29,98 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <StackLayout Padding="0,80,0,0">
 
             <Label
-        Text="TULOKSET"
-        FontSize="40"
-        FontAttributes="Bold"
-        FontFamily="BebasNeue"
-        TextColor="Black"
-        HorizontalOptions="Center"
-        Margin="0,30,0,50"/>
+                Text="TULOKSET"
+                FontSize="40"
+                FontAttributes="Bold"
+                FontFamily="BebasNeue"
+                TextColor="Black"
+                HorizontalOptions="Center"
+                Margin="0,30,0,50"/>
 
             <CollectionView
-        ItemsSource="{Binding Results}"
-        HorizontalOptions="Center"
-        Margin="0,0,0,20">
+                ItemsSource="{Binding Results}"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout
-              WidthRequest="100"
-              VerticalOptions="EndAndExpand"
-              HorizontalOptions="Center"
-              Spacing="0">
+                            WidthRequest="100"
+                            VerticalOptions="EndAndExpand"
+                            HorizontalOptions="Center"
+                            Spacing="0">
 
                             <Image
-                Source="{Binding Image}"
-                HeightRequest="80"
-                HorizontalOptions="Center"/>
+                                Source="{Binding Image}"
+                                HeightRequest="80"
+                                HorizontalOptions="Center"/>
 
                             <Grid
-                HeightRequest="200"
-                VerticalOptions="FillAndExpand">
+                                HeightRequest="200"
+                                VerticalOptions="FillAndExpand">
                                 <Frame
-                  VerticalOptions="End"
-                  HeightRequest="{Binding ScalePx}"
-                  WidthRequest="60"
-                  BackgroundColor="#FEBA4F"
-                  CornerRadius="5"
-                  Padding="0"
-                  HasShadow="False">
+                                    VerticalOptions="End"
+                                    HeightRequest="{Binding ScalePx}"
+                                    WidthRequest="60"
+                                    BackgroundColor="#FEBA4F"
+                                    CornerRadius="5"
+                                    Padding="0"
+                                    HasShadow="False">
                                     <Label
-                    Text="{Binding Amount}"
-                    TextColor="Black"
-                    FontSize="30"
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                                        Text="{Binding Amount}"
+                                        TextColor="Black"
+                                        FontSize="30"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
                                 </Frame>
                             </Grid>
 
                             <BoxView
-                HeightRequest="8"
-                BackgroundColor="#C381FD"
-                VerticalOptions="End"
-                Margin="0,0,0,25"
-                HorizontalOptions="FillAndExpand"/>
-
-
-
+                                HeightRequest="8"
+                                BackgroundColor="#C381FD"
+                                VerticalOptions="End"
+                                Margin="0,0,0,25"
+                                HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
             <StackLayout
-        Orientation="Horizontal"
-        HorizontalOptions="Center"
-        VerticalOptions="EndAndExpand"
-        Spacing="20"
-        Margin="0,0,0,30">
+                Orientation="Horizontal"
+                HorizontalOptions="Center"
+                VerticalOptions="EndAndExpand"
+                Spacing="20"
+                Margin="0,0,0,30">
 
                 <Button
-          Text="Keskeytä"
-          Clicked="KeskeytäClicked"
-          BackgroundColor="#FEBA4F"
-          TextColor="Black"
-          FontSize="20"
-          FontAttributes="Bold"
-          CornerRadius="10"
-          HeightRequest="70"
-          WidthRequest="150"
-          BorderColor="Transparent"
-          BorderWidth="0"/>
+                    Text="Keskeytä"
+                    Clicked="KeskeytäClicked"
+                    BackgroundColor="#FEBA4F"
+                    TextColor="Black"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="70"
+                    WidthRequest="150"
+                    BorderColor="Transparent"
+                    BorderWidth="0"/>
 
                 <Button
-          Text="Jatka"
-          Clicked="JatkaClicked"
-          BackgroundColor="#FEBA4F"
-          TextColor="Black"
-          FontSize="20"
-          FontAttributes="Bold"
-          CornerRadius="10"
-          HeightRequest="70"
-          WidthRequest="150"
-          BorderColor="Transparent"
-          BorderWidth="0"/>
+                    Text="Jatka"
+                    Clicked="JatkaClicked"
+                    BackgroundColor="#FEBA4F"
+                    TextColor="Black"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="70"
+                    WidthRequest="150"
+                    BorderColor="Transparent"
+                    BorderWidth="0"/>
 
             </StackLayout>
         </StackLayout>

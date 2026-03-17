@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Eemil Alamäki
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -18,117 +19,66 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyLopetus"
              BackgroundColor="#ffea7f"
              Title="Juttunurkka">
 
+    <Grid RowDefinitions="Auto,Auto,*,Auto"
+          Padding="24,50,24,30"
+          RowSpacing="22">
 
-    <StackLayout Spacing="0">
+        <Label Grid.Row="0"
+               Text="Luo nimi juttunurkalle"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               FontAttributes="Bold"
+               FontSize="28"
+               TextColor="Black" />
 
-        <Label Text="Luo nimi ja avainkoodi juttunurkalle"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand"
-            HorizontalTextAlignment="Center"
-            FontAttributes="Bold"
-            FontSize="30"
-            TextColor="Black" 
-            Margin="0,40,0,0"
-             />
-       
-                <Label
-                    Grid.Row="0"
-                    Margin="40,10,0,-5"
-                    Text="Nimi"
-                    TextColor="Black"
-                    FontAttributes="Bold"
-                    FontSize="22"/>
+        <VerticalStackLayout Grid.Row="1" Spacing="8">
+            <Label Text="Nimi"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   FontSize="22" />
 
-            <Entry   x:Name="NameEditor"
-                     Margin="20,10,20,-70"
-                     Placeholder="Kirjoita..."
-                     WidthRequest="340"
-                     VerticalOptions="StartAndExpand"
-                     FontAttributes="Bold"
-                     BackgroundColor="White"  
-                     FontSize="20"
-                     TextChanged="OnEntryTextChanged"
-                 />
+            <Entry x:Name="NameEditor"
+                   Placeholder="Kirjoita..."
+                   FontAttributes="Bold"
+                   BackgroundColor="White"
+                   FontSize="20"
+                   TextChanged="OnEntryTextChanged" />
+        </VerticalStackLayout>
 
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="CenterAndExpand">
-
-            <Image Source="key"
-               HeightRequest="70"
-               WidthRequest="70"
-               Margin="-10,0,0,0"
-               />
-
-            <Frame Padding="5"
-                HorizontalOptions="CenterAndExpand"
-                BorderColor="#4383EF"
-                CornerRadius="10" 
-                HeightRequest="60"
-                WidthRequest="120"
-                Margin="5,5,5,5">
-
-
-                    <Entry x:Name="KeyEditor"
-                     Placeholder="Kirjoita..."
-                     VerticalOptions="StartAndExpand"
-                     MaxLength="6"
-                    FontAttributes="Bold"
-                     BackgroundColor="White"
-                     FontSize="20"
-                     TextChanged="OnEntryTextChanged"
-                 />
-
-                
-            </Frame>
-
-        </StackLayout>
-
-        <Grid 
-            RowDefinitions="Auto, Auto"
-            ColumnDefinitions="Auto, Auto"
-            VerticalOptions="EndAndExpand"
-            HorizontalOptions="CenterAndExpand">
+        <Grid Grid.Row="3"
+              ColumnDefinitions="*,*"
+              ColumnSpacing="18">
 
             <Button Grid.Column="0"
-                Text="Edellinen"
-                Clicked="EdellinenButtonClicked"
-                VerticalOptions="EndAndExpand"
-                HorizontalOptions="CenterAndExpand" 
-                TextColor="Black"
-                FontAttributes="Bold"
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="150"
-                BackgroundColor="#feba4e"
-                BorderColor="#feba4e"
-            />
+                    Text="Edellinen"
+                    Clicked="EdellinenButtonClicked"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontSize="19"
+                    CornerRadius="10"
+                    HeightRequest="56"
+                    BackgroundColor="#feba4e"
+                    BorderColor="#feba4e" />
 
-            <Button Grid.Column="1" 
-                Text="Jatka"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Clicked="JatkaButtonClicked" 
-                VerticalOptions="EndAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="150"
-                BackgroundColor="#feba4e"
-                BorderColor="#feba4e"
-            />
+            <Button Grid.Column="1"
+                    Text="Jatka"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Clicked="JatkaButtonClicked"
+                    FontSize="19"
+                    CornerRadius="10"
+                    HeightRequest="56"
+                    BackgroundColor="#feba4e"
+                    BorderColor="#feba4e" />
         </Grid>
 
-    </StackLayout>
-
+    </Grid>
 </ContentPage>

@@ -19,60 +19,94 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls.Xaml;
-using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdotetaanVastauksiaClient : ContentPage
     {
+        private CancellationTokenSource cts;
+
         public OdotetaanVastauksiaClient()
         {
             InitializeComponent();
-            //Ei enää mahdollista päästä takaisin kysleyn luontiin painamalla navigoinnin backbuttonia 
             NavigationPage.SetHasBackButton(this, false);
-            ReceiveSurveyData();
         }
-        private async void ReceiveSurveyData() {
-            bool success = await Main.GetInstance().client.ReceiveSurveyDataAsync();
-			if (success)
-			{
-                await Navigation.PushAsync(new LisätiedotClient());
-			} else {
-                Main.GetInstance().client.DestroyClient();
-                await Navigation.PopToRootAsync();
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            cts = new CancellationTokenSource();
+            _ = WaitForResultsAsync(cts.Token);
+        }
+
+        protected override void OnDisappearing()
+        {
+            cts?.Cancel();
+            base.OnDisappearing();
+        }
+
+        private async Task WaitForResultsAsync(CancellationToken token)
+        {
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    var status = await Main.GetInstance().Api.GetRoomStatusAsync(OnlineSession.Current.RoomId);
+
+                    OnlineSession.Current.JoinedCount = status.JoinedCount;
+                    OnlineSession.Current.VotedCount = status.VotedCount;
+                    OnlineSession.Current.SurveyClosed = status.SurveyClosed;
+
+                    if (status.SurveyClosed)
+                    {
+                        OnlineSession.Current.EmojiResults =
+                            await Main.GetInstance().Api.GetEmojiResultsAsync(OnlineSession.Current.RoomId);
+
+                        await MainThread.InvokeOnMainThreadAsync(async () =>
+                        {
+                            await Navigation.PushAsync(new LisätiedotClient());
+                        });
+
+                        return;
+                    }
+
+                    await Task.Delay(1000, token);
+                }
             }
-        }        
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"WaitForResultsAsync failed: {ex.Message}");
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await DisplayAlert("Virhe", "Tulosten odottaminen epäonnistui.", "OK");
+                    await Navigation.PopToRootAsync();
+                });
+            }
+        }
 
         private async void Poistu(object sender, EventArgs e)
         {
+            var res = await DisplayAlert("Oletko varma että tahdot poistua kyselystä?", "", "Kyllä", "Ei");
 
-            // Varmistus kyselystä poistumisen yhteydessä
-
-             var res = await DisplayAlert("Oletko varma että tahdot poistua kyselystä?", "", "Kyllä", "Ei");
-
-            if (res == true)
+            if (res)
             {
-                Main.GetInstance().client.DestroyClient();
+                cts?.Cancel();
                 await Navigation.PopToRootAsync();
             }
-            else return;
-            
-
         }
 
-        //Device back button disabled
         protected override bool OnBackButtonPressed()
         {
             return true;
-
         }
     }
 }

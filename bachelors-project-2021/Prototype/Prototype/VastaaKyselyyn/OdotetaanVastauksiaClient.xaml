@@ -29,13 +29,13 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
     <StackLayout>
 
         <Label Text="ODOTETAAN MUITA &#10;    OSALLISTUJIA"
-                   FontFamily="Bebasneue"
-                   FontAttributes="Bold"
-                   Margin="0,100,0,0"
-                   FontSize="25"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   LineHeight="1.3"/>
+               FontFamily="Bebasneue"
+               FontAttributes="Bold"
+               Margin="0,100,0,0"
+               FontSize="25"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               LineHeight="1.3"/>
 
         <ActivityIndicator IsRunning="true" 
                            Color="Black"

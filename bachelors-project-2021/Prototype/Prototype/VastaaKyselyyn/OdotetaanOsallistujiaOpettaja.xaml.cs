@@ -20,24 +20,30 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls.Xaml;
-using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui;
 
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdotetaanOsallistujiaOpettaja : ContentPage, System.ComponentModel.INotifyPropertyChanged
     {
-        public string roomCode { get; set; } = "Avainkoodi: ";
+        private string roomCode = "Luodaan huonetta...";
+        public string RoomCode
+        {
+            get => roomCode;
+            set
+            {
+                if (roomCode != value)
+                {
+                    roomCode = value;
+                    OnPropertyChanged(nameof(RoomCode));
+                }
+            }
+        }
 
         private int participantsCount;
-
         public int ParticipantsCount
         {
             get => participantsCount;
@@ -51,56 +57,90 @@ namespace Prototype
             }
         }
 
+        private bool pollingStarted = false;
+
         public OdotetaanOsallistujiaOpettaja()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-            roomCode += SurveyManager.GetInstance().GetSurvey().RoomCode;
-            BindingContext = this; 
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = this;
 
-            //Ei enää mahdollista päästä takaisin kysleyn luontiin painamalla navigoinnin backbuttonia 
-            NavigationPage.SetHasBackButton(this, true);
-
-            //actually run the survey
-            //Host();
+            _ = InitializeRoomAsync();
         }
-        
-        
-        private async void Host()
-		{
-            //hakee osallistujien määrän?
-            //clientCount = Main.GetInstance().host.clientCount;
-            
-            if (!await Main.GetInstance().HostSurvey())
+
+        private async Task InitializeRoomAsync()
+        {
+            var ok = await Main.GetInstance().HostSurvey();
+            if (!ok)
             {
-                //host survey ended in a fatal unexpected error, aborting survey.
-                //pop to root and display error
+                await DisplayAlert("Virhe", "Huoneen luominen epäonnistui.", "OK");
                 await Navigation.PopToRootAsync();
-                await DisplayAlert("Kysely suljettiin automaattisesti1", "Tapahtui odottamaton virhe.", "OK");
+                return;
+            }
+
+            RoomCode = "Avainkoodi: " + OnlineSession.Current.RoomCode;
+
+            if (!pollingStarted)
+            {
+                pollingStarted = true;
+                StartPollingStatus();
             }
         }
-        
+
+        private void StartPollingStatus()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                _ = PollStatusOnceAsync();
+                return !OnlineSession.Current.SurveyClosed;
+            });
+        }
+
+        private async Task PollStatusOnceAsync()
+        {
+            try
+            {
+                var status = await Main.GetInstance().Api.GetRoomStatusAsync(OnlineSession.Current.RoomId);
+                OnlineSession.Current.JoinedCount = status.JoinedCount;
+                OnlineSession.Current.VotedCount = status.VotedCount;
+                OnlineSession.Current.SurveyClosed = status.SurveyClosed;
+
+                ParticipantsCount = status.JoinedCount;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Status polling failed: {ex.Message}");
+            }
+        }
 
         private async void AloitaButtonClicked(object sender, EventArgs e)
         {
-            //siirrytään odottamaan vastauksia
             await Navigation.PushAsync(new OdotetaanVastauksiaOpe());
         }
-                 
 
         private async void KeskeytaButtonClicked(object sender, EventArgs e)
         {
-
-            //Varmistu kyselyn peruuttamisen yhteydessä keskeyttää
-
             var res = await DisplayAlert("Oletko varma että tahdot keskeyttää kyselyn?", "", "Kyllä", "Ei");
+            if (!res) return;
 
-            if (res == true) {
-                await Navigation.PopToRootAsync();
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(OnlineSession.Current.RoomId))
+                {
+                    await Main.GetInstance().Api.CloseSurveyAsync(OnlineSession.Current.RoomId);
+                }
             }
-            else return; 
-           
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Close survey failed: {ex.Message}");
+            }
 
+            await Navigation.PopToRootAsync();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }

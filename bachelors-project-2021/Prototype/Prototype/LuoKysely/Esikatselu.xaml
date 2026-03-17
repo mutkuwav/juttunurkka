@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Eemil Alamäki
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -18,6 +19,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Esikatselu"
@@ -25,16 +27,16 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              Title="Juttunurkka">
 
     <ContentPage.Content>
-        <StackLayout Padding="0,60,0,0" Spacing="20" HorizontalOptions="Center">
+        <StackLayout Padding="0,60,0,0"
+                     Spacing="20"
+                     HorizontalOptions="Center">
 
-            <!-- Otsikko -->
             <Label Text="Esikatselu"
                    FontAttributes="Bold"
                    FontSize="30"
                    TextColor="Black"
                    HorizontalOptions="Center"/>
 
-            <!-- Intro Message Button -->
             <Button Text="{Binding introMessage}"
                     TextColor="Black"
                     BorderColor="#4383EF"
@@ -46,7 +48,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     BorderWidth="1"
                     WidthRequest="340"/>
 
-            <!-- Aktiviteetit-kehys -->
             <Frame BorderColor="#4383EF"
                    BackgroundColor="White"
                    CornerRadius="10"
@@ -62,7 +63,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                            HorizontalOptions="Center"
                            TextColor="Black"/>
 
-                    <!-- Aktiviteettilista -->
                     <CollectionView ItemsSource="{Binding Emojit}"
                                     SelectionMode="None"
                                     HeightRequest="300">
@@ -75,16 +75,24 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                             <DataTemplate>
                                 <StackLayout Orientation="Horizontal" Spacing="10">
 
-                                    <!-- Emoji -->
                                     <Image Source="{Binding Item.ImageSource}"
                                            WidthRequest="30"
                                            HeightRequest="30"
                                            VerticalOptions="Start"/>
 
-                                    <!-- Aktiviteettien nimet -->
                                     <StackLayout>
-                                        <Label Text="{Binding ActivityChoises[0]}" FontSize="18" TextColor="Black" LineBreakMode="WordWrap" WidthRequest="280" HorizontalTextAlignment="Start"/>
-                                        <Label Text="{Binding ActivityChoises[1]}" FontSize="18" TextColor="Black" LineBreakMode="WordWrap" WidthRequest="280" HorizontalTextAlignment="Start"/>
+                                        <Label Text="{Binding ActivityChoises[0]}"
+                                               FontSize="18"
+                                               TextColor="Black"
+                                               LineBreakMode="WordWrap"
+                                               WidthRequest="280"
+                                               HorizontalTextAlignment="Start"/>
+                                        <Label Text="{Binding ActivityChoises[1]}"
+                                               FontSize="18"
+                                               TextColor="Black"
+                                               LineBreakMode="WordWrap"
+                                               WidthRequest="280"
+                                               HorizontalTextAlignment="Start"/>
                                     </StackLayout>
 
                                 </StackLayout>
@@ -95,32 +103,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 </StackLayout>
             </Frame>
 
-            <!-- Avainkoodi -->
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Center"
-                         Spacing="20">
-                <Label Text="Avainkoodi"
-                       FontSize="18"
-                       VerticalOptions="Center"
-                       FontAttributes="Bold"
-                       TextColor="Black"/>
-                <Frame
-                    BorderColor="#4383EF"
-                    CornerRadius="10">
-                    
-                    <Label Text="{Binding RoomCode}"
-                       FontSize="18"
-                       TextColor="Black"
-                       HorizontalOptions="Start"
-                       WidthRequest="60"
-                       HeightRequest="20"
-                       FontAttributes="Bold"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"/>
-                </Frame>
-            </StackLayout>
-
-            <!-- Napit -->
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="Center"
                          Spacing="20"

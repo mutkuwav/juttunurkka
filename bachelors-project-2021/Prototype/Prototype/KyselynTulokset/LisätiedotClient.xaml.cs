@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Joni Lapinkoski
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -22,31 +23,44 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 
 namespace Prototype
 {
     public partial class LisätiedotClient : ContentPage
     {
+        private CancellationTokenSource cts;
         public ResultsViewModel ViewModel { get; set; }
 
         public LisätiedotClient()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, false);
             ViewModel = new ResultsViewModel();
             BindingContext = ViewModel;
 
             ProcessEmojiResults();
-            ReceiveVote1();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            cts = new CancellationTokenSource();
+            _ = WaitForActivityVoteAsync(cts.Token);
+        }
+
+        protected override void OnDisappearing()
+        {
+            cts?.Cancel();
+            base.OnDisappearing();
         }
 
         void ProcessEmojiResults()
         {
-            var emojiResults = Main.GetInstance()
-                                   .client.summary
-                                   .GetEmojiResults()
-                                   .OrderByDescending(kvp => kvp.Value);
+            var emojiResults = OnlineSession.Current.EmojiResults
+                .OrderByDescending(kvp => kvp.Value);
 
             int totalVotes = emojiResults.Sum(kvp => kvp.Value);
 
@@ -55,8 +69,8 @@ namespace Prototype
                 var image = $"emoji{kvp.Key}lowres.png";
                 var amount = kvp.Value;
                 var height = totalVotes == 0
-                             ? 0
-                             : (int)((double)amount / totalVotes * 200);
+                    ? 0
+                    : (int)((double)amount / totalVotes * 200);
 
                 ViewModel.Results.Add(new ResultItem
                 {
@@ -67,15 +81,43 @@ namespace Prototype
             }
         }
 
-        async void ReceiveVote1()
+        async Task WaitForActivityVoteAsync(CancellationToken token)
         {
-            bool success = await Main.GetInstance()
-                                     .client
-                                     .ReceiveVote1Candidates();
-            if (success)
+            try
             {
-                await Navigation.PushAsync(
-                  new AktiviteettiäänestysEka());
+                while (!token.IsCancellationRequested)
+                {
+                    var response = await Main.GetInstance().Api.GetActivityCandidatesAsync(OnlineSession.Current.RoomId);
+
+                    if (response.Activities.Count > 0)
+                    {
+                        OnlineSession.Current.ActivityCandidates = response.Activities
+                            .Select(a => new Activity
+                            {
+                                Title = a.Title,
+                                ImageSource = a.ImageSource
+                            })
+                            .ToList();
+
+                        OnlineSession.Current.ActivityVoteOpen = response.VoteOpen;
+
+                        await MainThread.InvokeOnMainThreadAsync(async () =>
+                        {
+                            await Navigation.PushAsync(new AktiviteettiäänestysEka());
+                        });
+
+                        return;
+                    }
+
+                    await Task.Delay(1000, token);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"WaitForActivityVoteAsync failed: {ex.Message}");
             }
         }
 
@@ -89,7 +131,7 @@ namespace Prototype
 
             if (answer)
             {
-                Main.GetInstance().client.DestroyClient();
+                cts?.Cancel();
                 await Navigation.PopToRootAsync();
             }
         }
