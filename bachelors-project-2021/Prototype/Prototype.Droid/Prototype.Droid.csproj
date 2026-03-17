@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	
 	<PropertyGroup>
 		<TargetFramework>net8.0-android</TargetFramework>
 		<SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
@@ -13,7 +13,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Prototype\Prototype.csproj" />
 	</ItemGroup>
-
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />

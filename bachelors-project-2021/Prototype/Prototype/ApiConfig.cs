@@ -18,7 +18,7 @@ namespace Prototype
 {
     public static class ApiConfig
     {
-        // baseurl tulee vaihtaa jos testaa local backendia nopeampia muutoksia varten
+        //baseurl tulee vaihtaa jos testaa local backendia nopeampia muutoksia varten
         //local hosti 10.0.2.2:8080
         //2026 projektin server ip on 86.50.20.47:8080, serveri on voimassa 31.7.2026 saakka
         public static string BaseUrl = "http://86.50.20.47:8080/";
