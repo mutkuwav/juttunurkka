@@ -27,10 +27,7 @@
 			<DependentUpon>LuoOmaVaihtoehto.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="VastaaKyselyyn\EmojiAnswered.xaml.cs">
-			<DependentUpon>moi.xaml.cs</DependentUpon>
-		</Compile>
-		<Compile Update="VastaaKyselyyn\OmanEmojinPiirto.xaml.cs">
-		  <DependentUpon>OmanEmojinPiirto.xaml</DependentUpon>
+			<DependentUpon>EmojiAnswered.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
@@ -43,8 +40,6 @@
 		<MauiXaml Update="VastaaKyselyyn\EmojiAnswered.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="VastaaKyselyyn\OmanEmojinPiirto.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 	</ItemGroup>
 </Project>
+
