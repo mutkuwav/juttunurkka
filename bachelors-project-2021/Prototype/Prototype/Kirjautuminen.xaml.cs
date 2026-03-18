@@ -46,7 +46,7 @@ namespace Prototype
             }
             else
             {
-                DisplayAlert("VIRHE", "Vaara salasana tai kayttajatunnus", "OK");
+                DisplayAlert("VIRHE", "Väärä salasana tai käyttäjätunnus", "OK");
             }
         }
 
@@ -58,7 +58,7 @@ namespace Prototype
             }
             else
             {
-                await DisplayAlert("VIRHE", "Vaara salasana tai kayttajatunnus", "OK");
+                await DisplayAlert("VIRHE", "Väärä salasana tai käyttäjätunnus", "OK");
             }
             
         }

@@ -33,6 +33,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <Label Text="Esikatselu"
                    FontAttributes="Bold"
+                   FontFamily="LineSeedBold"
                    FontSize="30"
                    TextColor="Black"
                    HorizontalOptions="Center"/>

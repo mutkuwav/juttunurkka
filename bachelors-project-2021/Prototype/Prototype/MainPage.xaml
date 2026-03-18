@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Petri Pentinpuro, Eemil Alamäki
+          2026 Mimosa Joenväärä
 
 This file is part of "Juttunurkka".
 
@@ -26,14 +27,21 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              >
 
     <AbsoluteLayout
-        Padding="0"
-        HorizontalOptions="FillAndExpand"
-        VerticalOptions="FillAndExpand">
+    Padding="0"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
+
+    <!-- TAUSTAKUVA -->
+    <Image
+        Source="background2.png"
+        Aspect="AspectFill"
+        AbsoluteLayout.LayoutBounds="0,0,1,1"
+        AbsoluteLayout.LayoutFlags="All" />
 
 
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                      AbsoluteLayout.LayoutFlags="All" 
-                     BackgroundColor="#ffea7f"
+                     
                      >
 
             <StackLayout Padding="10">
@@ -47,10 +55,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         HorizontalOptions="Start" 
                         FontSize="20"
                         FontAttributes="Bold"
+                        FontFamily="LineSeedBold"
                         Margin="10,10,0,35"
                         CornerRadius="10"
-                        BackgroundColor="#feba4f"
-                        BorderColor="#ffea7f"
+                        BackgroundColor="#bfd3c1"
+                        BorderColor="#bfd3c1"
                         HeightRequest="60"/>
 
 
@@ -62,8 +71,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         TextColor="Black"
                         Margin="0,10,10,35"
                         CornerRadius="10"
-                        BackgroundColor="#feba4f"
-                        BorderColor="#ffea7f"
+                        BackgroundColor="#bfd3c1"
+                        BorderColor="#bfd3c1"
+                        FontFamily="LineSeedBold"
                         HeightRequest="60"
                         Clicked="AvaaOpettaja"/>
 
@@ -78,7 +88,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    FontSize="50"
                  />-->
 
-                <Image Source="logo_no_background"
+                <Image Source="logo"
                     HorizontalOptions="Center"
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="40"
@@ -90,9 +100,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                 <Grid HorizontalOptions="CenterAndExpand"
                     Margin="0,50,0,0"
-                    HeightRequest="380"
+                    HeightRequest="360"
                     WidthRequest="300"
-                    BackgroundColor="#89e077">
+                    BackgroundColor="#a0baa3">
 
 
                     <Grid.RowDefinitions>
@@ -116,7 +126,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         LineBreakMode="WordWrap"
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="Center"
-                        FontFamily="LineSeedRegular"
+                        FontFamily="LineSeedBold"
                         Margin="10,20,10,40" />
 
                     <Label Text="AVAA JUTTUNURKKA JA ODOTA OPETTAJAN OHJEITA"
@@ -124,7 +134,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         TextColor="Black"
                         HorizontalOptions="Center"
                         VerticalOptions="Start"
-                        FontSize="26"
+                        FontSize="18"
 
                         Padding="0"
                         LineBreakMode="WordWrap"
@@ -133,50 +143,35 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="Center"/>
 
-                    <Frame Grid.Row="2"
-                       Margin="0,0,0,-50"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       Padding="0"
-                       HeightRequest="160"
-                       WidthRequest="250"
-                       BackgroundColor="#feba4f"
-                       CornerRadius="5"
-                       BorderColor="Transparent"
-                       HasShadow="True">
+                       <Frame Grid.Row="2"
+                                Margin="0,0,0,-50"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Padding="0"
+                                HeightRequest="140"
+                                WidthRequest="220"
+                                BackgroundColor="#bfd3c1"
+                                CornerRadius="10"
+                                BorderColor="Transparent"
+                                HasShadow="True">
 
-                        <Grid Padding="20,0"
-                              ColumnSpacing="0"
-                              RowSpacing="0"
-                              HorizontalOptions="Center"
-                              VerticalOptions="Center">
+                                <Grid HorizontalOptions="Center"
+                                    VerticalOptions="Center">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                                    <Image Source="lukko.png"
+                                        WidthRequest="110"
+                                        HeightRequest="110"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Aspect="AspectFit" />
 
-                            <Label Text="AVAA JUTTUNURKKA"
-                               Grid.Column="0"
-                               HorizontalOptions="Start"
-                               FontSize="30"
-                               TextColor="Black"
-                               FontFamily="LineSeedRegular"
-                               LineBreakMode="WordWrap"/>
+                                </Grid>
 
-                            <Image Source="lukko.png"
-                               Grid.Column="1"
-                               WidthRequest="80"
-                               HeightRequest="80"
-                               HorizontalOptions="End"
-                               VerticalOptions="Center"
-                               Aspect="AspectFit" />
-                        </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="LiityKyselyynClicked" />
+                                </Frame.GestureRecognizers>
 
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="LiityKyselyynClicked" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                            </Frame>
                 </Grid>
 
             </StackLayout>
@@ -196,7 +191,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Frame CornerRadius="15"
                        Padding="0"
                        BorderColor="White">
-                    <StackLayout BackgroundColor="#89e077"
+                    <StackLayout BackgroundColor="#bfd3c1"
                              HeightRequest="200"
                              Orientation="Vertical"
                              WidthRequest="300"
@@ -206,19 +201,20 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                            FontAttributes="Bold"
                            HorizontalOptions="Center"
                            Margin="0,15,0,0"
-                           BackgroundColor="#89e077"
+                           BackgroundColor="#bfd3c1"
+                           FontFamily="LineSeedRegular"
                            FontSize="22"/>
 
                         <Label Margin="20,5,15,0" 
                            TextColor="Black"
                            FontSize="18"
-                           FontAttributes="Bold"
+                           FontFamily="LineSeedRegular"
                            HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="All emojis designed by "/>
                                     <Span Text="OpenMoji"
-                                      TextColor="Blue"
+                                      TextColor="Black"
                                       TextDecorations="Underline">
                                         <Span.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding TapCommand}"
@@ -242,6 +238,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                             <Button Text="OK"
                                     TextColor="Black"
+                                    FontFamily="LineSeedBold"
                                     FontAttributes="Bold"
                                     FontSize="18"
                                     HeightRequest="43"
