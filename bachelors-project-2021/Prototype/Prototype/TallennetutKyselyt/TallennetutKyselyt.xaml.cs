@@ -47,6 +47,7 @@ namespace Prototype
             SurveyManager manager = SurveyManager.GetInstance();
 
             NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
 
 
             Surveys = manager.GetTemplates();

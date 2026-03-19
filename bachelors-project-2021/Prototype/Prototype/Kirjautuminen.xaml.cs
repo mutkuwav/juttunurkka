@@ -37,6 +37,11 @@ namespace Prototype
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
         }
+        async void BackBtnClicked(object sender, EventArgs e)
+        {
+            // Navigoi takaisin edelliselle sivulle
+            await Navigation.PopAsync();
+        }
 
         private void MyClick(object sender, EventArgs e)
         {

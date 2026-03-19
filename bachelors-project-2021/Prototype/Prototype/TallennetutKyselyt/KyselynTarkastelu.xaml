@@ -23,7 +23,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.KyselynTarkastelu"
              Title="Tarkastele kyselyä"
              BackgroundColor="#ffea7f"
-             >
+             NavigationPage.HasNavigationBar="False">
     <!-- poista kysely -nappi-->
 
     <ContentPage.ToolbarItems>
@@ -42,6 +42,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    x:Name="title"
                    Margin="0 ,0,0,0"
                    FontSize="20" 
+                   FontFamily="LineSeedBold"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"  
                    VerticalOptions="Center"/>
@@ -57,6 +58,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
 
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background2.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
+
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                      AbsoluteLayout.LayoutFlags="All" 
                      >
@@ -67,12 +77,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Label Margin="0,10,0,10"
                     Text="{Binding introMessage}"
                     TextColor="Black"
+                    FontFamily="LineSeedBold"
                     FontAttributes="Bold"
                     FontSize="22"/>
 
                 <Label Margin="0,10,0,10"
                         Text="{Binding roomCode}"
                         TextColor="Black"
+                        FontFamily="LineSeedBold"
                         FontAttributes="Bold"
                         FontSize="22"/>
 
@@ -103,7 +115,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                         FontSize="20"
                                         TextColor="Black"
                                         FontAttributes="Bold"
-                                        BackgroundColor="#feba4f"
+                                        BackgroundColor="#a0baa3"
+                                        FontFamily="LineSeedBold"
                                         BorderColor="Transparent"
                                         Text="Toimenpiteet" 
                                         Clicked="btnPopupButton_Clicked"
@@ -185,24 +198,26 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     Margin="0,50,0,0">
                     <Button Grid.Column="0" 
                             Text="Jaa kysely"
+                            FontFamily="LineSeedBold"
                             TextColor="Black"
                             FontAttributes="Bold"
                             Clicked="JaaClicked"
-                            FontSize="20"
+                            FontSize="16"
                             BorderColor="Transparent"
                             HeightRequest="65"
                             CornerRadius="10"
                             WidthRequest="160"
-                            BackgroundColor="#feba4e"/>
+                            BackgroundColor="#bfd3c1"/>
 
                     <Button Grid.Column="1" 
                             x:Name="MuokkaaButton"
 							Text="Muokkaa"
+                            FontFamily="LineSeedBold"
                             TextColor="Black"
                             FontAttributes="Bold"
-                            FontSize="20"
+                            FontSize="16"
                             Clicked="MuokkaaClicked"
-                            BackgroundColor="#feba4f"
+                            BackgroundColor="#bfd3c1"
                             BorderColor="Transparent"
                             HeightRequest="65"
                             WidthRequest="160"
@@ -225,7 +240,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <StackLayout
-                    BackgroundColor="#feba4f"
+                    BackgroundColor="#bfd3c1"
                     HeightRequest="165"
                     Orientation="Vertical"
                     WidthRequest="300">

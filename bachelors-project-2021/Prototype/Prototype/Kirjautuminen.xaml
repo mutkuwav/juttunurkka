@@ -27,14 +27,25 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              >
              <Grid>
 
-        <!-- TAUSTAKUVA -->
+        <!-- TAUSTAKUVA SIVULLE -->
         <Image
             Source="background2.png"
             Aspect="AspectFill"
             HorizontalOptions="Fill"
             VerticalOptions="Fill"/>
+        
+        <ImageButton Source="back_btn.png"
+                 BackgroundColor="Transparent"
+                 Clicked="BackBtnClicked"
+                 HeightRequest="30"
+                 WidthRequest="30"
+                 HorizontalOptions="Start"
+                 VerticalOptions="Start"
+                 Margin="20"/>
 
     <StackLayout VerticalOptions="CenterAndExpand" Spacing="10" Padding="0,0,0,50">
+        <!-- TAKAISIN-NAPPI kiinnitetty Gridin vasempaan yläkulmaan -->
+
         <Label Text="Kirjaudu sisään opettajanhuoneeseen"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"

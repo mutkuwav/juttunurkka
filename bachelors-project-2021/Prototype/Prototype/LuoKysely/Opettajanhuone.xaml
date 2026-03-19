@@ -38,6 +38,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      Spacing="50"
                      Padding="0,100,0,0">
 
+            <!-- Otsikko ja hammasratas -->
             <Grid RowDefinitions="Auto, Auto"
                   ColumnDefinitions="Auto, Auto">
 
@@ -60,7 +61,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                        Padding="100,0,0,0" />
             </Grid>
 
-            <Grid RowDefinitions="Auto, Auto"
+            <!-- Painikkeet -->
+            <Grid RowDefinitions="Auto, Auto, Auto"
                   ColumnDefinitions="Auto, Auto"
                   VerticalOptions="End"
                   Padding="10"
@@ -97,10 +99,54 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         TextColor="Black"
                         WidthRequest="340"
                         Clicked="ArkistoClicked" />
+
+                <Button Grid.Row="2"
+                        Text="Ohjeet"
+                        FontFamily="LineSeedBold"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="#bfd3c1"
+                        FontSize="25"
+                        BorderColor="Transparent"
+                        Margin="0,30,0,0"
+                        CornerRadius="10"
+                        HeightRequest="100"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        WidthRequest="340"
+                        Clicked="OnBoardingClicked" />
             </Grid>
+
+            <!-- OnBoarding kehikko -->
+            <Frame x:Name="OnBoardingBox"
+                   IsVisible="False"
+                   BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="300"
+                   HasShadow="True">
+
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Ohjeet"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           HorizontalOptions="Center" />
+
+                    <Label Text="Tähän lyhyt ohjeteksti."
+                           FontSize="16" />
+
+                    <Button Text="Sulje"
+                            Clicked="CloseOnBoardingClicked"
+                            FontFamily="LineSeedRegular"
+                            BackgroundColor="#f6c68a"
+                            TextColor="Black"
+                            CornerRadius="10" />
+                </VerticalStackLayout>
+            </Frame>
 
         </StackLayout>
 
     </Grid>
-
 </ContentPage>
