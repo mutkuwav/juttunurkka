@@ -15,7 +15,7 @@ This file is part of "Juttunurkka".
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
         <!-- TAUSTAKUVA -->
-        <Image Source="background2.png"
+        <Image Source="background3.png"
                Aspect="AspectFill"
                VerticalOptions="FillAndExpand"
                HorizontalOptions="FillAndExpand"/>
@@ -23,14 +23,14 @@ This file is part of "Juttunurkka".
         <!-- PÄÄSISÄLTÖ -->
         <StackLayout Spacing="15" Padding="20,20,20,20" VerticalOptions="FillAndExpand">
 
-            <!-- NAVIGATION / TAKAS-NAPPI JA OTSIKKO -->
+            <!-- NAVIGATION / TAKAISIN-NAPPI JA OTSIKKO -->
             <Grid HeightRequest="40">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- TAKAS-NAPPI vasemmassa yläkulmassa -->
+                <!-- TAKAISIN-NAPPI vasemmassa yläkulmassa -->
                 <ImageButton Source="back_btn.png"
                              BackgroundColor="Transparent"
                              Clicked="BackBtnClicked"

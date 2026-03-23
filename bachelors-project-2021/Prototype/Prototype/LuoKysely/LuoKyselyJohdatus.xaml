@@ -31,6 +31,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <!-- TAUSTAKUVA (alimmaisena) -->
         <Image Source="background2.png"
                Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
                Grid.RowSpan="5"
                Grid.ColumnSpan="1" />
 

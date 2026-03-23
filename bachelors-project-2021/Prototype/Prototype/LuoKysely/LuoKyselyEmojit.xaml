@@ -25,7 +25,25 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              Title="Juttunurkka">
 
 
-    <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background2.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
+
+        <StackLayout
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            VerticalOptions="FillAndExpand"
+            Spacing="50"
+            Padding="0,100,0,0">
 
         <Label
             Text="Valitse hymiöt"
@@ -35,6 +53,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             FontAttributes="Bold"
             FontSize="35"
             TextColor="Black" 
+            FontFamily="LineSeedBold"
             Margin="0,0,0,0"
         />
 
@@ -45,7 +64,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="15"
-                           BorderColor="#4383EF"
                            CornerRadius="5"
                            Margin="10,10,10,10">   
                         <Grid RowDefinitions="Auto"
@@ -87,10 +105,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
-                BackgroundColor="#feba4f"
+                BackgroundColor="#bfd3c1"
                 TextColor="Black"
                 BorderColor="Transparent"
                 FontSize="19"
+                FontFamily="LineSeedBold"
                 Margin="20,0,10,40"
                 CornerRadius="10"
                 HeightRequest="50"
@@ -105,8 +124,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 IsEnabled="false"
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
-                BackgroundColor="#feba4e"
+                BackgroundColor="#bfd3c1"
                 TextColor="Black"
+                FontFamily="LineSeedBold"
                 FontAttributes="Bold"
                 BorderColor="Transparent"
                 FontSize="19"
@@ -118,5 +138,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             />
 
         </Grid>
-    </StackLayout>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>
