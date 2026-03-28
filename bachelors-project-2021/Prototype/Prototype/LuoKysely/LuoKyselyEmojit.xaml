@@ -31,7 +31,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <!-- TAUSTAKUVA SIVULLE -->
         <Image
-            Source="background2.png"
+            Source="background3.png"
             Aspect="AspectFill"
             HorizontalOptions="Fill"
             VerticalOptions="Fill"

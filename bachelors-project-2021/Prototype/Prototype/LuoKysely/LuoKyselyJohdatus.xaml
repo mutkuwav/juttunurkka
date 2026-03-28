@@ -28,8 +28,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
     <Grid RowDefinitions="*, Auto, Auto, Auto, *"
           ColumnDefinitions="*">
 
-        <!-- TAUSTAKUVA (alimmaisena) -->
-        <Image Source="background2.png"
+        <!-- TAUSTAKUVA -->
+        <Image Source="background3.png"
                Aspect="AspectFill"
                HorizontalOptions="Fill"
                VerticalOptions="Fill"
