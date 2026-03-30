@@ -23,6 +23,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.LuoKyselyToimenpiteet"
              Title="Juttunurkka"
              >
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="LineSeedBold" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="LineSeedBold" />
+        </Style>
+    </ContentPage.Resources>
 
     <AbsoluteLayout
         HorizontalOptions="FillAndExpand"
@@ -31,7 +39,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <!-- TAUSTAKUVA SIVULLE -->
         <Image
-            Source="background2.png"
+            Source="background3.png"
             Aspect="AspectFill"
             HorizontalOptions="Fill"
             VerticalOptions="Fill"
@@ -196,6 +204,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
                 FontFamily="LineSeedBold"
+                BackgroundColor="#bfd3c1"
                 FontSize="19"
                 Margin="20,0,10,40"
                 CornerRadius="10"

@@ -22,10 +22,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.KyselynTarkastelu"
              Title="Tarkastele kyselyä"
-             BackgroundColor="#ffea7f"
+            
              NavigationPage.HasNavigationBar="False">
-    <!-- ToolbarItem ja TitleView eivät näy, kun navigaatiopalkki on piilotettu.
-         Otsikko ja Poista ovat pääsisällössä alla. -->
+    
 
     <AbsoluteLayout
         Padding="0"
@@ -34,7 +33,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <!-- TAUSTAKUVA SIVULLE -->
         <Image
-            Source="background2.png"
+            Source="background3.png"
             Aspect="AspectFill"
             HorizontalOptions="Fill"
             VerticalOptions="Fill"

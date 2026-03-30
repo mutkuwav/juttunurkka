@@ -23,7 +23,16 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyToimenpiteetNeutraali"
              Title="Juttunurkka"
-             BackgroundColor="#ffea7f">
+             BackgroundColor="#ffea7f"
+             BackgroundImageSource="background3.png">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="LineSeedBold" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="LineSeedBold" />
+        </Style>
+    </ContentPage.Resources>
              
 
     <StackLayout Spacing="40">
@@ -55,6 +64,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="Start" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
+            FontFamily="LineSeedRegular"
             FontSize="24"
             TextColor="Black"   
             Margin="0,-20,0,0"
@@ -65,7 +75,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             FontAttributes="Bold"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
-            BorderColor="#4383EF"
+            BorderColor="#ffe5d4"
             BackgroundColor="White"
             FontSize="22"
             Margin="0,-95,0,0"
@@ -85,7 +95,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HeightRequest="300"
             Padding="1"
             BackgroundColor="White"
-            BorderColor="#4383EF"
+            BorderColor="#ffe5d4"
             CornerRadius="10"
             IsVisible="true">
 
@@ -118,11 +128,28 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                                   HeightRequest="100"
                                                   WidthRequest="340"
                                                   ColumnDefinitions="Auto, *"  >
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroupList>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState x:Name="Selected">
+                                                            <VisualState.Setters>
+                                                                <Setter Property="BackgroundColor" Value="#f6c68a" />
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                </VisualStateGroupList>
+                                            </VisualStateManager.VisualStateGroups>
 
-                                            <Label 
-                                                    Text="{Binding Title}" 
+                                            <Label
+                                                    Text="{Binding Title}"
                                                     TextColor="Black"
                                                     FontSize="20"
+                                                    FontFamily="LineSeedRegular"
                                                     WidthRequest="340"
                                                     Margin="5,0,0,5"
                                                 />
@@ -171,7 +198,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 FontAttributes="Bold"
                 HeightRequest="50"
                 WidthRequest="150"
-                BackgroundColor="#feba4f"
+                BackgroundColor="#bfd3c1"
                 TextColor="Black"
                 BorderColor="Transparent"
             />
