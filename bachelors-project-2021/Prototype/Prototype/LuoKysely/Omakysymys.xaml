@@ -21,12 +21,28 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Omakysymys"
-             Title="Luo oma kysymys"
-             BackgroundColor="#ffea7f">
+             Title="Luo oma kysymys" >
 
 
 
-    <StackLayout  Spacing="40">
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Padding="0">
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
+
+        <StackLayout
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            Spacing="40">
 
         <Label Grid.Column="2"
             Text="Luo oma kysymys"
@@ -34,6 +50,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
             FontAttributes="Bold"
+            FontFamily="LineSeedBold"
             FontSize="30"
             TextColor="Black" 
             Margin="0,80,0,0"
@@ -43,7 +60,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Frame Padding="10"
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="CenterAndExpand"
-            BorderColor="#4383EF"
+            BorderColor="#ffe5d4"
             Margin="0,0,0,330"
             CornerRadius="10"
             HeightRequest="150"
@@ -54,6 +71,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                        VerticalOptions="StartAndExpand"
                        MaxLength="40"
                        FontSize="20"
+                       FontFamily="LineSeedBold"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
                        BackgroundColor="White"
                  />
         </Frame>
@@ -71,13 +91,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
+                FontFamily="LineSeedBold"
                 FontSize="19"
                 Margin="20,0,10,40"
                 BorderColor="Transparent"
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
-                BackgroundColor="#feba4f"
+                BackgroundColor="#bfd3c1"
                 TextColor="Black"
                 FontAttributes="Bold"
             />
@@ -87,13 +108,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="JatkaButtonClicked" 
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
+                FontFamily="LineSeedBold"
                 FontSize="19"
                 Margin="20,0,10,40"
                 BorderColor="Transparent"
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
-                BackgroundColor="#feba4f"
+                BackgroundColor="#bfd3c1"
                 TextColor="Black"
                 FontAttributes="Bold"
                 
@@ -102,5 +124,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         </Grid>
 
     </StackLayout>
+    </AbsoluteLayout>
 
 </ContentPage>

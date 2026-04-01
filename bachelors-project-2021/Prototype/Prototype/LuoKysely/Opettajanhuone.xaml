@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Eemil Alamäki
+          2026 Mimosa Joenväärä
 
 This file is part of "Juttunurkka".
 
@@ -21,126 +22,131 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Opettajanhuone"
-             BackgroundColor="#ffea7f"
              Title="Juttunurkka">
 
+    <Grid>
 
+        <!-- TAUSTAKUVA -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
 
+        <!-- SISÄLTÖ -->
+        <StackLayout VerticalOptions="FillAndExpand"
+                     Spacing="50"
+                     Padding="0,100,0,0">
 
-    <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
-        
-        
+            <!-- Otsikko ja hammasratas -->
+            <Grid RowDefinitions="Auto, Auto"
+                  ColumnDefinitions="Auto, Auto">
 
-        <Grid 
-              RowDefinitions="Auto, Auto"
-              ColumnDefinitions="Auto, Auto">
+                <Image Grid.Column="1"
+                       Source="gear"
+                       HeightRequest="45"
+                       WidthRequest="45"
+                       Scale="1.3"
+                       Margin="-205,0,0,0" />
 
+                <Label Grid.Column="2"
+                       Text="Opettajanhuone"
+                       FontFamily="LineSeedBold"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       FontSize="30"
+                       TextColor="Black"
+                       Padding="100,0,0,0" />
+            </Grid>
 
-            <Image Grid.Column="1"
-                   Source="gear"     
-                   HeightRequest="45"
-                   WidthRequest="45"
-                   Scale="1.3"
-                   Margin="-165,0,0,0"       
-            />
+            <!-- Painikkeet -->
+            <Grid RowDefinitions="Auto, Auto, Auto"
+                  ColumnDefinitions="Auto, Auto"
+                  VerticalOptions="End"
+                  Padding="10"
+                  HorizontalOptions="CenterAndExpand">
 
-            <Label Grid.Column="2"
-                Text="Opettajanhuone"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
-                HorizontalTextAlignment="Center"
-                FontAttributes="Bold"
-                FontSize="30"
-                TextColor="Black"
-                Padding="100,0,0,0"  
-            />
+                <Button Grid.Row="0"
+                        Text="Luo uusi juttunurkka"
+                        FontFamily="LineSeedBold"
+                        Clicked="UusiJuttunurkkaClicked"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        FontSize="25"
+                        Margin="0,0,0,0"
+                        CornerRadius="10"
+                        HeightRequest="100"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        BorderColor="Transparent"
+                        WidthRequest="340"
+                        BackgroundColor="#bfd3c1" />
 
-        </Grid>
+                <Button Grid.Row="1"
+                        Text="Arkisto"
+                        FontFamily="LineSeedBold"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="#bfd3c1"
+                        FontSize="25"
+                        BorderColor="Transparent"
+                        Margin="0,30,0,0"
+                        CornerRadius="10"
+                        HeightRequest="100"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        WidthRequest="340"
+                        Clicked="ArkistoClicked" />
 
+                <Button Grid.Row="2"
+                        Text="Ohjeet"
+                        FontFamily="LineSeedBold"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="#bfd3c1"
+                        FontSize="25"
+                        BorderColor="Transparent"
+                        Margin="0,30,0,0"
+                        CornerRadius="10"
+                        HeightRequest="100"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        WidthRequest="340"
+                        Clicked="OnBoardingClicked" />
+            </Grid>
 
-        <Grid RowDefinitions="Auto, Auto, Auto"
-            ColumnDefinitions="Auto, Auto"
-            VerticalOptions="End"
-            Padding="10"
-            HorizontalOptions="CenterAndExpand">
+            <!-- OnBoarding kehikko -->
+            <Frame x:Name="OnBoardingBox"
+                   IsVisible="False"
+                   BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="300"
+                   HasShadow="True">
 
-            <Button Grid.Row="0"
-                Text="Luo uusi juttunurkka"
-                Clicked="UusiJuttunurkkaClicked"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="25"
-                Margin="0,0,0,0"
-                CornerRadius="10"
-                HeightRequest="100"
-                TextColor="Black"
-                FontAttributes="Bold"
-                BorderColor="Transparent"
-                WidthRequest="340"
-                BackgroundColor="#feba4f"
-             />
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Ohjeet"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           HorizontalOptions="Center" />
 
-            <Button Grid.Row="1"
-                    Text="Arkisto"
-               VerticalOptions="CenterAndExpand" 
-               HorizontalOptions="CenterAndExpand" 
-               BackgroundColor="#feba4f"
-               FontSize="25"
-               BorderColor="Transparent"
-               Margin="0,30,0,0"
-               CornerRadius="10"
-               HeightRequest="100"
-               FontAttributes="Bold"
-               TextColor="Black"
-               WidthRequest="340"
-               Clicked="ArkistoClicked"
-            />
+                    <Label Text="Tähän lyhyt ohjeteksti."
+                           FontSize="16" />
 
-            <Button Grid.Row="2"
-                    Text="Ohjeet"
-               VerticalOptions="CenterAndExpand" 
-               HorizontalOptions="CenterAndExpand" 
-               BackgroundColor="#feba4f"
-               FontSize="25"
-               BorderColor="Transparent"
-               Margin="0,30,0,0"
-               CornerRadius="10"
-               HeightRequest="100"
-               FontAttributes="Bold"
-               TextColor="Black"
-               WidthRequest="340"
-               Clicked="OnBoardingClicked"
-            />
-        </Grid>
+                    <Button Text="Sulje"
+                            Clicked="CloseOnBoardingClicked"
+                            FontFamily="LineSeedRegular"
+                            BackgroundColor="#f6c68a"
+                            TextColor="Black"
+                            CornerRadius="10" />
+                </VerticalStackLayout>
+            </Frame>
 
-        <Frame x:Name="OnBoardingBox"
-           IsVisible="False"
-           BackgroundColor="White"
-           CornerRadius="15"
-           Padding="20"
-           HorizontalOptions="Center"
-           VerticalOptions="Center"
-           WidthRequest="300"
-           HasShadow="True">
+        </StackLayout>
 
-            <VerticalStackLayout Spacing="15">
-                <Label Text="Ohjeet"
-                   FontAttributes="Bold"
-                   FontSize="20"
-                   HorizontalOptions="Center" />
-
-                <Label 
-                    Text="Tähän lyhyt ohjeteksti."
-                    FontSize="16" />
-
-                <Button Text="Sulje"
-                    Clicked="CloseOnBoardingClicked"
-                    BackgroundColor="#feba4f"
-                    TextColor="Black"
-                    CornerRadius="10" />
-                
-            </VerticalStackLayout>
-        </Frame>
-
-    </StackLayout>
+    </Grid>
 </ContentPage>
