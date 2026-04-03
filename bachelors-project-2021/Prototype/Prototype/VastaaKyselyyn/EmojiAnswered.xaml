@@ -40,7 +40,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    FontAttributes="Bold"
                    FontFamily="LineSpeedBold"
                    TextColor="Black"
-                   FontSize="25"
+                   FontSize="30"
                    HorizontalOptions="Center"
                    Margin="0,40,0,60" />
             
