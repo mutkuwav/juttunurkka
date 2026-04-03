@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright 2025 Riina Kaipia
+          2026 Aurora Kansanoja
 
 This file is part of "Juttunurkka".
 
@@ -19,27 +20,39 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.EmojiAnswered"
-             BackgroundColor="#FFEA7F"
+             BackgroundColor="Transparent"
              NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.Content>
-        <StackLayout Padding="20">
+    <Grid VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand">
 
+        <!-- TAUSTAKUVA -->
+        <Image Source="background3.png"
+               Aspect="AspectFill"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"/>
+
+        <!-- SISÄLTÖ -->
+        <StackLayout Padding="20">
+            
+            <!--Yläreunan TEKSTIOSA-->
             <Label Text="VASTAUS TALLENNETTU"
                    FontAttributes="Bold"
-                   FontFamily="BebasNeue"
+                   FontFamily="LineSpeedBold"
                    TextColor="Black"
-                   FontSize="35"
+                   FontSize="25"
                    HorizontalOptions="Center"
                    Margin="0,40,0,60" />
-
+            
+            <!--Clientin valitsema EMOJI-->
             <Image Source="{Binding EmojiImageSource}"
                    HeightRequest="150"
                    WidthRequest="150"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    Aspect="AspectFit" />
-
+           
+            <!-- Progressbar-->
             <ProgressBar x:Name="progressBar"
                          FlowDirection="LeftToRight"
                          Progress="1"
@@ -47,8 +60,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                          HorizontalOptions="CenterAndExpand"
                          WidthRequest="300"
                          ScaleY="15"
-                         ProgressColor="#feba4e"
+                         ProgressColor="#bfd3c1"
                          Margin="0,50,0,0"/>
         </StackLayout>
-    </ContentPage.Content>
+    </Grid>
 </ContentPage>
