@@ -32,7 +32,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Grid VerticalOptions="FillAndExpand"
               HorizontalOptions="FillAndExpand">
 
-                <!-- TAUSTAKUVA -->
+            <!-- TAUSTAKUVA -->
             <Image Source="background3.png"
                    Aspect="AspectFill"
                    VerticalOptions="FillAndExpand"

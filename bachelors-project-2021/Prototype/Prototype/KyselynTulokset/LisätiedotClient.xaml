@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Joni Lapinkoski
-2026 Matias Meriläinen
+          2026 Matias Meriläinen, Aurora Kansanoja
 This file is part of "Juttunurkka".
 
 Juttunurkka is free software: you can redistribute it and/or modify
@@ -24,7 +24,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Prototype.LisätiedotClient"
     Title="Tulokset"
-    BackgroundColor="#FFEA7F">
+    BackgroundColor="Transparent"
+    BackgroundImageSource="background3.png">
 
     <ContentPage.Content>
         <StackLayout
@@ -38,7 +39,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 FontSize="40"
                 FontAttributes="Bold"
                 TextColor="Black"
-                FontFamily="BebasNeue"
+                FontFamily="LineSpeedBold"
                 HorizontalOptions="Center" />
 
             <CollectionView ItemsSource="{Binding Results}">
@@ -57,8 +58,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                 <Frame
                                     HeightRequest="{Binding Scale}"
                                     WidthRequest="55"
-                                    BackgroundColor="#feba4f"
-                                    CornerRadius="0"
+                                    BackgroundColor="#bfd3c1"
+                                    CornerRadius="10"
                                     Padding="0"
                                     HasShadow="False"
                                     VerticalOptions="End"
@@ -67,7 +68,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                            TextColor="Black"
                                            FontSize="36"
                                            FontAttributes="Bold"
-                                           FontFamily="RobotoMedium"
+                                           FontFamily="LineSpeedBold"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center"/>
                                 </Frame>
@@ -79,7 +80,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <BoxView
                 HeightRequest="3"
-                BackgroundColor="#C381FD"
+                BackgroundColor="#bfd3c1"
                 HorizontalOptions="FillAndExpand"
                 Margin="0,-20,0,0"/>
         </StackLayout>
