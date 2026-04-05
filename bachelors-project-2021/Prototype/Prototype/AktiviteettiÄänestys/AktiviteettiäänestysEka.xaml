@@ -2,7 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
-          2026 Matias Meriläinen
+          2026 Matias Meriläinen, Aurora Kansanoja
 
 This file is part of "Juttunurkka".
 
@@ -22,13 +22,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AktiviteettiäänestysEka"
-             BackgroundColor="#FFEA7F"
-             NavigationPage.HasNavigationBar="False">
+             BackgroundColor="Transparent"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundImageSource="background3.png">
 
     <Grid RowDefinitions="Auto,*,Auto,Auto"
           Padding="24,60,24,30"
           RowSpacing="20">
-
+        
+           <!--Teksti-->
         <Label Grid.Row="0"
                Text="MITÄ HALUAT TEHDÄ?"
                HorizontalOptions="Center"
@@ -36,12 +38,13 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                FontSize="28"
                FontAttributes="Bold"
                TextColor="Black"
-               FontFamily="BebasNeue" />
-
+               FontFamily="LineSeedBold" />
+        
+        <!--Laatikko, jonka sisään tulee vaihtoehdot mitä tehdään-->
         <Frame Grid.Row="1"
                Padding="16"
-               CornerRadius="18"
-               BackgroundColor="#F4E18D"
+               CornerRadius="10"
+               BackgroundColor="#a0baa3"
                BorderColor="Transparent"
                HasShadow="False">
 
@@ -51,11 +54,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Button x:Name="ActivityButton1"
                         Text="Vaihtoehto 1"
                         Clicked="OnButton1Clicked"
-                        BackgroundColor="#FEBA4F"
+                        BackgroundColor="#bfd3c1"
                         TextColor="Black"
                         FontAttributes="Bold"
                         FontSize="15"
-                        CornerRadius="16"
+                        CornerRadius="10"
                         HeightRequest="92"
                         BorderWidth="0"
                         LineBreakMode="WordWrap"
@@ -65,11 +68,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Button x:Name="ActivityButton2"
                         Text="Vaihtoehto 2"
                         Clicked="OnButton2Clicked"
-                        BackgroundColor="#FEBA4F"
+                        BackgroundColor="#bfd3c1"
                         TextColor="Black"
                         FontAttributes="Bold"
                         FontSize="15"
-                        CornerRadius="16"
+                        CornerRadius="10"
                         HeightRequest="92"
                         BorderWidth="0"
                         IsVisible="False"
@@ -86,18 +89,19 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      HorizontalOptions="Fill"
                      HeightRequest="18"
                      ScaleY="10"
-                     ProgressColor="#FEBA4F" />
-
+                     ProgressColor="#bfd3c1" />
+        
+        <!--Nappi, jolla tallennetaan vastaus-->
         <Button Grid.Row="3"
                 x:Name="SaveButton"
                 Text="TALLENNA"
                 Clicked="SaveAnswer"
                 IsEnabled="False"
-                BackgroundColor="#FEBA4F"
+                BackgroundColor="#bfd3c1"
                 TextColor="Black"
                 FontAttributes="Bold"
                 FontSize="22"
-                CornerRadius="16"
+                CornerRadius="10"
                 HeightRequest="82"
                 HorizontalOptions="Fill" />
     </Grid>
