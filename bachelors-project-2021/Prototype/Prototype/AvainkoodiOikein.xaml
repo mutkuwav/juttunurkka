@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright 2025 Petri Pentinpuro
+          2026 Aurora Kansanoja
 
 This file is part of "Juttunurkka".
 
@@ -20,15 +21,19 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AvainkoodiOikein"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="#ffea7f">
+             BackgroundColor="Transparent"
+             BackgroundImageSource="background3.png">
+
     <AbsoluteLayout Padding="0"
-                  HorizontalOptions="FillAndExpand"
-                  VerticalOptions="FillAndExpand">
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                      AbsoluteLayout.LayoutFlags="All"
-                     BackgroundColor="#ffea7f">
+                     BackgroundColor="Transparent">
+            
             <StackLayout Padding="10">
-                <Image Source="logo_no_background"
+                <Image Source="logo.png"
                        HorizontalOptions="Center"
                        VerticalOptions="CenterAndExpand"
                        WidthRequest="50"
@@ -38,17 +43,23 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                        Scale="6.5" />
 
                 <!-- Grid containing the Entry field and the Image (lock) -->
-                <Grid HorizontalOptions="CenterAndExpand"
-                      Margin="0,110,0,0"
-                      HeightRequest="380"
+                <Grid Margin="0,110,0,0"
                       WidthRequest="300"
-                      BackgroundColor="#89e077">
-                    <Frame BackgroundColor="#feba4f"
-                           CornerRadius="7"
+                      HeightRequest="380"
+                      HorizontalOptions="CenterAndExpand">
+
+
+                    <Frame
+                        CornerRadius="10"
+                        BackgroundColor="#a0baa3"
+                        HasShadow="False"
+                        Padding="0"/>
+
+                    <Frame BackgroundColor="#bfd3c1"
+                           CornerRadius="10"
                            HasShadow="False"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="FillAndExpand"
                            Margin="-20,35,-20,170">
+
                         <Grid HorizontalOptions="Center"
                               VerticalOptions="Center">
                             <Grid.RowDefinitions>
