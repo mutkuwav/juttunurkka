@@ -80,7 +80,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <BoxView
                 HeightRequest="3"
-                BackgroundColor="#bfd3c1"
+                BackgroundColor="#a0baa3"
                 HorizontalOptions="FillAndExpand"
                 Margin="0,-20,0,0"/>
         </StackLayout>
