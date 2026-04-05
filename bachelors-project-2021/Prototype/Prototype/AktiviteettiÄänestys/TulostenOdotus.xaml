@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen
-          2026 Matias Meriläinen, Aurora Kansanoja
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -23,9 +23,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.TulostenOdotus"
              Title="Juttunurkka"
-             BackgroundColor="Transparent"
-             BackgroundImageSource="background3.png">
-    
+             BackgroundColor="#ffea7f">
+
     <ContentPage.Content>
         <StackLayout>
             <Label 
@@ -33,7 +32,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                 HorizontalTextAlignment="Center"
-                FontFamily="LineSeedBold"
                 FontAttributes="Bold"
                 FontSize="30"
                 TextColor="Black"
@@ -46,39 +44,33 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                   RowDefinitions="Auto, Auto, Auto">
 
                 <Label Text="Avainkoodi:"
-                       FontFamily="LineSeedBold"
                        FontSize="25"
                        TextColor="Black"
                        Grid.Row="0" Grid.Column="0" />
 
                 <Label Text="{Binding RoomCode}"
-                       FontFamily="LineSeedBold"
                        FontSize="25"
                        TextColor="Black"
                        Grid.Row="0" Grid.Column="1"
                        HorizontalTextAlignment="End"/>
 
                 <Label Text="Osallistujia:"
-                       FontFamily="LineSeedBold"
                        FontSize="25"
                        TextColor="Black"
                        Grid.Row="1" Grid.Column="0" />
 
                 <Label Text="{Binding ParticipantsCount}"
-                       FontFamily="LineSeedBold"
                        FontSize="25"
                        TextColor="Black"
                        Grid.Row="1" Grid.Column="1" 
                        HorizontalTextAlignment="End"/>
 
                 <Label Text="Vastanneita:"
-                       FontFamily="LineSeedBold"
                        FontSize="25"
                        TextColor="Black"
                        Grid.Row="2" Grid.Column="0" />
 
                 <Label Text="{Binding AnswerCount}"
-                       FontFamily="LineSeedBold"
                        FontSize="25"
                        TextColor="Black"
                        Grid.Row="2" Grid.Column="1" 
@@ -94,7 +86,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label
                     Text="Aikaa jäljellä:"
-                    FontFamily="LineSeedBold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start"
                     FontAttributes="Bold"
@@ -106,7 +97,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     Text="{Binding TimeLeft}"
                     VerticalOptions="Center"
                     HorizontalOptions="Start"
-                    FontFamily="LineSeedBold"
                     FontSize="25"
                     FontAttributes="Bold"
                     TextColor="Black"
@@ -120,7 +110,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                              HorizontalOptions="CenterAndExpand"
                              WidthRequest="300"
                              ScaleY="15"
-                             ProgressColor="#bfd3c1"
+                             ProgressColor="#feba4e"
                              Margin="0,25,0,0"/>
             </StackLayout>
 
@@ -129,8 +119,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand"
                     FontAttributes="Bold"
-                    BackgroundColor="#bfd3c1"
-                    FontFamily="LineSeedBold"
+                    BackgroundColor="#feba4e"
                     TextColor="Black"
                     FontSize="20"
                     CornerRadius="10"
