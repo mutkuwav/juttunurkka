@@ -23,21 +23,30 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AktiviteettiäänestysTulokset"
-             BackgroundColor="#FFEA7F"
              NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="Auto,*,Auto"
-          Padding="24,60,24,30"
-          RowSpacing="20">
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
+
+        <Image Source="background3.png"
+               Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
+               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+               AbsoluteLayout.LayoutFlags="All" />
+
+        <Grid RowDefinitions="Auto,*,Auto"
+              Padding="24,60,24,30"
+              RowSpacing="20"
+              AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+              AbsoluteLayout.LayoutFlags="All">
 
         <Label Grid.Row="0"
                Text="TULOKSET"
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
                FontSize="38"
-               FontAttributes="Bold"
-               TextColor="Black"
-               FontFamily="BebasNeue" />
+               FontFamily="LineSeedBold"
+               TextColor="Black" />
 
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Results}"
@@ -47,7 +56,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     <Frame Padding="16"
                            Margin="0,8,0,8"
                            CornerRadius="16"
-                           BackgroundColor="#F4E18D"
+                           BackgroundColor="#bfd3c1"
                            BorderColor="Transparent"
                            HasShadow="False">
 
@@ -68,11 +77,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                    VerticalOptions="Center"
                                    TextColor="Black"
                                    FontSize="20"
-                                   FontAttributes="Bold"
+                                   FontFamily="LineSeedBold"
                                    LineBreakMode="WordWrap" />
 
                             <Frame Grid.Column="2"
-                                   BackgroundColor="#FEBA4F"
+                                   BackgroundColor="#a0baa3"
                                    CornerRadius="12"
                                    Padding="18,10"
                                    HasShadow="False"
@@ -81,7 +90,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                 <Label Text="{Binding Amount}"
                                        TextColor="Black"
                                        FontSize="22"
-                                       FontAttributes="Bold"
+                                       FontFamily="LineSeedBold"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center" />
                             </Frame>
@@ -95,12 +104,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Button Grid.Row="2"
                 Text="SULJE HUONE"
                 Clicked="SuljeClicked"
-                BackgroundColor="#FEBA4F"
+                BackgroundColor="#bfd3c1"
                 TextColor="Black"
                 FontSize="22"
-                FontAttributes="Bold"
+                FontFamily="LineSeedBold"
                 CornerRadius="16"
+                BorderColor="Transparent"
                 HeightRequest="86"
                 HorizontalOptions="Fill" />
-    </Grid>
+        </Grid>
+    </AbsoluteLayout>
 </ContentPage>
