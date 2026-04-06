@@ -31,15 +31,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
           Padding="24,60,24,30"
           RowSpacing="20">
 
+        <!--Teksti-->
         <Label Grid.Row="0"
                Text="TULOKSET"
+               FontFamily="LineSeedBold"
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
                FontSize="38"
                FontAttributes="Bold"
-               TextColor="Black"
-               FontFamily="LineSeedBold" />
+               TextColor="Black"/>
 
+        <!--Tulokset pylväinä-->
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Results}"
                         SelectionMode="None">
@@ -94,7 +96,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+        
+        <!--Sulje huone -nappi-->
         <Button Grid.Row="2"
                 Text="SULJE HUONE"
                 Clicked="SuljeClicked"

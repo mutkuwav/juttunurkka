@@ -48,13 +48,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                       HeightRequest="380"
                       HorizontalOptions="CenterAndExpand">
 
-
-                    <Frame
-                        CornerRadius="10"
-                        BackgroundColor="#a0baa3"
-                        HasShadow="False"
-                        Padding="0"/>
-
                     <Frame BackgroundColor="#bfd3c1"
                            CornerRadius="10"
                            HasShadow="False"

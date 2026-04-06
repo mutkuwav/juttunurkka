@@ -51,10 +51,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     FontSize="30"
                     TextColor="Black"
                     FontAttributes="Bold"
-                    FontFamily="LineSpeedBold"/>
+                    FontFamily="LineSeedBold"/>
                 <!--Valittavat emoijit-->
                 <Frame
-                    CornerRadius="5"
+                    CornerRadius="10"
                     HasShadow="True"
                     Padding="0"
                     BackgroundColor="#bfd3c1"
@@ -120,7 +120,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     IsEnabled="False"    
                     FontSize="30"
                     TextColor="Black"
-                    FontFamily="LineSppeBold"
+                    FontFamily="LineSeedBold"
                     FontAttributes="Bold"
                     BorderColor="Transparent"
                     CornerRadius="10"

@@ -100,7 +100,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="SaveAnswer"
                 IsEnabled="False"
                 BackgroundColor="#bfd3c1"
-                FontFamily="LineSpeedBold"
+                FontFamily="LineSeedBold"
                 TextColor="Black"
                 FontAttributes="Bold"
                 FontSize="22"

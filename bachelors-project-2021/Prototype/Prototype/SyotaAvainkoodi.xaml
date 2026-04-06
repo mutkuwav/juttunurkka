@@ -27,7 +27,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     VerticalOptions="FillAndExpand">
 
         <!-- TAUSTAKUVA -->
-        <Image Source="background2.png"
+        <Image Source="background3.png"
                Aspect="AspectFill"
                AbsoluteLayout.LayoutBounds="0,0,1,1"
                AbsoluteLayout.LayoutFlags="All" />

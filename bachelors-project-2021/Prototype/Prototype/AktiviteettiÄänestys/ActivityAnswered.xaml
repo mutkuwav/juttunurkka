@@ -30,7 +30,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
     <Grid RowDefinitions="Auto,*,Auto"
           Padding="24,70,24,30"
           RowSpacing="25">
-
+        
+        <!--Tekstiosa-->
         <Label Grid.Row="0"
                Text="VASTAUS TALLENNETTU"
                HorizontalOptions="Center"

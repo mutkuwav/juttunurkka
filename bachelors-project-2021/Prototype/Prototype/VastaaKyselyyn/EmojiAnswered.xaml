@@ -34,16 +34,21 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <!-- SISÄLTÖ -->
         <StackLayout Padding="20">
-            
+
+            <BoxView HeightRequest="60"/>
+
             <!--Yläreunan TEKSTIOSA-->
-            <Label Text="VASTAUS TALLENNETTU"
+            <Label 
+                   Text="VASTAUS TALLENNETTU"
                    FontAttributes="Bold"
-                   FontFamily="LineSpeedBold"
+                   FontFamily="LineSeedBold"
                    TextColor="Black"
                    FontSize="30"
                    HorizontalOptions="Center"
-                   Margin="0,40,0,60" />
-            
+                   HorizontalTextAlignment="Center"
+                   />
+
+
             <!--Clientin valitsema EMOJI-->
             <Image Source="{Binding EmojiImageSource}"
                    HeightRequest="150"

@@ -32,29 +32,51 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="Center"
             VerticalOptions="FillAndExpand"
             Spacing="20"
-            Padding="0,150,0,0">
+            Padding="0,80,0,0">
 
+            <!--Tekstiosa-->
             <Label
                 Text="TULOKSET"
+                FontFamily="LineSeedBold"
                 FontSize="40"
                 FontAttributes="Bold"
                 TextColor="Black"
-                FontFamily="LineSpeedBold"
                 HorizontalOptions="Center" />
 
-            <CollectionView ItemsSource="{Binding Results}">
+            <!--Tulokset pylväinä-->
+            <CollectionView ItemsSource="{Binding Results}"
+                            HorizontalOptions="Center"
+                            ItemSizingStrategy="MeasureFirstItem"
+                            Margin="0,0,0,20">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout
                         Orientation="Horizontal"
-                        ItemSpacing="20" />
+                        ItemSpacing="0" />
                 </CollectionView.ItemsLayout>
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout HorizontalOptions="Center" Spacing="8">
+                        <StackLayout HorizontalOptions="Center" 
+                                     Spacing="0"
+                                     WidthRequest="100"
+                                     VerticalOptions="EndAndExpand">
+
                             <Image Source="{Binding Image}"
-                                   HeightRequest="70"
+                                   HeightRequest="80"
                                    HorizontalOptions="Center"/>
-                            <Grid WidthRequest="50" HeightRequest="200">
+
+                            <Grid VerticalOptions="FillAndExpand" 
+                                  HeightRequest="200"
+                                  RowDefinitions="*,Auto"
+                                  Margin="0,20,0,0">
+
+                                <BoxView
+                                    Grid.Row="1"
+                                    HeightRequest="6"
+                                    BackgroundColor="#a0baa3"
+                                    HorizontalOptions="FillAndExpand"/>
+
+
                                 <Frame
                                     HeightRequest="{Binding Scale}"
                                     WidthRequest="55"
@@ -63,12 +85,13 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                     Padding="0"
                                     HasShadow="False"
                                     VerticalOptions="End"
-                                    HorizontalOptions="FillAndExpand">
+                                    HorizontalOptions="Center">
+
                                     <Label Text="{Binding Amount}"
                                            TextColor="Black"
                                            FontSize="36"
                                            FontAttributes="Bold"
-                                           FontFamily="LineSpeedBold"
+                                           FontFamily="LineSeedBold"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center"/>
                                 </Frame>
@@ -77,12 +100,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <BoxView
-                HeightRequest="3"
-                BackgroundColor="#a0baa3"
-                HorizontalOptions="FillAndExpand"
-                Margin="0,-20,0,0"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

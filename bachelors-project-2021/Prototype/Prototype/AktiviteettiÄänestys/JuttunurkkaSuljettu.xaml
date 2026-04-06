@@ -117,7 +117,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         VerticalOptions="EndAndExpand"
                         FontFamily="LineSeedBold"
                         FontSize="25"
-                        BackgroundColor="#a0baa3"
+                        BackgroundColor="#bfd3c1"
                         BorderColor="Transparent"
                         BorderWidth="0"
                         CornerRadius="10"
