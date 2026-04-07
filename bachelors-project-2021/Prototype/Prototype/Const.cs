@@ -74,9 +74,9 @@ namespace Prototype
             }},
 
             { 7, new List<Activity>() {
-                new() { Title = "Kerrotaan tarina", ImageSource = "thought.png" },
-                new() { Title = "Katsotaan video", ImageSource = "video.png" },
-                new() { Title = "Kerrotaan vitsi", ImageSource = "joke.png" },
+                new() { Title = "Piirretään tunne paperille", ImageSource = "draw.png" },
+                new() { Title = "Jaetaan ajatuksia luokalle", ImageSource = "telltought.png" },
+                new() { Title = "Jaetaan tarinoita pöytäryhmittäin", ImageSource = "thought.png" },
             }}
         };
 	

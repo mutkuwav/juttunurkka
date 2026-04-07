@@ -24,8 +24,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="#ffea7f"
              Title="Juttunurkka">
 
+    <Grid>
 
-    <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
+
+        <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
 
         <Label
             Text="Valitse hymiöt"
@@ -119,4 +121,50 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         </Grid>
     </StackLayout>
+
+        <Frame x:Name="OnBoardingBox2"
+               IsVisible="False"
+               BackgroundColor="White"
+               CornerRadius="15"
+               Padding="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               WidthRequest="300"
+               HasShadow="True">
+
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Emojit"
+                       FontAttributes="Bold"
+                       FontSize="24"
+                       HorizontalOptions="Center" />
+
+                
+
+                <Label 
+                    Text=
+            
+                    "Tässä valitset emojit vastausvaihtoehdoiksi"
+            
+            
+                    FontSize="16" />
+
+
+                <Label 
+                    Text=
+            
+                    "?-Emoji on oman emojin merkki. Sen valitessaan oppilas saa piirtää oman emojinsa."
+            
+            
+                    FontSize="16" />
+
+                <Button Text="Sulje"
+                        Clicked="CloseOnBoardingClicked"
+                        BackgroundColor="#feba4f"
+                        TextColor="Black"
+                        CornerRadius="10" />
+
+            </VerticalStackLayout>
+        </Frame>
+
+    </Grid>
 </ContentPage>

@@ -43,6 +43,8 @@ namespace Prototype
             base.OnAppearing();
             cts = new CancellationTokenSource();
             _ = WaitForResultsAsync(cts.Token);
+
+            _ = Navigation.PushAsync(new LisätiedotClient());
         }
 
         protected override void OnDisappearing()
@@ -70,7 +72,15 @@ namespace Prototype
 
                         await MainThread.InvokeOnMainThreadAsync(async () =>
                         {
-                            await Navigation.PushAsync(new LisätiedotClient());
+                            var top = Navigation.NavigationStack.LastOrDefault();
+                            if (top is LisätiedotClient lis)
+                            {
+                                lis.ProcessEmojiResults();
+                            }
+                            else
+                            {
+                                _ = Navigation.PushAsync(new LisätiedotClient());
+                            }
                         });
 
                         return;

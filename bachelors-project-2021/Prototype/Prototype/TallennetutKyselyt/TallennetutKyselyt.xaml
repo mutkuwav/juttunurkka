@@ -65,7 +65,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                  BorderColor="Transparent"
                  IsEnabled="True"/>
 		
-        <CollectionView Margin="20"
+        <CollectionView x:Name="SurveyList"
+                        Margin="20"
                         ItemsSource="{Binding Surveys}"
                         SelectionMode="Single"
                         SelectionChanged="OnListSelection">
@@ -109,6 +110,22 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                  BorderColor="Transparent"
                  BorderWidth="0.1"
                  IsEnabled="False"/>
+        
+        <Button  x:Name="DeleteButton"
+                 Text="Poista kyselyitä"
+                 TextColor="Black"
+                 FontAttributes="Bold"
+                 Clicked="DeleteClicked" 
+                 Margin="0,0,0,20"
+                 CornerRadius="10"
+                 HorizontalOptions="Center"
+                 WidthRequest="300"
+                 HeightRequest="50"
+                 FontSize="20"
+                 BackgroundColor="#feba4f"
+                 BorderColor="Transparent"
+                 BorderWidth="0.1"
+                 IsEnabled="True"/>
 
 
     </StackLayout>

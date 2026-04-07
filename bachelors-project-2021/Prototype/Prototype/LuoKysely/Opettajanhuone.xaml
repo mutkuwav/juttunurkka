@@ -24,19 +24,19 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="#ffea7f"
              Title="Juttunurkka">
 
+    <Grid>
+
+
+        <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
 
 
 
-    <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
-        
-        
-
-        <Grid 
+            <Grid 
               RowDefinitions="Auto, Auto"
               ColumnDefinitions="Auto, Auto">
 
 
-            <Image Grid.Column="1"
+                <Image Grid.Column="1"
                    Source="gear"     
                    HeightRequest="45"
                    WidthRequest="45"
@@ -44,7 +44,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    Margin="-165,0,0,0"       
             />
 
-            <Label Grid.Column="2"
+                <Label Grid.Column="2"
                 Text="Opettajanhuone"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
@@ -55,16 +55,16 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Padding="100,0,0,0"  
             />
 
-        </Grid>
+            </Grid>
 
 
-        <Grid RowDefinitions="Auto, Auto, Auto"
+            <Grid RowDefinitions="Auto, Auto, Auto"
             ColumnDefinitions="Auto, Auto"
             VerticalOptions="End"
             Padding="10"
             HorizontalOptions="CenterAndExpand">
 
-            <Button Grid.Row="0"
+                <Button Grid.Row="0"
                 Text="Luo uusi juttunurkka"
                 Clicked="UusiJuttunurkkaClicked"
                 VerticalOptions="CenterAndExpand" 
@@ -80,7 +80,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 BackgroundColor="#feba4f"
              />
 
-            <Button Grid.Row="1"
+                <Button Grid.Row="1"
                     Text="Arkisto"
                VerticalOptions="CenterAndExpand" 
                HorizontalOptions="CenterAndExpand" 
@@ -96,7 +96,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                Clicked="ArkistoClicked"
             />
 
-            <Button Grid.Row="2"
+                <Button Grid.Row="2"
                     Text="Ohjeet"
                VerticalOptions="CenterAndExpand" 
                HorizontalOptions="CenterAndExpand" 
@@ -111,36 +111,57 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                WidthRequest="340"
                Clicked="OnBoardingClicked"
             />
-        </Grid>
+
+
+
+
+
+            </Grid>
+
+
+
+
+        </StackLayout>
 
         <Frame x:Name="OnBoardingBox"
-           IsVisible="False"
-           BackgroundColor="White"
-           CornerRadius="15"
-           Padding="20"
-           HorizontalOptions="Center"
-           VerticalOptions="Center"
-           WidthRequest="300"
-           HasShadow="True">
+               IsVisible="False"
+               BackgroundColor="White"
+               CornerRadius="15"
+               Padding="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               WidthRequest="300"
+               HasShadow="True">
 
             <VerticalStackLayout Spacing="15">
                 <Label Text="Ohjeet"
-                   FontAttributes="Bold"
-                   FontSize="20"
-                   HorizontalOptions="Center" />
+                       FontAttributes="Bold"
+                       FontSize="24"
+                       HorizontalOptions="Center" />
+                
+                <Label Text="Perusidea"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       HorizontalOptions="Center" />
 
                 <Label 
-                    Text="Tähän lyhyt ohjeteksti."
+                    Text=
+                    
+                    "Voit tehdä kyselyitä oppilaille, joihin he vastaavat valitsemalla tunnetilaansa vastaavan emojin.
+             
+                    Tämän jälkeen vastauksien perusteella äänestetään aktiviteetti luokalle."
+                    
+                    
                     FontSize="16" />
 
                 <Button Text="Sulje"
-                    Clicked="CloseOnBoardingClicked"
-                    BackgroundColor="#feba4f"
-                    TextColor="Black"
-                    CornerRadius="10" />
-                
+                        Clicked="CloseOnBoardingClicked"
+                        BackgroundColor="#feba4f"
+                        TextColor="Black"
+                        CornerRadius="10" />
+
             </VerticalStackLayout>
         </Frame>
+    </Grid>
 
-    </StackLayout>
 </ContentPage>

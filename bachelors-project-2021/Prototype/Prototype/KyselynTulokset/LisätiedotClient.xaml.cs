@@ -57,10 +57,13 @@ namespace Prototype
             base.OnDisappearing();
         }
 
-        void ProcessEmojiResults()
+        public void ProcessEmojiResults()
         {
-            var emojiResults = OnlineSession.Current.EmojiResults
-                .OrderByDescending(kvp => kvp.Value);
+            ViewModel.Results.Clear();
+
+            var emojiResults = OnlineSession.Current?.EmojiResults?
+                .OrderByDescending(kvp => kvp.Value)
+                ?? Enumerable.Empty<KeyValuePair<int, int>>();
 
             int totalVotes = emojiResults.Sum(kvp => kvp.Value);
 

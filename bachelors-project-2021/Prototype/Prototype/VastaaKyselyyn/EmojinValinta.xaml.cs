@@ -133,14 +133,16 @@ namespace Prototype
             cts.Cancel(); //cancel task if button clicked
 
             await Main.GetInstance().client.SendResult(answer.ToString());
-            
-            if (answer == 7) { 
+
+            if (answer == 7)
+            {
                 await Navigation.PushAsync(new OmanEmojinPiirto());
-            } else { 
-                await Navigation.PushAsync(new EmojiAnswered(answer)); 
+            }
+            else
+            {
+                await Navigation.PushAsync(new EmojiAnswered(answer));
             }
 
-        }
             if (answer < 0)
             {
                 await DisplayAlert("Huom", "Valitse emoji ennen vastaamista.", "OK");
@@ -163,6 +165,7 @@ namespace Prototype
                 Console.WriteLine($"Submit vote failed: {ex.Message}");
                 await DisplayAlert("Virhe", "Vastauksen lähetys epäonnistui.", "OK");
             }
+
         }
     }
 }
