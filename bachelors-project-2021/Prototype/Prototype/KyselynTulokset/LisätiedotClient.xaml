@@ -30,7 +30,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
     <ContentPage.Content>
         
         <StackLayout Padding="0,80,0,0">
-
+        
+            <!--Tekstiosa-->
             <Label
                 Text="TULOKSET"
                 FontSize="40"
@@ -40,6 +41,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 HorizontalOptions="Center"
                 Margin="0,30,0,50"/>
 
+            <!--Tulokset pylväinä-->
             <CollectionView
                 ItemsSource="{Binding Results}"
                 HorizontalOptions="Center"
@@ -83,6 +85,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                 </Frame>
                             </Grid>
 
+                            <!--Pylväiden alla oleva viiva-->
                             <BoxView
                                 HeightRequest="8"
                                 BackgroundColor="#a0baa3"
