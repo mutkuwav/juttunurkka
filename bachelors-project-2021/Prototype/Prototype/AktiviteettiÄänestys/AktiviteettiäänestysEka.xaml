@@ -42,11 +42,12 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         
         <!--Laatikko, jonka sisään tulee vaihtoehdot mitä tehdään-->
         <Frame Grid.Row="1"
-               Padding="16"
+               Padding="10"
                CornerRadius="10"
                BackgroundColor="#a0baa3"
-               BorderColor="Transparent"
-               HasShadow="False">
+               HasShadow="False"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
 
             <VerticalStackLayout Spacing="18"
                                  VerticalOptions="Center">

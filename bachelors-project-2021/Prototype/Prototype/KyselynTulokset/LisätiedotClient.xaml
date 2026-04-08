@@ -19,87 +19,82 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-<ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Prototype.LisätiedotClient"
-    Title="Tulokset"
-    BackgroundColor="Transparent"
-    BackgroundImageSource="background3.png">
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.LisätiedotClient"
+             Title="Juttunurkka"
+             BackgroundColor="Transparent"
+             BackgroundImageSource="background3.png">
 
     <ContentPage.Content>
-        <StackLayout
-            HorizontalOptions="Center"
-            VerticalOptions="FillAndExpand"
-            Spacing="20"
-            Padding="0,80,0,0">
+        
+        <StackLayout Padding="0,80,0,0">
 
-            <!--Tekstiosa-->
             <Label
                 Text="TULOKSET"
-                FontFamily="LineSeedBold"
                 FontSize="40"
                 FontAttributes="Bold"
+                FontFamily="LineSeedBold"
                 TextColor="Black"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                Margin="0,30,0,50"/>
 
-            <!--Tulokset pylväinä-->
-            <CollectionView ItemsSource="{Binding Results}"
-                            HorizontalOptions="Center"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            Margin="0,0,0,20">
+            <CollectionView
+                ItemsSource="{Binding Results}"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout
-                        Orientation="Horizontal"
-                        ItemSpacing="0" />
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"/>
                 </CollectionView.ItemsLayout>
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout HorizontalOptions="Center" 
-                                     Spacing="0"
-                                     WidthRequest="100"
-                                     VerticalOptions="EndAndExpand">
+                        <StackLayout
+                            WidthRequest="100"
+                            VerticalOptions="EndAndExpand"
+                            HorizontalOptions="Center"
+                            Spacing="0">
 
-                            <Image Source="{Binding Image}"
-                                   HeightRequest="80"
-                                   HorizontalOptions="Center"/>
+                            <Image
+                                Source="{Binding Image}"
+                                HeightRequest="80"
+                                HorizontalOptions="Center"/>
 
-                            <Grid VerticalOptions="FillAndExpand" 
-                                  HeightRequest="200"
-                                  RowDefinitions="*,Auto"
-                                  Margin="0,20,0,0">
-
-                                <BoxView
-                                    Grid.Row="1"
-                                    HeightRequest="6"
-                                    BackgroundColor="#a0baa3"
-                                    HorizontalOptions="FillAndExpand"/>
-
-
+                            <Grid
+                                HeightRequest="300"
+                                VerticalOptions="FillAndExpand">
                                 <Frame
-                                    HeightRequest="{Binding Scale}"
-                                    WidthRequest="55"
+                                    VerticalOptions="End"
+                                    HeightRequest="{Binding ScalePx}"
+                                    MinimumHeightRequest="160"
+                                    WidthRequest="60"
                                     BackgroundColor="#bfd3c1"
                                     CornerRadius="10"
                                     Padding="0"
-                                    HasShadow="False"
-                                    VerticalOptions="End"
-                                    HorizontalOptions="Center">
-
-                                    <Label Text="{Binding Amount}"
-                                           TextColor="Black"
-                                           FontSize="36"
-                                           FontAttributes="Bold"
-                                           FontFamily="LineSeedBold"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center"/>
+                                    HasShadow="False">
+                                    <Label
+                                        Text="{Binding Amount}"
+                                        TextColor="Black"
+                                        FontFamily="LineSeedBold"
+                                        FontSize="30"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
                                 </Frame>
                             </Grid>
+
+                            <BoxView
+                                HeightRequest="8"
+                                BackgroundColor="#a0baa3"
+                                VerticalOptions="End"
+                                Margin="0,0,0,25"
+                                HorizontalOptions="FillAndExpand"/>
+                            
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
