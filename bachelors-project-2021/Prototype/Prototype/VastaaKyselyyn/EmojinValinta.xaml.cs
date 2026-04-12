@@ -1,4 +1,3 @@
-﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
@@ -130,19 +129,6 @@ namespace Prototype
 
         private async void Vastaa_Clicked(object sender, EventArgs e)
         {
-            cts.Cancel(); //cancel task if button clicked
-
-            await Main.GetInstance().client.SendResult(answer.ToString());
-
-            if (answer == 7)
-            {
-                await Navigation.PushAsync(new OmanEmojinPiirto());
-            }
-            else
-            {
-                await Navigation.PushAsync(new EmojiAnswered(answer));
-            }
-
             if (answer < 0)
             {
                 await DisplayAlert("Huom", "Valitse emoji ennen vastaamista.", "OK");
@@ -158,14 +144,20 @@ namespace Prototype
                     OnlineSession.Current.DeviceId,
                     answer);
 
-                await Navigation.PushAsync(new EmojiAnswered(answer));
+                if (answer == 7)
+                {
+                    await Navigation.PushAsync(new OmanEmojinPiirto());
+                }
+                else
+                {
+                    await Navigation.PushAsync(new EmojiAnswered(answer));
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Submit vote failed: {ex.Message}");
                 await DisplayAlert("Virhe", "Vastauksen lähetys epäonnistui.", "OK");
             }
-
         }
     }
 }

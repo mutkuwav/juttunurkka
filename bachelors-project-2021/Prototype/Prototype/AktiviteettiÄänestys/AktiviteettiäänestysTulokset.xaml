@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen
-          2026 Matias Meriläinen
+          2026 Matias Meriläinen, Aurora Kansanoja
 
 This file is part of "Juttunurkka".
 
@@ -23,22 +23,25 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AktiviteettiäänestysTulokset"
-             BackgroundColor="#FFEA7F"
-             NavigationPage.HasNavigationBar="False">
+             BackgroundColor="Transparent"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundImageSource="background3.png">
 
     <Grid RowDefinitions="Auto,*,Auto"
           Padding="24,60,24,30"
           RowSpacing="20">
 
+        <!--Teksti-->
         <Label Grid.Row="0"
                Text="TULOKSET"
+               FontFamily="LineSeedBold"
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
                FontSize="38"
                FontAttributes="Bold"
-               TextColor="Black"
-               FontFamily="BebasNeue" />
+               TextColor="Black"/>
 
+        <!--Tulokset pylväinä-->
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Results}"
                         SelectionMode="None">
@@ -46,8 +49,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <DataTemplate>
                     <Frame Padding="16"
                            Margin="0,8,0,8"
-                           CornerRadius="16"
-                           BackgroundColor="#F4E18D"
+                           CornerRadius="10"
+                           BackgroundColor="#a0baa3"
                            BorderColor="Transparent"
                            HasShadow="False">
 
@@ -67,19 +70,21 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                    Text="{Binding Title}"
                                    VerticalOptions="Center"
                                    TextColor="Black"
+                                   FontFamily="LineSeedBold"
                                    FontSize="20"
                                    FontAttributes="Bold"
                                    LineBreakMode="WordWrap" />
 
                             <Frame Grid.Column="2"
-                                   BackgroundColor="#FEBA4F"
-                                   CornerRadius="12"
+                                   BackgroundColor="#bfd3c1"
+                                   CornerRadius="10"
                                    Padding="18,10"
                                    HasShadow="False"
                                    VerticalOptions="Center">
 
                                 <Label Text="{Binding Amount}"
                                        TextColor="Black"
+                                       FontFamily="LineSeedBold"
                                        FontSize="22"
                                        FontAttributes="Bold"
                                        HorizontalOptions="Center"
@@ -91,15 +96,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
+        
+        <!--Sulje huone -nappi-->
         <Button Grid.Row="2"
                 Text="SULJE HUONE"
                 Clicked="SuljeClicked"
-                BackgroundColor="#FEBA4F"
+                BackgroundColor="#bfd3c1"
+                FontFamily="LineSeedBold"
                 TextColor="Black"
                 FontSize="22"
                 FontAttributes="Bold"
-                CornerRadius="16"
+                CornerRadius="10"
                 HeightRequest="86"
                 HorizontalOptions="Fill" />
     </Grid>

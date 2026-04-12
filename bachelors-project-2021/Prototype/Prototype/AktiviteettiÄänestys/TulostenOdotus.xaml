@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen
-    2026 Matias Meriläinen
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -24,7 +24,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.TulostenOdotus"
              Title="Juttunurkka"
              BackgroundColor="#ffea7f">
-    
+
     <ContentPage.Content>
         <StackLayout>
             <Label 

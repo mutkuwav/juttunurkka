@@ -37,6 +37,11 @@ namespace Prototype
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
         }
+        async void BackBtnClicked(object sender, EventArgs e)
+        {
+            // Navigoi takaisin edelliselle sivulle
+            await Navigation.PopAsync();
+        }
 
         private void MyClick(object sender, EventArgs e)
         {
@@ -46,7 +51,7 @@ namespace Prototype
             }
             else
             {
-                DisplayAlert("VIRHE", "Vaara salasana tai kayttajatunnus", "OK");
+                DisplayAlert("VIRHE", "Väärä salasana tai käyttäjätunnus", "OK");
             }
         }
 
@@ -58,7 +63,7 @@ namespace Prototype
             }
             else
             {
-                await DisplayAlert("VIRHE", "Vaara salasana tai kayttajatunnus", "OK");
+                await DisplayAlert("VIRHE", "Väärä salasana tai käyttäjätunnus", "OK");
             }
             
         }

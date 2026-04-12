@@ -26,9 +26,26 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="#ffea7f"
              Title="Juttunurkka">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto"
-          Padding="24,50,24,30"
-          RowSpacing="22">
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Padding="0">
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
+
+        <Grid
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            RowDefinitions="Auto,Auto,*,Auto"
+            Padding="24,50,24,30"
+            RowSpacing="22">
 
         <Label Grid.Row="0"
                Text="Luo nimi juttunurkalle"
@@ -36,6 +53,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
                FontAttributes="Bold"
+               FontFamily="LineSeedBold"
                FontSize="28"
                TextColor="Black" />
 
@@ -43,14 +61,27 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <Label Text="Nimi"
                    TextColor="Black"
                    FontAttributes="Bold"
+                   FontFamily="LineSeedBold"
                    FontSize="22" />
 
-            <Entry x:Name="NameEditor"
-                   Placeholder="Kirjoita..."
-                   FontAttributes="Bold"
-                   BackgroundColor="White"
-                   FontSize="20"
-                   TextChanged="OnEntryTextChanged" />
+            <Frame
+                HeightRequest="50"
+                CornerRadius="10"
+                BackgroundColor="White"
+                BorderColor="Transparent"
+                Padding="15,0">
+                <Entry x:Name="NameEditor"
+                       Placeholder="Kirjoita..."
+                       FontAttributes="Bold"
+                       FontFamily="LineSeedBold"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       VerticalOptions="Center"
+                       HeightRequest="50"
+                       FontSize="20"
+                       TextChanged="OnEntryTextChanged" />
+            </Frame>
         </VerticalStackLayout>
 
         <Grid Grid.Row="3"
@@ -62,23 +93,26 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     Clicked="EdellinenButtonClicked"
                     TextColor="Black"
                     FontAttributes="Bold"
+                    FontFamily="LineSeedBold"
                     FontSize="19"
                     CornerRadius="10"
                     HeightRequest="56"
-                    BackgroundColor="#feba4e"
-                    BorderColor="#feba4e" />
+                    BackgroundColor="#bfd3c1"
+                    BorderColor="#bfd3c1" />
 
             <Button Grid.Column="1"
                     Text="Jatka"
                     TextColor="Black"
                     FontAttributes="Bold"
+                    FontFamily="LineSeedBold"
                     Clicked="JatkaButtonClicked"
                     FontSize="19"
                     CornerRadius="10"
                     HeightRequest="56"
-                    BackgroundColor="#feba4e"
-                    BorderColor="#feba4e" />
+                    BackgroundColor="#bfd3c1"
+                    BorderColor="#bfd3c1" />
         </Grid>
 
-    </Grid>
+        </Grid>
+    </AbsoluteLayout>
 </ContentPage>

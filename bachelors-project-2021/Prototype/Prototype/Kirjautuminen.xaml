@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Eemil Alamäki
+          2026 Mimosa Joenväärä
 
 This file is part of "Juttunurkka".
 
@@ -23,45 +24,95 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Kirjautuminen"
              Title="Juttunurkka"
-             BackgroundColor="#ffea7f"
              >
+             <Grid>
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"/>
+        
+        <ImageButton Source="back_btn.png"
+                 BackgroundColor="Transparent"
+                 Clicked="BackBtnClicked"
+                 HeightRequest="30"
+                 WidthRequest="30"
+                 HorizontalOptions="Start"
+                 VerticalOptions="Start"
+                 Margin="20"/>
 
     <StackLayout VerticalOptions="CenterAndExpand" Spacing="10" Padding="0,0,0,50">
+        <!-- TAKAISIN-NAPPI kiinnitetty Gridin vasempaan yläkulmaan -->
+
         <Label Text="Kirjaudu sisään opettajanhuoneeseen"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                 HorizontalTextAlignment="Center"
                 FontAttributes="Bold"
+                FontFamily= "LineSeedBold"
                 FontSize="30"
                 TextColor="Black"
                 Padding="0,0,0,40"
              />
 
         <Label Text="Käyttäjätunnus"
-               FontAttributes="Bold"
+               FontFamily= "LineSeedBold"
                 VerticalOptions= "EndAndExpand" 
                 HorizontalOptions="StartAndExpand"
                FontSize="20"
                Margin="80,0,0,0"
              />
-        <Entry x:Name="txtUsername" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
-                WidthRequest="250" HorizontalOptions="CenterAndExpand"></Entry>
+        <Frame
+        HeightRequest="50"
+        WidthRequest="255"
+        CornerRadius="10"
+        BackgroundColor="White"
+        BorderColor="Transparent"
+        Padding="15,0"
+        HorizontalOptions="Center">
+
+        <Entry
+                x:Name="txtUsername"
+                TextColor="Black"
+                PlaceholderColor="Gray"
+                BackgroundColor="Transparent"
+                VerticalOptions="Center"
+                HeightRequest="50"/>
+        </Frame>
         
         <Label Text="Salasana"
-               FontAttributes="Bold"
+                FontFamily= "LineSeedBold"
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="StartAndExpand"
                FontSize="20"
                Margin="80,0,0,0"
              />
+        <Frame
+        HeightRequest="50"
+        WidthRequest="255"
+        CornerRadius="10"
+        BackgroundColor="White"
+        BorderColor="Transparent"
+        Padding="15,0"
+        HorizontalOptions="Center">
 
-        <Entry x:Name="txtPassword" IsPassword="True" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
-                WidthRequest="250" HorizontalOptions="CenterAndExpand"></Entry>
+        <Entry
+                x:Name="txtPassword"
+                IsPassword="True"
+                TextColor="Black"
+                PlaceholderColor="Gray"
+                BackgroundColor="Transparent"
+                VerticalOptions="Center"
+                HeightRequest="50"/>
+                
+        </Frame>
        
         
         <Button  
                 Text="Kirjaudu"
-                FontAttributes="Bold"
+                FontFamily= "LineSeedBold"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
                 FontSize="19"
@@ -70,11 +121,13 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               CornerRadius="10"
               HeightRequest="50"
               WidthRequest="255"
-              BackgroundColor="#feba4f"
+              BackgroundColor="#bfd3c1"
               BorderWidth="0.1"
               BorderColor="Transparent"
               Clicked="KirjauduClicked"/>
 
     </StackLayout>
+
+ </Grid>
 
 </ContentPage> 
