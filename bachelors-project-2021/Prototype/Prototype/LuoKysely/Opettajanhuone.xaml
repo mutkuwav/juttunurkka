@@ -131,11 +131,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Ohjeet"
                            FontAttributes="Bold"
-                           FontSize="20"
+                           FontSize="24"
                            HorizontalOptions="Center" />
 
-                    <Label Text="Tähän lyhyt ohjeteksti."
-                           FontSize="16" />
+                    <Label Text="Perusidea"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           HorizontalOptions="Center" />
+
+                    <Label
+                        Text="Voit tehdä kyselyitä oppilaille, joihin he vastaavat valitsemalla tunnetilaansa vastaavan emojin. Tämän jälkeen vastauksien perusteella äänestetään aktiviteetti luokalle."
+                        FontSize="16" />
 
                     <Button Text="Sulje"
                             Clicked="CloseOnBoardingClicked"

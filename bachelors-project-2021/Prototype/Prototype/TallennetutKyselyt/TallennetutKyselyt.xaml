@@ -65,7 +65,8 @@ This file is part of "Juttunurkka".
                     BorderColor="Transparent"/>
 
             <!-- COLLECTIONVIEW -->
-            <CollectionView Margin="0"
+            <CollectionView x:Name="SurveyList"
+                            Margin="0"
                             ItemsSource="{Binding Surveys}"
                             SelectionMode="Single"
                             SelectionChanged="OnListSelection">
@@ -121,6 +122,24 @@ This file is part of "Juttunurkka".
                     BorderColor="Transparent"
                     BorderWidth="0.1"
                     IsEnabled="False"/>
+
+            <!-- Poista kyselyitä -->
+            <Button x:Name="DeleteButton"
+                    Text="Poista kyselyitä"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontFamily="LineSeedBold"
+                    Clicked="DeleteClicked"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="300"
+                    HeightRequest="50"
+                    FontSize="20"
+                    BackgroundColor="#bfd3c1"
+                    BorderColor="Transparent"
+                    BorderWidth="0.1"
+                    IsEnabled="True"/>
+
         </StackLayout>
 
     </Grid>

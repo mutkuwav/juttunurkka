@@ -44,7 +44,9 @@ namespace Prototype
             public bool IsPositive { get; set; } = false;
 		}
 
-       
+        private const string onBoardingShownKey2 = "onBoardingShownKey2";
+
+
 
         public LuoKyselyEmojit()
         {
@@ -196,6 +198,23 @@ namespace Prototype
             }
 
             return false;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (!Preferences.Get(onBoardingShownKey2, false))
+            {
+                OnBoardingBox2.IsVisible = true;
+
+                Preferences.Set(onBoardingShownKey2, true);
+            }
+        }
+
+        private void CloseOnBoardingClicked(object sender, EventArgs e)
+        {
+            OnBoardingBox2.IsVisible = false;
         }
 
     }

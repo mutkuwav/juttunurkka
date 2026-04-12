@@ -107,8 +107,13 @@ namespace Prototype
         {
             try
             {
-                string path = Path.Combine(folder, name.ToLower());
-                File.Delete(path);
+
+                string path = Path.Combine(folder, name);
+                if (File.Exists(path) == true)
+                {
+                    File.Delete(path);
+                    Console.WriteLine("File deleted");
+                }
             }
             catch (FileNotFoundException)
             {
