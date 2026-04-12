@@ -36,7 +36,8 @@ namespace Prototype
 
         public enum ToolbarItemPosition { Start, End }
 
-
+        private bool _deleteMode = false;
+        private List<string> _selectedForDeletion = new();
 
         public string SelectedSurvey { get; set; }
         public List<string> Surveys { get; set; }
@@ -65,17 +66,21 @@ namespace Prototype
 
         }
 
+
         void OnListSelection(object sender, SelectionChangedEventArgs e)
         {
-            SelectedSurvey = e.CurrentSelection[0] as string;
+            if (_deleteMode)
+            {
+                // CurrentSelection contains ALL currently-selected items (multi-select)
+                _selectedForDeletion = e.CurrentSelection
+                                          .Cast<string>()
+                                          .ToList();
+                return;
+            }
 
-            //button enabled only when there is survey selected
-
-            if (SelectedSurvey != null)
-                TButton.IsEnabled = true;
-
-            else
-                TButton.IsEnabled = false;
+            // --- NORMAL MODE (single selection) ---
+            SelectedSurvey = e.CurrentSelection.FirstOrDefault() as string;
+            TButton.IsEnabled = SelectedSurvey != null;
         }
 
         async void OletusClicked(object sender, EventArgs e)
@@ -100,6 +105,49 @@ namespace Prototype
             await Navigation.PushAsync(new KyselynTarkastelu());
 
         }
+
+
+        async void DeleteClicked(object sender, EventArgs e)
+        {
+            if (!_deleteMode)
+            {
+                // first click -> enter delete mode
+                // second clicl -> delete selected items
+                _deleteMode = true;
+                DeleteButton.Text = "Poista valitut";
+                TButton.IsEnabled = false;
+
+                SurveyList.SelectionMode = SelectionMode.Multiple;
+                _selectedForDeletion.Clear();
+
+                return;
+            }
+
+            if (_selectedForDeletion.Count == 0)
+            {
+                await DisplayAlert("Ei valintaa", "Valitse ainakin yksi poistettava kysely.", "OK");
+                return;
+            }
+
+            var manager = SurveyManager.GetInstance();
+            foreach (var s in _selectedForDeletion)
+            {
+                manager.DeleteSurvey(s + ".txt");
+                Surveys.Remove(s);
+            }
+
+            // refresh UI
+            Surveys = manager.GetTemplates();
+            BindingContext = null;
+            BindingContext = this;
+
+            // exit delete mode
+            _deleteMode = false;
+            DeleteButton.Text = "Poista kyselyitä";
+            SurveyList.SelectionMode = SelectionMode.Single;
+        }
+
+
 
         async void BackBtnClicked(object sender, EventArgs e)
         {

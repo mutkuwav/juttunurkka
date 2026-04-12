@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen
-          2026 Matias Meriläinen, Mimosa Joenväärä
+          2026 Matias Meriläinen, Mimosa Joenväärä, Aurora Kansanoja
 
 This file is part of "Juttunurkka".
 
@@ -23,6 +23,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AktiviteettiäänestysTulokset"
+             BackgroundColor="Transparent"
              NavigationPage.HasNavigationBar="False">
 
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
@@ -40,78 +41,83 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
               AbsoluteLayout.LayoutFlags="All">
 
-        <Label Grid.Row="0"
-               Text="TULOKSET"
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"
-               FontSize="38"
-               FontFamily="LineSeedBold"
-               TextColor="Black" />
+            <!--Teksti-->
+            <Label Grid.Row="0"
+                   Text="TULOKSET"
+                   FontFamily="LineSeedBold"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontSize="38"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
 
-        <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Results}"
-                        SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="16"
-                           Margin="0,8,0,8"
-                           CornerRadius="16"
-                           BackgroundColor="#bfd3c1"
-                           BorderColor="Transparent"
-                           HasShadow="False">
+            <!--Tulokset pylväinä-->
+            <CollectionView Grid.Row="1"
+                            ItemsSource="{Binding Results}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="16"
+                               Margin="0,8,0,8"
+                               CornerRadius="16"
+                               BackgroundColor="#bfd3c1"
+                               BorderColor="Transparent"
+                               HasShadow="False">
 
-                        <Grid ColumnDefinitions="80,*,Auto"
-                              ColumnSpacing="16"
-                              VerticalOptions="Center">
+                            <Grid ColumnDefinitions="80,*,Auto"
+                                  ColumnSpacing="16"
+                                  VerticalOptions="Center">
 
-                            <Image Grid.Column="0"
-                                   Source="{Binding Image}"
-                                   HeightRequest="64"
-                                   WidthRequest="64"
-                                   Aspect="AspectFit"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-
-                            <Label Grid.Column="1"
-                                   Text="{Binding Title}"
-                                   VerticalOptions="Center"
-                                   TextColor="Black"
-                                   FontSize="20"
-                                   FontFamily="LineSeedBold"
-                                   LineBreakMode="WordWrap" />
-
-                            <Frame Grid.Column="2"
-                                   BackgroundColor="#a0baa3"
-                                   CornerRadius="12"
-                                   Padding="18,10"
-                                   HasShadow="False"
-                                   VerticalOptions="Center">
-
-                                <Label Text="{Binding Amount}"
-                                       TextColor="Black"
-                                       FontSize="22"
-                                       FontFamily="LineSeedBold"
+                                <Image Grid.Column="0"
+                                       Source="{Binding Image}"
+                                       HeightRequest="64"
+                                       WidthRequest="64"
+                                       Aspect="AspectFit"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center" />
-                            </Frame>
 
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <Label Grid.Column="1"
+                                       Text="{Binding Title}"
+                                       VerticalOptions="Center"
+                                       TextColor="Black"
+                                       FontFamily="LineSeedBold"
+                                       FontSize="20"
+                                       LineBreakMode="WordWrap" />
 
-        <Button Grid.Row="2"
-                Text="SULJE HUONE"
-                Clicked="SuljeClicked"
-                BackgroundColor="#bfd3c1"
-                TextColor="Black"
-                FontSize="22"
-                FontFamily="LineSeedBold"
-                CornerRadius="16"
-                BorderColor="Transparent"
-                HeightRequest="86"
-                HorizontalOptions="Fill" />
+                                <Frame Grid.Column="2"
+                                       BackgroundColor="#a0baa3"
+                                       CornerRadius="12"
+                                       Padding="18,10"
+                                       HasShadow="False"
+                                       VerticalOptions="Center">
+
+                                    <Label Text="{Binding Amount}"
+                                           TextColor="Black"
+                                           FontFamily="LineSeedBold"
+                                           FontSize="22"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Frame>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        
+            <!--Sulje huone -nappi-->
+            <Button Grid.Row="2"
+                    Text="SULJE HUONE"
+                    Clicked="SuljeClicked"
+                    BackgroundColor="#bfd3c1"
+                    FontFamily="LineSeedBold"
+                    TextColor="Black"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    CornerRadius="16"
+                    BorderColor="Transparent"
+                    HeightRequest="86"
+                    HorizontalOptions="Fill" />
         </Grid>
     </AbsoluteLayout>
 </ContentPage>

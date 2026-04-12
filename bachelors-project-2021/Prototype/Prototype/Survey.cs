@@ -93,7 +93,7 @@ namespace Prototype
 
             Const.activities.TryGetValue(7, out activities);
             activities = activities.GetRange(0, 2);
-            tempEmojis.Add(new Emoji(7, "OmaEmoji", "neutral", false, activities, "blank_emoji_lowres.png"));
+            tempEmojis.Add(new Emoji(7, "OmaEmoji", "neutral", false, activities, "emoji7lowres.png"));
 
             string TempRoomCode = GenerateRandomCode();
 
