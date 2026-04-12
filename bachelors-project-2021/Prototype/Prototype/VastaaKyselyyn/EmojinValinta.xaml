@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Riina Kaipia
+          2026 Aurora Kansanoja
 
 This file is part of "Juttunurkka".
 
@@ -22,98 +23,113 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.EmojinValinta"
-             BackgroundColor="#FFEA7F"
+             BackgroundColor="Transparent"
              NavigationPage.HasNavigationBar="False">
+    
+    <Grid VerticalOptions="FillAndExpand"
+      HorizontalOptions="FillAndExpand">
 
-    <StackLayout Padding="50" Spacing="50">
+        <!-- TAUSTAKUVA -->
+        <Image Source="background3.png"
+               Aspect="AspectFill"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"/>
 
-        <HorizontalStackLayout 
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Spacing="10">
+        <!-- PÄÄSISÄLTÖ -->
+        <StackLayout Padding="50" Spacing="50">
 
-            <Label 
-                Text="{Binding introMessage}"
-                VerticalOptions="Center" 
-                HorizontalTextAlignment="Center"
-                FontSize="35"
-                TextColor="Black"
-                FontFamily="BebasNeue"/>
+               <HorizontalStackLayout 
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Spacing="10">
+                   
+                <!--Yläreunan TEKSTIOSA-->
+                <Label 
+                    Text="{Binding introMessage}"
+                    VerticalOptions="Center" 
+                    HorizontalTextAlignment="Center"
+                    FontSize="30"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontFamily="LineSeedBold"/>
+                <!--Valittavat emoijit-->
+                <Frame
+                    CornerRadius="10"
+                    HasShadow="True"
+                    Padding="0"
+                    BackgroundColor="#bfd3c1"
+                    HeightRequest="40"
+                    WidthRequest="50">
 
-            <Frame
-                CornerRadius="5"
-                HasShadow="True"
-                Padding="0"
-                BackgroundColor="#FEBA4F"
-                HeightRequest="40"
-                WidthRequest="60">
+                    <ImageButton
+                        x:Name="QuestionToSpeech"
+                        Clicked="QuestionToSpeech_Clicked"    
+                        Source="megaphone.png"
+                        ClassId="{Binding Item.ID}"
+                        BackgroundColor="Transparent"
+                        HeightRequest="35"
+                        WidthRequest="35"
+                        VerticalOptions="Center"/>
+                </Frame>
 
-                <ImageButton
-                    x:Name="QuestionToSpeech"
-                    Clicked="QuestionToSpeech_Clicked"    
-                    Source="megaphone.png"
-                    ClassId="{Binding Item.ID}"
-                    BackgroundColor="Transparent"
-                    HeightRequest="35"
-                    WidthRequest="35"
-                    VerticalOptions="Center"/>
-            </Frame>
-        </HorizontalStackLayout>
+            </HorizontalStackLayout>
 
-        <Frame Padding="15"
-               HorizontalOptions="Center"
-               BorderColor="White"
-               CornerRadius="15"
-               WidthRequest="300">
+                <Frame Padding="15"
+                       HorizontalOptions="Center"
+                       BorderColor="White"
+                       CornerRadius="10"
+                       WidthRequest="300">
 
-            <CollectionView ItemsSource="{Binding Emojit}"
-                            ItemsLayout="VerticalGrid, 3">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="5"
-                              RowDefinitions="Auto, *"
-                              ColumnDefinitions="Auto, *">
+                <CollectionView ItemsSource="{Binding Emojit}"
+                                ItemsLayout="VerticalGrid, 3">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5"
+                                  RowDefinitions="Auto, *"
+                                  ColumnDefinitions="Auto, *">
 
-                            <ImageButton Grid.Column="0"
-                                         Source="{Binding Item.ImageSource}"
-                                         ClassId="{Binding Item.ID}"
-                                         BackgroundColor="Transparent"
-                                         HeightRequest="60"
-                                         WidthRequest="60"
-                                         Margin="10,0,0,0"
-                                         Clicked="Button_Clicked"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                <ImageButton Grid.Column="0"
+                                             Source="{Binding Item.ImageSource}"
+                                             ClassId="{Binding Item.ID}"
+                                             BackgroundColor="Transparent"
+                                             HeightRequest="60"
+                                             WidthRequest="60"
+                                             Margin="10,0,0,0"
+                                             Clicked="Button_Clicked"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        </Frame>
+                </Frame>
+            <!-- Progressbar-->
+            <ProgressBar x:Name="progressBar"
+                         FlowDirection="LeftToRight"
+                         Progress="1"
+                         VerticalOptions="CenterAndExpand" 
+                         HorizontalOptions="CenterAndExpand"
+                         WidthRequest="300"
+                         ScaleY="15"
+                         ProgressColor="#bfd3c1"/>
 
-        <ProgressBar x:Name="progressBar"
-                     FlowDirection="LeftToRight"
-                     Progress="1"
-                     VerticalOptions="CenterAndExpand" 
-                     HorizontalOptions="CenterAndExpand"
-                     WidthRequest="300"
-                     ScaleY="15"
-                     ProgressColor="#FEBA4F"/>
+            <Button Text="TALLENNA"
+                    x:Name="Vastaus"    
+                    Clicked="Vastaa_Clicked"    
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
+                    IsEnabled="False"    
+                    FontSize="30"
+                    TextColor="Black"
+                    FontFamily="LineSeedBold"
+                    FontAttributes="Bold"
+                    BorderColor="Transparent"
+                    CornerRadius="10"
+                    HeightRequest="95"
+                    WidthRequest="270"
+                    BackgroundColor="#bfd3c1"/>
 
-        <Button Text="TALLENNA"
-                x:Name="Vastaus"    
-                Clicked="Vastaa_Clicked"    
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                IsEnabled="False"    
-                FontSize="30"
-                TextColor="Black"
-                FontFamily="RobotoMedium"
-                FontAttributes="Bold"
-                BorderColor="Transparent"
-                CornerRadius="15"
-                HeightRequest="95"
-                WidthRequest="270"
-                BackgroundColor="#FEBA4F"/>
+        </StackLayout>
 
-    </StackLayout>
+    </Grid>
 
 </ContentPage>
