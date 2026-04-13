@@ -54,7 +54,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                       VerticalOptions="Start">
                     <Label x:Name="title"
                            Grid.Column="0"
-                           Text="Kyselyn tarkastelu"
+                           Text="Juttunurkan tarkastelu"
                            FontSize="20"
                            FontFamily="LineSeedBold"
                            FontAttributes="Bold"
@@ -199,7 +199,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     HorizontalOptions="Center"
                     Margin="0,50,0,0">
                     <Button Grid.Column="0" 
-                            Text="Jaa kysely"
+                            Text="Jaa"
                             FontFamily="LineSeedBold"
                             TextColor="Black"
                             FontAttributes="Bold"
@@ -256,7 +256,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                   HorizontalOptions="End"
                                   Clicked="X_Clicked"/>
 
-                    <Label Text="Poistetaanko kysely?" 
+                    <Label Text="Poistetaanko juttunurkka?" 
                            FontSize="24" 
                            TextColor="Black"
                            FontFamily="LineSeedBold" 

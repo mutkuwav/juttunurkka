@@ -75,7 +75,7 @@ namespace Prototype
         {
             //Sulkee kyselyn kaikilta osallistujilta
 
-            var res = await DisplayAlert("Oletko varma että tahdot sulkea kyselyn?", "", "Kyllä", "Ei");
+            var res = await DisplayAlert("Oletko varma että tahdot sulkea juttunurkan?", "", "Kyllä", "Ei");
 
             if (res == true)
             {
