@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Eemil Alamäki, Riina Kaipia
-2026 Matias Meriläinen, Mimosa Joenväärä
+          2026 Matias Meriläinen, Mimosa Joenväärä, Aurora Kansanoja
 This file is part of "Juttunurkka".
 
 Juttunurkka is free software: you can redistribute it and/or modify
@@ -139,8 +139,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <Frame x:Name="OnBoardingBox2"
                    IsVisible="False"
-                   BackgroundColor="White"
-                   CornerRadius="15"
+                   BackgroundColor="#ffe5d4"
+                   CornerRadius="10"
                    Padding="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
@@ -152,20 +152,25 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Emojit"
                            FontAttributes="Bold"
+                           FontFamily="LineSeedBold"
                            FontSize="24"
                            HorizontalOptions="Center" />
 
                     <Label
-                        Text="Tässä valitset emojit vastausvaihtoehdoiksi"
-                        FontSize="16" />
+                        Text="Tässä valitaan emojit vastausvaihtoehdoiksi"
+                        FontSize="16"
+                        FontFamily="LineSeedBold"/>
 
                     <Label
-                        Text="?-Emoji on oman emojin merkki. Sen valitessaan oppilas saa piirtää oman emojinsa."
-                        FontSize="16" />
+                        Text="? -Emoji on oman emojin merkki. Sen valitessaan vastaaja saa piirtää oman emojinsa."
+                        FontSize="16"
+                        FontFamily="LineSeedBold"/>
 
                     <Button Text="Sulje"
                             Clicked="CloseOnBoardingClicked"
-                            BackgroundColor="#feba4f"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            FontFamily="LineSeedBold"
                             TextColor="Black"
                             CornerRadius="10" />
                 </VerticalStackLayout>

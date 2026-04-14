@@ -188,10 +188,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
 
 
-                <Frame CornerRadius="15"
+                <Frame CornerRadius="10"
                        Padding="0"
                        BorderColor="White">
-                    <StackLayout BackgroundColor="#bfd3c1"
+                    <StackLayout BackgroundColor="#ffe5d4"
                              HeightRequest="200"
                              Orientation="Vertical"
                              WidthRequest="300"
@@ -201,7 +201,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                            FontAttributes="Bold"
                            HorizontalOptions="Center"
                            Margin="0,15,0,0"
-                           BackgroundColor="#bfd3c1"
+                           BackgroundColor="#ffe5d4"
                            FontFamily="LineSeedRegular"
                            FontSize="22"/>
 
