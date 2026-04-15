@@ -28,7 +28,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="Transparent"
              BackgroundImageSource="background3.png">
 
-    <ScrollView>
+    
         <Grid RowDefinitions="Auto, *, Auto, Auto, Auto"
           Padding="16"
           RowSpacing="16">
@@ -76,8 +76,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               VerticalOptions="Center">
 
             <GraphicsView x:Name="drawingView"
-                      WidthRequest="300"
-                      HeightRequest="300"
+                      WidthRequest="350"
+                      HeightRequest="350"
                       HorizontalOptions="Center"
                       VerticalOptions="Center"
                       BackgroundColor="Transparent">
@@ -145,7 +145,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
 
     </Grid>
-    </ScrollView>
+    
 
 
 </ContentPage>
