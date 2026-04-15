@@ -48,10 +48,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     Text="{Binding introMessage}"
                     VerticalOptions="Center" 
                     HorizontalTextAlignment="Center"
-                    FontSize="30"
+                    FontSize="25"
                     TextColor="Black"
                     FontAttributes="Bold"
-                    FontFamily="LineSeedBold"/>
+                    FontFamily="LineSeedBold"
+                    Margin="-20,0,0,0"/>
                 <!--Valittavat emoijit-->
                 <Frame
                     CornerRadius="10"

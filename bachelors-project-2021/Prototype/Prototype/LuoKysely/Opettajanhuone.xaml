@@ -122,10 +122,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <Grid x:Name="Overlay"
               Grid.Row="0"
-          IsVisible="False"
-          >
+              IsVisible="False"
+              >
 
-                <!-- OnBoarding kehikko -->
+            <!-- OnBoarding kehikko -->
             <Frame x:Name="OnBoardingBox"
                    
                    BackgroundColor="#ffe5d4"
@@ -136,7 +136,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    WidthRequest="300"
                    HasShadow="True"
                    >
-
+                <!--Tekstit onboardingissa-->
+                
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Ohjeet"
                            FontAttributes="Bold"
@@ -151,7 +152,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                            HorizontalOptions="Center" />
 
                     <Label
-                        Text="Voit tehdä kyselyitä, joihin vastataan valitsemalla tunnetilaa vastaava emojin. Vastaamisen jälkeen vastauksien perusteella äänestetään aktiviteetti."
+                        Text="Voit tehdä kyselyitä, joihin vastataan valitsemalla tunnetilaa vastaava emoji. Vastaamisen jälkeen vastauksien perusteella äänestetään aktiviteetti."
                         FontFamily="LineSeedRegular"
                         FontSize="16" />
 

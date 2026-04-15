@@ -4,6 +4,7 @@ Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Eemil Alamäki, Riina Kaipia
           2026 Matias Meriläinen, Mimosa Joenväärä, Aurora Kansanoja
+    
 This file is part of "Juttunurkka".
 
 Juttunurkka is free software: you can redistribute it and/or modify
@@ -159,18 +160,19 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     <Label
                         Text="Tässä valitaan emojit vastausvaihtoehdoiksi"
                         FontSize="16"
-                        FontFamily="LineSeedBold"/>
+                        FontFamily="LineSeedRegular"/>
 
                     <Label
                         Text="? -Emoji on oman emojin merkki. Sen valitessaan vastaaja saa piirtää oman emojinsa."
                         FontSize="16"
-                        FontFamily="LineSeedBold"/>
+                        FontFamily="LineSeedRegular"/>
 
                     <Button Text="Sulje"
                             Clicked="CloseOnBoardingClicked"
                             BackgroundColor="Transparent"
                             BorderColor="Transparent"
                             FontFamily="LineSeedBold"
+                            FontAttributes="Bold"
                             TextColor="Black"
                             CornerRadius="10" />
                 </VerticalStackLayout>
