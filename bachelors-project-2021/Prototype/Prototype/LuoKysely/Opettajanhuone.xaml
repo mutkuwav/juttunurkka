@@ -116,8 +116,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         WidthRequest="340"
                         Clicked="OnBoardingClicked" />
             </Grid>
+        </StackLayout>
 
-            <!-- OnBoarding kehikko -->
+        <!-- OnBoarding kehikko -->
             <Frame x:Name="OnBoardingBox"
                    IsVisible="False"
                    BackgroundColor="White"
@@ -152,7 +153,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 </VerticalStackLayout>
             </Frame>
 
-        </StackLayout>
 
     </Grid>
 </ContentPage>

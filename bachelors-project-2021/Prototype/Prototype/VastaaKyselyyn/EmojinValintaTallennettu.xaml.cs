@@ -95,6 +95,22 @@ namespace Prototype
         private async void Vastaa_Clicked(object sender, EventArgs e)
         {
             await Main.GetInstance().client.SendResult(answer.ToString());
+
+            // Try to fetch latest emoji results immediately so results page can show current counts
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(OnlineSession.Current.RoomId))
+                {
+                    var results = await Main.GetInstance().Api.GetEmojiResultsAsync(OnlineSession.Current.RoomId);
+                    OnlineSession.Current.EmojiResults = results;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Silently ignore; fallback to updating when results page appears
+                Console.WriteLine($"Failed to fetch emoji results after vote: {ex.Message}");
+            }
+
             await Navigation.PushAsync(new EmojiAnswered(answer));
         }
     }
