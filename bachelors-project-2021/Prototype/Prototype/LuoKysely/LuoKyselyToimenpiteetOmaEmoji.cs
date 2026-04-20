@@ -79,7 +79,7 @@ namespace Prototype
             {
                 if (individual.Name == "OmaEmoji")
                 {
-                    var activities = new List<Activity>(Const.activities[6]);
+                    var activities = new List<Activity>(Const.activities[7]);
                     activities.Add(new Activity { Title = "Luo oma vaihtoehto..." });
                     Items.Add(new CollectionItem(individual, activities));
                     break;

@@ -40,8 +40,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      Grid.Row="0">
 
             <!-- Otsikko ja hammasratas -->
-            <Grid RowDefinitions="*"
-                  >
+            <Grid RowDefinitions="*">
 
                 <Image Grid.Column="1"
                        Source="gear"
@@ -119,25 +118,21 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             </Grid>
         </StackLayout>
 
-
         <Grid x:Name="Overlay"
               Grid.Row="0"
-              IsVisible="False"
-              >
+              IsVisible="False">
 
             <!-- OnBoarding kehikko -->
             <Frame x:Name="OnBoardingBox"
-                   
                    BackgroundColor="#ffe5d4"
                    CornerRadius="10"
                    Padding="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    WidthRequest="300"
-                   HasShadow="True"
-                   >
+                   HasShadow="True">
+
                 <!--Tekstit onboardingissa-->
-                
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Ohjeet"
                            FontAttributes="Bold"
@@ -166,8 +161,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                             CornerRadius="10" />
                 </VerticalStackLayout>
             </Frame>
-            </Grid>
 
-        
+        </Grid>
+
     </Grid>
 </ContentPage>

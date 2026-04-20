@@ -48,7 +48,12 @@ namespace Prototype
         {
             base.OnAppearing();
             cts = new CancellationTokenSource();
+            // Immediately try to fetch current emoji results so the user sees up-to-date counts
+            _ = FetchInitialEmojiResultsAsync();
+
+            // Start background tasks to keep activity and emoji results updated in real time
             _ = WaitForActivityVoteAsync(cts.Token);
+            _ = WaitForEmojiUpdatesAsync(cts.Token);
         }
 
         protected override void OnDisappearing()
@@ -81,6 +86,57 @@ namespace Prototype
                     Amount = amount.ToString(),
                     Scale = height
                 });
+            }
+        }
+
+        private async Task FetchInitialEmojiResultsAsync()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(OnlineSession.Current.RoomId))
+                {
+                    var results = await Main.GetInstance().Api.GetEmojiResultsAsync(OnlineSession.Current.RoomId);
+                    OnlineSession.Current.EmojiResults = results;
+                    await MainThread.InvokeOnMainThreadAsync(() => ProcessEmojiResults());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"FetchInitialEmojiResultsAsync failed: {ex.Message}");
+            }
+        }
+
+        private async Task WaitForEmojiUpdatesAsync(CancellationToken token)
+        {
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    try
+                    {
+                        if (!string.IsNullOrWhiteSpace(OnlineSession.Current.RoomId))
+                        {
+                            var results = await Main.GetInstance().Api.GetEmojiResultsAsync(OnlineSession.Current.RoomId);
+                            OnlineSession.Current.EmojiResults = results;
+
+                            await MainThread.InvokeOnMainThreadAsync(() => ProcessEmojiResults());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // ignore individual fetch errors and continue polling
+                        Console.WriteLine($"WaitForEmojiUpdatesAsync fetch error: {ex.Message}");
+                    }
+
+                    await Task.Delay(1000, token);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"WaitForEmojiUpdatesAsync failed: {ex.Message}");
             }
         }
 
@@ -151,5 +207,8 @@ namespace Prototype
         public string Image { get; set; }
         public string Amount { get; set; }
         public int Scale { get; set; }
+
+        // XAML expects ScalePx binding for HeightRequest. Provide a computed property.
+        public double ScalePx => Scale;
     }
 }
