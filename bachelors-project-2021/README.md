@@ -39,8 +39,15 @@ public static string BaseUrl = "http://86.50.20.47:8080/";
 
 
 ## Kehittäminen
+Projektin client puolta kehitetään .NET MAUI -teknologialla käyttäen C#:ia ja XAML:ia.
+Projektin backend on toteutettu javalla. 
+
 
 ### Vaatimukset
+
+- Android SDK ja emulaattori TAI fyysinen Android-laite
+- Internet-yhteys
+- VM-serveri, jossa backend pyörii.
 
 ### Käynnistys
 
