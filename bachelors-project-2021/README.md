@@ -37,7 +37,6 @@ public static string BaseUrl = "http://86.50.20.47:8080/";
 ```
 
 
-
 ## Kehittäminen
 Projektin client puolta kehitetään .NET MAUI -teknologialla käyttäen C#:ia ja XAML:ia.
 Projektin backend on toteutettu javalla. 
@@ -49,8 +48,6 @@ Projektin backend on toteutettu javalla.
 - Internet-yhteys
 - VM-serveri, jossa backend pyörii.
 
-### Käynnistys
-
 
 ### Opettajan kirjautuminen (prototyyppi)
 
@@ -59,6 +56,7 @@ Opettajan sisäänkirjautumisessa käytetään kovakoodattuja tunnuksia:
 - Käyttäjätunnus: `opettaja`
 - Salasana: `opehuone`
 
+
 ## Tekijät
 
 - 2026 Lauri Romppainen, Elias Tupasela, Matias Meriläinen, Aurora Kansanoja, Mimosa Joenväärä
@@ -66,3 +64,35 @@ Opettajan sisäänkirjautumisessa käytetään kovakoodattuja tunnuksia:
 ## Lisenssi
 
 GNU General Public License v3.0 — katso [LICENSE](https://www.gnu.org/licenses/gpl-3.0.html)
+
+
+BACKEND README:
+
+Backend korvaa vanhan LAN-vain (UDP/TCP) -toteutuksen HTTP(S)-rajapinnalla, jotta opettaja ja oppilaat voivat käyttää sovellusta internetin yli (esim. CSC cPouta VM:llä).
+
+Päätoiminnot:
+
+Opettaja luo uuden “huoneen/istunnon” (room) ja asettaa kyselyn (intro + emoji-vaihtoehdot)
+Oppilaat liittyvät huoneeseen avainkoodilla ja äänestävät emojin (1 ääni / laite)
+Backend palauttaa emojituloslaskennan
+Opettaja käynnistää aktiviteettiäänestyksen, oppilaat äänestävät (1 ääni / laite)
+Oppilaat voivat ladata itse piirretyn emojin PNG-muodossa, ja opettaja voi nähdä listan + avata kuvat
+Tekniset speksit:
+
+Ohjelma on ns. "pure javaa", ilman ulkopuolisia kirjastoja
+com.sun.net.httpserver.HttpServer (Javan oma kevyt HTTP-palvelin)
+JSON käsitellään yksinkertaisella parsinnalla (JsonUtil)
+Testaus: curl + bash test.sh
+Palvelin käynnistyy osoitteeseen: http://localhost:8080
+
+Vaatimukset:
+
+Java JDK (testattu: Java 21)
+curl
+Windowsissa: Git Bash (test.sh:n ajamiseen)
+Ohjelman testaaminen: Avaa Command Prompt backend-kansiossa (missä Main.java on):
+
+javac --add-modules jdk.httpserver *.java
+java --add-modules jdk.httpserver -cp . Main
+Huom. Tarkemmat ohjeet test.sh luokan sisällä.
+
