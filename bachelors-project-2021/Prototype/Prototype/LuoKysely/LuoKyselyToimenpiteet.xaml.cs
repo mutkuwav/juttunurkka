@@ -77,7 +77,7 @@ namespace Prototype
 
         async void EdellinenButtonClicked(object sender, EventArgs e)
         {
-            var res = await DisplayAlert("Tahdotko varmasti keskeyttää kyselyn tekemisen?", "", "Kyllä", "Ei");
+            var res = await DisplayAlert("Tahdotko varmasti keskeyttää juttunurkan tekemisen?", "", "Kyllä", "Ei");
 
             if (res == true)
             {
@@ -124,7 +124,7 @@ namespace Prototype
             List<Emoji> tempEmojis = new List<Emoji>();
             foreach (var item in Items)
             {
-                List<Activity> tempActivities = [];
+                List<Activity> tempActivities = new List<Activity>();
                 foreach (var selection in item.Selected)
                 {
                     Console.WriteLine("Lisätään aktiviteetti:" +selection as string);

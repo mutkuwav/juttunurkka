@@ -105,9 +105,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 </CollectionView.ItemTemplate>
             </CollectionView>
         
-            <!--Sulje huone -nappi-->
+            <!--Sulje juttunurkka-nappi-->
             <Button Grid.Row="2"
-                    Text="SULJE HUONE"
+                    Text="SULJE JUTTUNURKKA"
                     Clicked="SuljeClicked"
                     BackgroundColor="#bfd3c1"
                     FontFamily="LineSeedBold"

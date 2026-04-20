@@ -21,7 +21,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:Prototype;assembly=Prototype"
             x:Class="Prototype.TabbedViewHost"
-            Title="Kyselyn tulokset"
+            Title="Juttunurkan tulokset"
             BarBackgroundColor="Silver"
             BarTextColor="Black">
     <local:YhteenVetoHost/>

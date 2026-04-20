@@ -41,7 +41,7 @@ This file is part of "Juttunurkka".
 
                 <!-- OTSIKKO keskitetty -->
                 <Label Grid.Column="1"
-                       Text="Tallennetut kyselyt"
+                       Text="Tallennetut juttunurkat"
                        FontSize="30"
                        FontFamily="LineSeedBold"
                        FontAttributes="Bold"
@@ -50,8 +50,8 @@ This file is part of "Juttunurkka".
                        Margin="0,-5,0,0"/>
             </Grid>
 
-            <!-- OLETUSKYSYLY -->
-            <Button Text="Oletuskysely"
+            <!-- OLETUSKYSELY -->
+            <Button Text="Oletus"
                     Clicked="OletusClicked"
                     TextColor="Black"
                     FontAttributes="Bold"
@@ -125,7 +125,7 @@ This file is part of "Juttunurkka".
 
             <!-- Poista kyselyitä -->
             <Button x:Name="DeleteButton"
-                    Text="Poista kyselyitä"
+                    Text="Poista juttunurkkia"
                     TextColor="Black"
                     FontAttributes="Bold"
                     FontFamily="LineSeedBold"

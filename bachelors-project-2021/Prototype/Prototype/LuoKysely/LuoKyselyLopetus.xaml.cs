@@ -65,7 +65,7 @@ namespace Prototype
             }
             else
             {
-                await DisplayAlert("Nimi puuttuu", "Sinun on asetettava kyselylle nimi", "OK");
+                await DisplayAlert("Nimi puuttuu", "Sinun on asetettava juttunurkalle nimi", "OK");
             }
         }
 

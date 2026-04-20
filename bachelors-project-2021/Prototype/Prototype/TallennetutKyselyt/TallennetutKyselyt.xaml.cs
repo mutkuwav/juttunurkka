@@ -125,7 +125,7 @@ namespace Prototype
 
             if (_selectedForDeletion.Count == 0)
             {
-                await DisplayAlert("Ei valintaa", "Valitse ainakin yksi poistettava kysely.", "OK");
+                await DisplayAlert("Ei valintaa", "Valitse ainakin yksi poistettava juttunurkka.", "OK");
                 return;
             }
 
