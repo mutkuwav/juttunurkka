@@ -87,7 +87,7 @@ namespace Prototype
 
         async void KeskeytäClicked(object sender, EventArgs e)
         {
-            bool ok = await DisplayAlert("Haluatko varmasti sulkea huoneen?", "", "Kyllä", "Ei");
+            bool ok = await DisplayAlert("Haluatko varmasti sulkea juttunurkan?", "", "Kyllä", "Ei");
             if (!ok) return;
 
             await Navigation.PopToRootAsync();

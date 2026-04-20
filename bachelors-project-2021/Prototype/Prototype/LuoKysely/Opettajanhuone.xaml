@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Eemil Alamäki
-          2026 Mimosa Joenväärä
+          2026 Mimosa Joenväärä, Aurora Kansanoja
 
 This file is part of "Juttunurkka".
 
@@ -24,7 +24,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.Opettajanhuone"
              Title="Juttunurkka">
 
-    <Grid>
+    <Grid RowDefinitions="*">
 
         <!-- TAUSTAKUVA -->
         <Image
@@ -36,11 +36,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <!-- SISÄLTÖ -->
         <StackLayout VerticalOptions="FillAndExpand"
                      Spacing="50"
-                     Padding="0,100,0,0">
+                     Padding="0,100,0,0"
+                     Grid.Row="0">
 
             <!-- Otsikko ja hammasratas -->
-            <Grid RowDefinitions="Auto, Auto"
-                  ColumnDefinitions="Auto, Auto">
+            <Grid RowDefinitions="*">
 
                 <Image Grid.Column="1"
                        Source="gear"
@@ -118,41 +118,51 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             </Grid>
         </StackLayout>
 
-        <!-- OnBoarding kehikko -->
+        <Grid x:Name="Overlay"
+              Grid.Row="0"
+              IsVisible="False">
+
+            <!-- OnBoarding kehikko -->
             <Frame x:Name="OnBoardingBox"
-                   IsVisible="False"
-                   BackgroundColor="White"
-                   CornerRadius="15"
+                   BackgroundColor="#ffe5d4"
+                   CornerRadius="10"
                    Padding="20"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    WidthRequest="300"
                    HasShadow="True">
 
+                <!--Tekstit onboardingissa-->
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Ohjeet"
                            FontAttributes="Bold"
+                           FontFamily="LineSeedBold"
                            FontSize="24"
                            HorizontalOptions="Center" />
 
                     <Label Text="Perusidea"
                            FontAttributes="Bold"
+                           FontFamily="LineSeedBold"
                            FontSize="18"
                            HorizontalOptions="Center" />
 
                     <Label
-                        Text="Voit tehdä kyselyitä oppilaille, joihin he vastaavat valitsemalla tunnetilaansa vastaavan emojin. Tämän jälkeen vastauksien perusteella äänestetään aktiviteetti luokalle."
+                        Text="Voit tehdä kyselyitä, joihin vastataan valitsemalla tunnetilaa vastaava emoji. Vastaamisen jälkeen vastauksien perusteella äänestetään aktiviteetti."
+                        FontFamily="LineSeedRegular"
                         FontSize="16" />
 
                     <Button Text="Sulje"
                             Clicked="CloseOnBoardingClicked"
                             FontFamily="LineSeedRegular"
-                            BackgroundColor="#f6c68a"
+                            FontAttributes="Bold"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
                             TextColor="Black"
                             CornerRadius="10" />
                 </VerticalStackLayout>
             </Frame>
 
+        </Grid>
 
     </Grid>
 </ContentPage>

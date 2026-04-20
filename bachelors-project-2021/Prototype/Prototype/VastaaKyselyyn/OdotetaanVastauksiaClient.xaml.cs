@@ -105,7 +105,7 @@ namespace Prototype
 
         private async void Poistu(object sender, EventArgs e)
         {
-            var res = await DisplayAlert("Oletko varma että tahdot poistua kyselystä?", "", "Kyllä", "Ei");
+            var res = await DisplayAlert("Oletko varma että tahdot poistua juttunurkasta?", "", "Kyllä", "Ei");
 
             if (res)
             {
