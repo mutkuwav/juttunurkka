@@ -2,6 +2,7 @@
 using Microsoft.Maui.Graphics;
 using Prototype;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Net.Http.Headers;
 
 namespace Prototype;
@@ -232,8 +233,8 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
         //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
         if (progressBar.Progress == 0)
         {
-            await Main.GetInstance().host.CloseSurvey();
-            await Navigation.PushAsync(new LisätiedotHost());
+            await SaveDrawingAsync(navigateAfterSave: false);
+            await Navigation.PushAsync(new EmojiAnswered(7, savedImageBytes));
         }
 
     }
@@ -265,8 +266,43 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
             }
         }
     }
-    
-    
+
+
+    private async Task SaveDrawingAsync(bool navigateAfterSave)
+    {
+        if (lines.Count == 0 || currentLine != null)
+            return;
+
+        try
+        {
+            var screenshotResult = await drawingView.CaptureAsync();
+            if (screenshotResult == null)
+                return;
+
+            using var stream = new MemoryStream();
+            await screenshotResult.CopyToAsync(stream);
+            savedImageBytes = stream.ToArray();
+
+            await UploadEmojiAsync(savedImageBytes);
+
+            await Main.GetInstance().Api.SubmitEmojiVoteAsync(
+                OnlineSession.Current.RoomId,
+                OnlineSession.Current.DeviceId,
+                7);
+
+            if (navigateAfterSave)
+            {
+                await Navigation.PushAsync(new EmojiAnswered(7, savedImageBytes));
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Auto-save failed: " + ex.Message);
+        }
+    }
+
+
+
     /*
     public byte[]? getDrawingAsImage()
     {
