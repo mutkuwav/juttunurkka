@@ -27,8 +27,9 @@ namespace Prototype
 
         protected override void OnDisappearing()
         {
-            cts?.Cancel();
+           
             base.OnDisappearing();
+            cts?.Cancel();
         }
 
         private async Task PollSurveyStartAsync(CancellationToken token)

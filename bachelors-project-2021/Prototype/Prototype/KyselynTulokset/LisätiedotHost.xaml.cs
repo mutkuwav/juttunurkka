@@ -78,13 +78,16 @@ namespace Prototype
                 };
 
 
-                
+
                 // jos kyseessä on "piirrä oma" emoji (id 7), lisätään piirretyt kuvat tämän palkin alle
                 if (kv.Key == 7)
                 {
-                    foreach (var url in drawnEmojiUrls)
+                    foreach (var drawn in drawnEmojiUrls)
                     {
-                       // item.DrawnImages.Add(url);
+                        if (!string.IsNullOrWhiteSpace(drawn.ImageUrl))
+                        {
+                            item.DrawnImages.Add(drawn.ImageUrl);
+                        }
                     }
                 }
 

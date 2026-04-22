@@ -57,9 +57,9 @@ namespace Prototype
         }
 
         protected override void OnDisappearing()
-        {
-            cts?.Cancel();
+        {  
             base.OnDisappearing();
+            cts?.Cancel();
         }
 
         public void ProcessEmojiResults()

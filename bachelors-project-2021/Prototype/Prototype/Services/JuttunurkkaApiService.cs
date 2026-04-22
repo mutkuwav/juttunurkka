@@ -164,27 +164,26 @@ namespace Prototype.Services
 
         public async Task<List<DrawnEmojiItem>> GetDrawnEmojiResultsAsync(string roomId)
         {
-            using var client = new HttpClient();
-
-            string url = $"{baseUrl}/rooms/{roomId}/drawn-emoji-results";
-
-            var response = await client.GetAsync(url);
+            var response = await httpClient.GetAsync($"rooms/{roomId}/drawn-emoji-results");
 
             if (!response.IsSuccessStatusCode)
                 return new List<DrawnEmojiItem>();
 
             var json = await response.Content.ReadAsStringAsync();
-
-            var doc = System.Text.Json.JsonDocument.Parse(json);
+            using var doc = JsonDocument.Parse(json);
 
             var list = new List<DrawnEmojiItem>();
 
             foreach (var item in doc.RootElement.GetProperty("items").EnumerateArray())
             {
+                var relativeUrl = item.GetProperty("imageUrl").GetString() ?? string.Empty;
+
                 list.Add(new DrawnEmojiItem
                 {
-                    DeviceId = item.GetProperty("deviceId").GetString(),
-                    ImageUrl = item.GetProperty("imageUrl").GetString()
+                    DeviceId = item.GetProperty("deviceId").GetString() ?? string.Empty,
+                    ImageUrl = relativeUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase)
+                        ? relativeUrl
+                        : $"{ApiConfig.BaseUrl.TrimEnd('/')}{relativeUrl}"
                 });
             }
 

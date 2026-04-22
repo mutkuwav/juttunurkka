@@ -146,31 +146,28 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
 
             if (screenshotResult == null)
             {
-                await DisplayAlert("Error", "Virhe kuvan tallennuksessa", "OK");
+                await DisplayAlert("Virhe", "Kuvan tallennus epäonnistui.", "OK");
                 return;
             }
 
             using var stream = new MemoryStream();
             await screenshotResult.CopyToAsync(stream);
-
             savedImageBytes = stream.ToArray();
 
-            //lisätty, hoitaa piirroksen backend classiin EmojiUploadHandler.java
             await UploadEmojiAsync(savedImageBytes);
 
             await Main.GetInstance().Api.SubmitEmojiVoteAsync(
-                OnlineSession.Current.RoomId, OnlineSession.Current.DeviceId, 7);
+                OnlineSession.Current.RoomId,
+                OnlineSession.Current.DeviceId,
+                7);
 
             await DisplayAlert("Tallennettu", "Emoji lähetetty opettajalle", "OK");
-
             await Navigation.PushAsync(new EmojiAnswered(7, savedImageBytes));
-
         }
         catch (Exception ex)
         {
             await DisplayAlert("Virhe tallennuksessa", ex.Message, "OK");
         }
-
     }
 
     //hoitaa oman emojin pilveen
@@ -178,8 +175,7 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
     {
         using var client = new HttpClient();
 
-        // vaihda tähän "10.0.2.2:8080" local testausta vasrten
-        string url = "http://86.50.20.47:8080/emoji-upload";
+        string url = $"{ApiConfig.BaseUrl.TrimEnd('/')}/emoji-upload";
 
         using var content = new ByteArrayContent(imageBytes);
         content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
@@ -187,11 +183,10 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
         using var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Content = content;
 
-        
-        var response = await client.SendAsync(request);
-
         request.Headers.Add("X-Room-Id", OnlineSession.Current.RoomId);
         request.Headers.Add("X-Device-Id", OnlineSession.Current.DeviceId);
+
+        var response = await client.SendAsync(request);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -247,6 +242,7 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
     async protected override void OnDisappearing()
     {
         base.OnDisappearing();
+        cts?.Cancel();
 
     // varmistus, että piirustus tallentuu
         if (savedImageBytes == null && lines.Count > 0)
