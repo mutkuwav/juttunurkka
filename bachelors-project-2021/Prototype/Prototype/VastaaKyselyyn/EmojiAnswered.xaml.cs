@@ -1,5 +1,6 @@
 ﻿/*
 Copyright 2025 Riina Kaipia
+2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -29,7 +30,7 @@ namespace Prototype
         public ImageSource EmojiImageSource { get; set; }
 
         private readonly int _selectedEmojiId;
-        private readonly int _remainingTime = 5;
+        private readonly int _remainingTime = 7;
 
         public EmojiAnswered(int selectedEmojiId, byte[]? drawnEmojiBytes = null)
         { 

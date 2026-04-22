@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.OdotetaanKyselynAloitustaClient"
+             Title="Juttunurkka"
+             BackgroundColor="#ffea7f">
+
+    <StackLayout Padding="0,80,0,0" Spacing="25" VerticalOptions="FillAndExpand">
+
+        <Label 
+            Text="Odotetaan muita osallistujia"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="30"
+            TextColor="Black" 
+            Margin="0,20,0,0"/>
+
+        <StackLayout Spacing="40" HorizontalOptions="Center">
+            <Label Text="Opettaja ei ole vielä aloittanut kyselyä"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Text="Odota hetki..."
+                   FontSize="20"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+
+        
+
+    </StackLayout>
+</ContentPage>

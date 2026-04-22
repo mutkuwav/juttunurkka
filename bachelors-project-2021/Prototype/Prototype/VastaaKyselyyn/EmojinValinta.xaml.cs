@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Riina Kaipia
+          2026 Matias Meriläinen
 
 This file is part of "Juttunurkka".
 
@@ -139,6 +140,11 @@ namespace Prototype
             try
             {
                 cts?.Cancel();
+
+                if (answer == 7)
+                {   await Navigation.PushAsync(new OmanEmojinPiirto());
+                    return;
+                }
 
                 await Main.GetInstance().Api.SubmitEmojiVoteAsync(
                     OnlineSession.Current.RoomId,

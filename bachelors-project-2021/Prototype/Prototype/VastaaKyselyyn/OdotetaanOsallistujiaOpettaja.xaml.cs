@@ -115,7 +115,21 @@ namespace Prototype
 
         private async void AloitaButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new OdotetaanVastauksiaOpe());
+            try
+            {
+                var survey = SurveyManager.GetInstance().GetSurvey();
+
+                await Main.GetInstance().Api.PublishSurveyAsync(
+                    OnlineSession.Current.RoomId,
+                    survey);
+
+                await Navigation.PushAsync(new OdotetaanVastauksiaOpe());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Survey publish failed: {ex.Message}");
+                await DisplayAlert("Virhe", "Kyselyn aloitus epäonnistui.", "OK");
+            }
         }
 
         private async void KeskeytaButtonClicked(object sender, EventArgs e)

@@ -39,31 +39,35 @@ namespace Prototype
 
         private async void LukkoImage_Tapped(object sender, EventArgs e)
         {
-            if (isProcessing) return; // Estetään tapahtuman toistuminen nopeasti
-            isProcessing = true; // Merkitään, että käsittely on käynnissä
+            if (isProcessing) return;
+            isProcessing = true;
 
-            // Lukitus napautettu, suoritetaan avainkoodin tarkistus
             if (entry != null && !string.IsNullOrEmpty(entry.Text) && await Main.GetInstance().JoinSurvey(entry.Text))
             {
-                // Näytetään avainkoodin oikeellisuusnäkymä
                 var oikeaAvainkoodiPage = new AvainkoodiOikein();
                 await Navigation.PushAsync(oikeaAvainkoodiPage);
 
-                // Odotetaan 2 sekuntia ja suljetaan näkymä
                 await Task.Delay(2000);
                 await Navigation.PopAsync();
 
-                // Siirrytään seuraavaan näkymään
-                await Navigation.PushAsync(new EmojinValinta());
-                entry.Text = null; // Tyhjennetään kenttä
+                if (string.IsNullOrWhiteSpace(OnlineSession.Current.IntroMessage) || OnlineSession.Current.Emojis.Count == 0)
+                {
+                    await Navigation.PushAsync(new OdotetaanKyselynAloitustaClient());
+                }
+                else
+                {
+                    await Navigation.PushAsync(new EmojinValinta());
+                }
+
+                entry.Text = null;
             }
             else
             {
                 await DisplayAlert("Virheellinen avainkoodi", "Syöttämälläsi avainkoodilla ei löydy avointa kyselyä", "OK");
-                entry.Text = null; // Tyhjennetään kenttä virheen jälkeen
+                entry.Text = null;
             }
 
-            isProcessing = false; // Vapaa käsittelyyn seuraavalla kerralla
+            isProcessing = false;
         }
 
         //Device back button disabled

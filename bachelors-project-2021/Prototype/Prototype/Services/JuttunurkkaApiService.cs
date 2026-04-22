@@ -12,7 +12,9 @@ namespace Prototype.Services
     public class JuttunurkkaApiService
     {
         private readonly HttpClient httpClient;
+        private readonly string baseUrl = "http://86.50.20.47:8080/";
         private readonly JsonSerializerOptions jsonOptions = new()
+        
         {
             PropertyNameCaseInsensitive = true
         };
@@ -160,6 +162,44 @@ namespace Prototype.Services
             return raw ?? new Dictionary<string, int>();
         }
 
+        public async Task<List<DrawnEmojiItem>> GetDrawnEmojiResultsAsync(string roomId)
+        {
+            using var client = new HttpClient();
+
+            string url = $"{baseUrl}/rooms/{roomId}/drawn-emoji-results";
+
+            var response = await client.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                return new List<DrawnEmojiItem>();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var doc = System.Text.Json.JsonDocument.Parse(json);
+
+            var list = new List<DrawnEmojiItem>();
+
+            foreach (var item in doc.RootElement.GetProperty("items").EnumerateArray())
+            {
+                list.Add(new DrawnEmojiItem
+                {
+                    DeviceId = item.GetProperty("deviceId").GetString(),
+                    ImageUrl = item.GetProperty("imageUrl").GetString()
+                });
+            }
+
+            return list;
+        }
+
+        public async Task<JoinRoomResponse> GetSurveyStateAsync(string roomId)
+        {
+            var response = await httpClient.GetAsync($"rooms/{roomId}/survey");
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadFromJsonAsync<JoinRoomResponse>(jsonOptions);
+            return result ?? throw new Exception("Survey state response was empty.");
+        }
+
         public class CreateRoomResponse
         {
             [JsonPropertyName("roomId")]
@@ -173,6 +213,9 @@ namespace Prototype.Services
         {
             [JsonPropertyName("roomId")]
             public string RoomId { get; set; }
+
+            [JsonPropertyName("surveyReady")]
+            public bool SurveyReady { get; set; }
 
             [JsonPropertyName("introMessage")]
             public string IntroMessage { get; set; }
@@ -234,5 +277,12 @@ namespace Prototype.Services
             [JsonPropertyName("activities")]
             public List<ActivityDto> Activities { get; set; } = new();
         }
+        public class DrawnEmojiItem
+        {
+            public string DeviceId { get; set; }
+            public string ImageUrl { get; set; }
+        }
     }
+
+
 }

@@ -37,6 +37,9 @@
 		<MauiXaml Update="LuoKysely\LuoOmaVaihtoehto.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="OdotetaanKyselynAloitustaClient.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="VastaaKyselyyn\EmojiAnswered.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

@@ -36,11 +36,13 @@ namespace Prototype
             InitializeComponent();
             Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = this;
-            LoadHostEmojiResults();
+            _ = LoadHostEmojiResultsAsync();
         }
 
-        private void LoadHostEmojiResults()
+        private async Task LoadHostEmojiResultsAsync()
         {
+            Results.Clear();
+
             var emojiMap = OnlineSession.Current.Emojis.ToDictionary(e => e.ID, e => e);
 
             var raw = OnlineSession.Current.EmojiResults
@@ -53,6 +55,9 @@ namespace Prototype
 
             var barColors = new[] { Colors.Blue, Colors.Red, Colors.Green, Colors.Orange, Colors.Purple, Colors.Teal, Colors.Gray };
 
+            // haetaan piirretyt emojit backendistä
+            var drawnEmojiUrls = await Main.GetInstance().Api.GetDrawnEmojiResultsAsync(OnlineSession.Current.RoomId);
+
             for (int i = 0; i < raw.Count; i++)
             {
                 var kv = raw[i];
@@ -63,14 +68,27 @@ namespace Prototype
                 double rawHeight = (kv.Value / maxCount) * maxBarHeight;
                 double heightPx = Math.Max(rawHeight, minBarHeight);
 
-                Results.Add(new HostResultItem
+                var item = new HostResultItem
                 {
                     Image = image,
                     Title = title,
                     Amount = kv.Value.ToString(),
                     ScalePx = heightPx,
                     Color = barColors.Length > i ? barColors[i] : Colors.Gray
-                });
+                };
+
+
+                
+                // jos kyseessä on "piirrä oma" emoji (id 7), lisätään piirretyt kuvat tämän palkin alle
+                if (kv.Key == 7)
+                {
+                    foreach (var url in drawnEmojiUrls)
+                    {
+                       // item.DrawnImages.Add(url);
+                    }
+                }
+
+                Results.Add(item);
             }
         }
 
@@ -126,5 +144,8 @@ namespace Prototype
         public string Amount { get; set; }
         public double ScalePx { get; set; }
         public Color Color { get; set; }
+
+        // tähän listaan tulee piirrettyjen emojien kuvat id:lle 7
+        public ObservableCollection<string> DrawnImages { get; set; } = new();
     }
 }

@@ -57,8 +57,17 @@ namespace Prototype
                 OnlineSession.Current.ResetSessionData();
                 OnlineSession.Current.RoomId = result.RoomId;
                 OnlineSession.Current.RoomCode = roomCode;
-                OnlineSession.Current.IntroMessage = result.IntroMessage;
-                OnlineSession.Current.Emojis = MapServerEmojis(result.Emojis);
+
+                if (result.SurveyReady)
+                {
+                    OnlineSession.Current.IntroMessage = result.IntroMessage;
+                    OnlineSession.Current.Emojis = MapServerEmojis(result.Emojis);
+                }
+                else
+                {
+                    OnlineSession.Current.IntroMessage = string.Empty;
+                    OnlineSession.Current.Emojis = new List<Emoji>();
+                }
 
                 state = MainState.Participating;
                 return true;
@@ -77,7 +86,6 @@ namespace Prototype
                 var survey = SurveyManager.GetInstance().GetSurvey();
 
                 var room = await Api.CreateRoomAsync();
-                await Api.PublishSurveyAsync(room.RoomId, survey);
 
                 OnlineSession.Current.ResetSessionData();
                 OnlineSession.Current.RoomId = room.RoomId;

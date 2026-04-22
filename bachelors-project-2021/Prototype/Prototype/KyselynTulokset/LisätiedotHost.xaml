@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Joni Lapinkoski
-    2026 Matias Meriläinen
+          2026 Matias Meriläinen
 This file is part of "Juttunurkka".
 Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -42,20 +41,28 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 HorizontalOptions="Center"
                 Margin="0,0,0,20">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"/>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout
-                            WidthRequest="100"
+                            WidthRequest="130"
                             VerticalOptions="EndAndExpand"
                             HorizontalOptions="Center"
-                            Spacing="0">
+                            Spacing="8">
 
                             <Image
                                 Source="{Binding Image}"
                                 HeightRequest="80"
                                 HorizontalOptions="Center"/>
+
+                            <Label
+                                Text="{Binding Title}"
+                                FontSize="14"
+                                HorizontalTextAlignment="Center"
+                                TextColor="Black"
+                                LineBreakMode="WordWrap"/>
 
                             <Grid
                                 HeightRequest="200"
@@ -82,8 +89,38 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                 HeightRequest="8"
                                 BackgroundColor="#C381FD"
                                 VerticalOptions="End"
-                                Margin="0,0,0,25"
+                                Margin="0,0,0,8"
                                 HorizontalOptions="FillAndExpand"/>
+
+                            <!-- tähän tulee lista piirretyistä emojeista "draw your own" palkin alle -->
+                            <CollectionView
+                                ItemsSource="{Binding DrawnImages}"
+                                VerticalOptions="Start"
+                                HeightRequest="180"
+                                IsVisible="{Binding DrawnImages.Count}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="6"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame
+                                            Padding="4"
+                                            Margin="0"
+                                            HasShadow="False"
+                                            BorderColor="Black"
+                                            BackgroundColor="White"
+                                            CornerRadius="8">
+                                            <Image
+                                                Source="{Binding .}"
+                                                HeightRequest="60"
+                                                WidthRequest="60"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Center"/>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -121,8 +158,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     WidthRequest="150"
                     BorderColor="Transparent"
                     BorderWidth="0"/>
-
             </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
