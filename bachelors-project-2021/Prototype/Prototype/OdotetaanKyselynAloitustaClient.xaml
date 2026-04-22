@@ -2,35 +2,53 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.OdotetaanKyselynAloitustaClient"
-             Title="Juttunurkka"
-             BackgroundColor="#ffea7f">
+			 NavigationPage.HasNavigationBar="False"
+             Title="Juttunurkka">
 
-    <StackLayout Padding="0,80,0,0" Spacing="25" VerticalOptions="FillAndExpand">
+	<ContentPage.Content>
+		<AbsoluteLayout HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Padding="0">
 
-        <Label 
-            Text="Odotetaan muita osallistujia"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"
-            FontAttributes="Bold"
-            FontSize="30"
-            TextColor="Black" 
-            Margin="0,20,0,0"/>
+			<Image Source="background3.png"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                   AbsoluteLayout.LayoutFlags="All" />
 
-        <StackLayout Spacing="40" HorizontalOptions="Center">
-            <Label Text="Opettaja ei ole vielä aloittanut kyselyä"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   TextColor="Black"
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center" />
+			<StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Fill"
+                         Padding="30,0,30,0"
+                         Spacing="30">
 
-            <Label Text="Odota hetki..."
-                   FontSize="20"
-                   TextColor="Black"
-                   HorizontalOptions="Center" />
-        </StackLayout>
+				<Label Text="Odotetaan muita osallistujia"
+                       FontSize="40"
+                       FontAttributes="Bold"
+                       FontFamily="LineSeedBold"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center" />
 
-        
+				<Label Text="Opettaja ei ole vielä aloittanut kyselyä"
+                       FontSize="24"
+                       FontFamily="LineSeedBold"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center" />
 
-    </StackLayout>
+				<Label Text="Odota hetki..."
+                       FontSize="18"
+                       FontFamily="LineSeedRegular"
+                       TextColor="Black"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center" />
+
+				
+			</StackLayout>
+
+		</AbsoluteLayout>
+	</ContentPage.Content>
 </ContentPage>
