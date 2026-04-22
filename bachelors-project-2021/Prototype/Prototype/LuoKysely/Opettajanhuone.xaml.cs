@@ -53,7 +53,7 @@ namespace Prototype
 
             if (!Preferences.Get(onBoardingShownKey, false))
             {
-                OnBoardingBox.IsVisible = true;
+                Overlay.IsVisible = true;
 
                 Preferences.Set(onBoardingShownKey, true);
             }
