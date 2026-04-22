@@ -243,16 +243,33 @@ public partial class OmanEmojinPiirto : ContentPage, IDrawable
 
     }
 
-    /*
-    protected override void OnDisappearing()
+    
+    async protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        if (savedImageBytes != null)
+
+    // varmistus, että piirustus tallentuu
+        if (savedImageBytes == null && lines.Count > 0)
         {
-            App.LastSavedDrawing = savedImageBytes;
+            try
+            {
+                var screenshotResult = await drawingView.CaptureAsync();
+                if (screenshotResult != null)
+                {
+                    using var stream = new MemoryStream();
+                    await screenshotResult.CopyToAsync(stream);
+                    savedImageBytes = stream.ToArray();
+
+                    await Navigation.PushAsync(new EmojiAnswered(7, savedImageBytes));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to auto-save drawing: " + ex.Message);
+            }
         }
     }
-    */
+    
     
     /*
     public byte[]? getDrawingAsImage()

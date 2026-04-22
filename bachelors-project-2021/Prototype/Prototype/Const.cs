@@ -40,7 +40,7 @@ namespace Prototype
 		public static Dictionary<int, List<Activity>> activities = new Dictionary<int, List<Activity>>() {
             { 0, new List<Activity>()
 			  {
-				  new() { Title = "Jokainen kertoo mikä on kivaa", ImageSource = "thumbsUp.png" },
+				  new() { Title = "Jokainen kertoo mikä on kivaa", ImageSource = "thumbs_up.png" },
 				  new() { Title = "Kehu vieressä istuvaa", ImageSource = "compliment.png" },
 				  new() { Title = "Valitaan päivän apuope", ImageSource = "teacher.png" }
 			  }
@@ -74,9 +74,9 @@ namespace Prototype
             }},
 
             { 7, new List<Activity>() {
-                new() { Title = "Kerrotaan tarina", ImageSource = "thought.png" },
-                new() { Title = "Katsotaan video", ImageSource = "video.png" },
-                new() { Title = "Kerrotaan vitsi", ImageSource = "joke.png" },
+                new() { Title = "Piirretään tunne paperille", ImageSource = "draw.png" },
+                new() { Title = "Jaetaan ajatuksia luokalle", ImageSource = "telltought.png" },
+                new() { Title = "Jaetaan tarinoita pöytäryhmittäin", ImageSource = "thought.png" },
             }}
         };
 	

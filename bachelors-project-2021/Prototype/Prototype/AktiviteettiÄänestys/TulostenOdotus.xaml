@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen
-    2026 Matias Meriläinen
+          2026 Matias Meriläinen, Mimosa Joenväärä
 
 This file is part of "Juttunurkka".
 
@@ -22,86 +22,115 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.TulostenOdotus"
-             Title="Juttunurkka"
-             BackgroundColor="#ffea7f">
-    
-    <ContentPage.Content>
-        <StackLayout>
-            <Label 
+             Title="Juttunurkka">
+
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Padding="0">
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
+
+        <StackLayout
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+
+            <Label
                 Text="Juttunurkka 2/2"
-                VerticalOptions="StartAndExpand" 
+                VerticalOptions="StartAndExpand"
                 HorizontalOptions="CenterAndExpand"
                 HorizontalTextAlignment="Center"
                 FontAttributes="Bold"
+                FontFamily="LineSeedBold"
                 FontSize="30"
                 TextColor="Black"
-                Margin="0,80,0,0"/>
+                Margin="0,10,0,0"/>
 
             <Grid Padding="50,0,70,20"
                   RowSpacing="20"
                   ColumnSpacing="20"
                   ColumnDefinitions="Auto, *"
-                  RowDefinitions="Auto, Auto, Auto">
+                  RowDefinitions="Auto, Auto, Auto, Auto">
 
                 <Label Text="Avainkoodi:"
                        FontSize="25"
                        TextColor="Black"
-                       Grid.Row="0" Grid.Column="0" />
+                       FontFamily="LineSeedRegular"
+                       Grid.Row="0"
+                       Grid.Column="0" />
 
                 <Label Text="{Binding RoomCode}"
                        FontSize="25"
                        TextColor="Black"
-                       Grid.Row="0" Grid.Column="1"
+                       FontFamily="LineSeedRegular"
+                       Grid.Row="0"
+                       Grid.Column="1"
                        HorizontalTextAlignment="End"/>
 
                 <Label Text="Osallistujia:"
                        FontSize="25"
                        TextColor="Black"
-                       Grid.Row="1" Grid.Column="0" />
+                       FontFamily="LineSeedRegular"
+                       Grid.Row="1"
+                       Grid.Column="0" />
 
                 <Label Text="{Binding ParticipantsCount}"
                        FontSize="25"
                        TextColor="Black"
-                       Grid.Row="1" Grid.Column="1" 
+                       FontFamily="LineSeedRegular"
+                       Grid.Row="1"
+                       Grid.Column="1"
                        HorizontalTextAlignment="End"/>
 
                 <Label Text="Vastanneita:"
                        FontSize="25"
                        TextColor="Black"
-                       Grid.Row="2" Grid.Column="0" />
+                       FontFamily="LineSeedRegular"
+                       Grid.Row="2"
+                       Grid.Column="0" />
 
                 <Label Text="{Binding AnswerCount}"
                        FontSize="25"
                        TextColor="Black"
-                       Grid.Row="2" Grid.Column="1" 
+                       FontFamily="LineSeedRegular"
+                       Grid.Row="2"
+                       Grid.Column="1"
                        HorizontalTextAlignment="End"/>
             </Grid>
-
 
             <StackLayout
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
                 Margin="0,50,0,0"
                 Spacing="10">
+
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label
-                    Text="Aikaa jäljellä:"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start"
-                    FontAttributes="Bold"
-                    FontSize="25"
-                    TextColor="Black"/>
+                        Text="Aikaa jäljellä:"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        FontAttributes="Bold"
+                        FontFamily="LineSeedBold"
+                        FontSize="25"
+                        TextColor="Black"/>
 
                     <Label
-                    x:Name="countdownLabel"
-                    Text="{Binding TimeLeft}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Start"
-                    FontSize="25"
-                    FontAttributes="Bold"
-                    TextColor="Black"
-                    Margin="50,0,0,0"
-                />
+                        x:Name="countdownLabel"
+                        Text="{Binding TimeLeft}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        FontFamily="LineSeedBold"
+                        TextColor="Black"
+                        Margin="50,0,0,0"/>
                 </StackLayout>
 
                 <ProgressBar x:Name="progressBar"
@@ -110,16 +139,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                              HorizontalOptions="CenterAndExpand"
                              WidthRequest="300"
                              ScaleY="15"
-                             ProgressColor="#feba4e"
+                             ProgressColor="#f6c68a"
                              Margin="0,25,0,0"/>
             </StackLayout>
 
             <Button Text="Lopeta ja siirry&#10; tuloksiin"
                     x:Name="GoToResults"
-                    VerticalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
                     FontAttributes="Bold"
-                    BackgroundColor="#feba4e"
+                    BackgroundColor="#bfd3c1"
+                    FontFamily="LineSeedBold"
                     TextColor="Black"
                     FontSize="20"
                     CornerRadius="10"
@@ -128,9 +158,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     WidthRequest="270"
                     Clicked="GoToResultsClicked"
                     Margin="0,60,0,30"
-                    LineBreakMode="WordWrap"
-                    />
-
+                    LineBreakMode="WordWrap"/>
         </StackLayout>
-    </ContentPage.Content>
+    </AbsoluteLayout>
 </ContentPage>

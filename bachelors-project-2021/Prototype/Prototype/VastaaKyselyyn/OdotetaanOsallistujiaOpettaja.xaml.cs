@@ -29,7 +29,7 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdotetaanOsallistujiaOpettaja : ContentPage, System.ComponentModel.INotifyPropertyChanged
     {
-        private string roomCode = "Luodaan huonetta...";
+        private string roomCode = "Luodaan juttunurkkaa...";
         public string RoomCode
         {
             get => roomCode;
@@ -73,7 +73,7 @@ namespace Prototype
             var ok = await Main.GetInstance().HostSurvey();
             if (!ok)
             {
-                await DisplayAlert("Virhe", "Huoneen luominen epäonnistui.", "OK");
+                await DisplayAlert("Virhe", "Juttunurkan luominen epäonnistui.", "OK");
                 await Navigation.PopToRootAsync();
                 return;
             }
@@ -134,7 +134,7 @@ namespace Prototype
 
         private async void KeskeytaButtonClicked(object sender, EventArgs e)
         {
-            var res = await DisplayAlert("Oletko varma että tahdot keskeyttää kyselyn?", "", "Kyllä", "Ei");
+            var res = await DisplayAlert("Oletko varma että tahdot keskeyttää juttunurkan?", "", "Kyllä", "Ei");
             if (!res) return;
 
             try

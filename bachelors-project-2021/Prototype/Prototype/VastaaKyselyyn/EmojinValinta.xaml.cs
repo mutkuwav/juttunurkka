@@ -1,4 +1,3 @@
-﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
@@ -151,7 +150,14 @@ namespace Prototype
                     OnlineSession.Current.DeviceId,
                     answer);
 
-                await Navigation.PushAsync(new EmojiAnswered(answer));
+                if (answer == 7)
+                {
+                    await Navigation.PushAsync(new OmanEmojinPiirto());
+                }
+                else
+                {
+                    await Navigation.PushAsync(new EmojiAnswered(answer));
+                }
             }
             catch (Exception ex)
             {

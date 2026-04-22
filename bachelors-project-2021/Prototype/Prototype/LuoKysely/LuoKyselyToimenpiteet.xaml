@@ -2,6 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2026 Mimosa Joenväärä
 
 This file is part of "Juttunurkka".
 
@@ -23,8 +24,33 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.LuoKyselyToimenpiteet"
              Title="Juttunurkka"
              >
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="LineSeedBold" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="LineSeedBold" />
+        </Style>
+    </ContentPage.Resources>
 
-    <StackLayout Spacing="40">
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Padding="0">
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
+
+        <StackLayout
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            Spacing="40">
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
                      HorizontalOptions="CenterAndExpand"
@@ -36,8 +62,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
               FontAttributes="Bold"
+              FontFamily="LineSeedBold"
               FontSize="30"
-              TextColor="#4383EF" 
+              TextColor="#4383EF"
               Margin="0,40,0,0"/>
            
             <Image Source="Emoji2.jpg"
@@ -52,6 +79,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="Start" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
+            FontFamily="LineSeedBold"
             FontSize="25"
             TextColor="Black"   
             Margin="0,-20,0,0"
@@ -67,9 +95,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Button Text="Vaihtoehdot"
             TextColor="black"
             FontAttributes="Bold"
+            FontFamily="LineSeedBold"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
-            BorderColor="#4383EF"
+            BorderColor="#bfd3c1"
             BackgroundColor="Transparent"
             FontSize="19"
             Margin="20,0,10,-40"
@@ -89,7 +118,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HeightRequest="200"
             Padding="1"
             BackgroundColor="Transparent"
-            BorderColor="#4383EF"
+            BorderColor="#bfd3c1"
             CornerRadius="10"
             IsVisible="true">
 
@@ -121,6 +150,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                             <Label 
                                                     Text="{Binding .}" 
                                                     TextColor="Black"
+                                                    FontFamily="LineSeedBold"
                                                     FontSize="20"
                                                     Margin="5,10,0,5"
                                                 />
@@ -161,6 +191,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
+                FontFamily="LineSeedBold"
                 FontSize="19"
                 Margin="20,0,10,40"
                 CornerRadius="10"
@@ -173,6 +204,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="JatkaButtonClicked" 
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
+                FontFamily="LineSeedBold"
+                BackgroundColor="#bfd3c1"
                 FontSize="19"
                 Margin="20,0,10,40"
                 CornerRadius="10"
@@ -181,6 +214,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             />
         </Grid>
 
-    </StackLayout>
+        </StackLayout>
+    </AbsoluteLayout>
 
 </ContentPage>

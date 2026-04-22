@@ -76,7 +76,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                        Grid.Row="2"
                        Scale="{Binding resultScale[7]}"/>
             </Grid>
-            <Button Text="Lopeta Kysely"
+            <Button Text="Lopeta juttunurkka"
                     Margin="0, 0, 0, 20"
                     Clicked="LopetaClicked"
                     CornerRadius="15"

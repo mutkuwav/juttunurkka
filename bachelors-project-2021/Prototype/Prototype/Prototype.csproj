@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<SingleProject>true</SingleProject>
@@ -36,9 +36,6 @@
 		</MauiXaml>
 		<MauiXaml Update="LuoKysely\LuoOmaVaihtoehto.xaml">
 			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="OdotetaanKyselynAloitustaClient.xaml">
-		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="VastaaKyselyyn\EmojiAnswered.xaml">
 			<Generator>MSBuild:Compile</Generator>

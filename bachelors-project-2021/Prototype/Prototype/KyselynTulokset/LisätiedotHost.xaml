@@ -3,7 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Joni Lapinkoski
-          2026 Matias Meriläinen
+    2026 Matias Meriläinen, Mimosa Joenväärä
 This file is part of "Juttunurkka".
 Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,17 +21,27 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LisätiedotHost"
-             Title="Juttunurkka"
-             BackgroundColor="#FFEA7F">
+             Title="Juttunurkka">
 
     <ContentPage.Content>
-        <StackLayout Padding="0,80,0,0">
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
+
+            <Image Source="background3.png"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"
+                   AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                   AbsoluteLayout.LayoutFlags="All" />
+
+        <StackLayout Padding="0,80,0,0"
+                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                     AbsoluteLayout.LayoutFlags="All">
 
             <Label
                 Text="TULOKSET"
                 FontSize="40"
                 FontAttributes="Bold"
-                FontFamily="BebasNeue"
+                FontFamily="LineSeedBold"
                 TextColor="Black"
                 HorizontalOptions="Center"
                 Margin="0,30,0,50"/>
@@ -71,8 +81,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                     VerticalOptions="End"
                                     HeightRequest="{Binding ScalePx}"
                                     WidthRequest="60"
-                                    BackgroundColor="#FEBA4F"
-                                    CornerRadius="5"
+                                    BackgroundColor="#bfd3c1"
+                                    CornerRadius="10"
                                     Padding="0"
                                     HasShadow="False">
                                     <Label
@@ -85,9 +95,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                 </Frame>
                             </Grid>
 
+                            <!--Pylväiden alla oleva viiva-->
                             <BoxView
                                 HeightRequest="8"
-                                BackgroundColor="#C381FD"
+                                BackgroundColor="#a0baa3"
                                 VerticalOptions="End"
                                 Margin="0,0,0,8"
                                 HorizontalOptions="FillAndExpand"/>
@@ -136,9 +147,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Button
                     Text="Keskeytä"
                     Clicked="KeskeytäClicked"
-                    BackgroundColor="#FEBA4F"
+                    BackgroundColor="#bfd3c1"
                     TextColor="Black"
                     FontSize="20"
+                    FontFamily="LineSeedBold"
                     FontAttributes="Bold"
                     CornerRadius="10"
                     HeightRequest="70"
@@ -149,10 +161,12 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Button
                     Text="Jatka"
                     Clicked="JatkaClicked"
-                    BackgroundColor="#FEBA4F"
+                    BackgroundColor="#bfd3c1"
                     TextColor="Black"
+                    FontFamily="LineSeedBold"
                     FontSize="20"
                     FontAttributes="Bold"
+
                     CornerRadius="10"
                     HeightRequest="70"
                     WidthRequest="150"
@@ -160,6 +174,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     BorderWidth="0"/>
             </StackLayout>
 
+            </StackLayout>
         </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

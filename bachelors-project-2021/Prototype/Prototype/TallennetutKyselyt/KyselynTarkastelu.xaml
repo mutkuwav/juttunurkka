@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Eemil Alamäki
+          2026 Mimosa Joenväärä
 
 This file is part of "Juttunurkka".
 
@@ -22,40 +23,23 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.KyselynTarkastelu"
              Title="Tarkastele kyselyä"
-             BackgroundColor="#ffea7f"
-             >
-    <!-- poista kysely -nappi-->
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem    x:Name="PoistaButton"
-			            Text="Poista"
-                        Clicked="PoistaClicked" />
-    </ContentPage.ToolbarItems>
-
-    <NavigationPage.TitleView >
-
-
-
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-
-            <Label Text="Kyselyn tarkastelu"
-                   x:Name="title"
-                   Margin="0 ,0,0,0"
-                   FontSize="20" 
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"  
-                   VerticalOptions="Center"/>
-        </StackLayout>
-
-
-
-    </NavigationPage.TitleView>
-
+            
+             NavigationPage.HasNavigationBar="False">
+    
 
     <AbsoluteLayout
         Padding="0"
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
 
         <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                      AbsoluteLayout.LayoutFlags="All" 
@@ -64,15 +48,45 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                           HorizontalOptions="FillAndExpand"
                          VerticalOptions="FillAndExpand">
 
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="10"
+                      Margin="0,10,0,0"
+                      VerticalOptions="Start">
+                    <Label x:Name="title"
+                           Grid.Column="0"
+                           Text="Juttunurkan tarkastelu"
+                           FontSize="20"
+                           FontFamily="LineSeedBold"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           VerticalOptions="Center"
+                           LineBreakMode="TailTruncation" />
+                    <Button x:Name="PoistaButton"
+                            Grid.Column="1"
+                            Text="Poista"
+                            Clicked="PoistaClicked"
+                            FontFamily="LineSeedBold"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            TextColor="Black"
+                            BackgroundColor="#bfd3c1"
+                            BorderColor="Transparent"
+                            Padding="12,6"
+                            CornerRadius="8"
+                            VerticalOptions="Center" />
+                </Grid>
+
                 <Label Margin="0,10,0,10"
                     Text="{Binding introMessage}"
                     TextColor="Black"
+                    FontFamily="LineSeedBold"
                     FontAttributes="Bold"
                     FontSize="22"/>
 
                 <Label Margin="0,10,0,10"
                         Text="{Binding roomCode}"
                         TextColor="Black"
+                        FontFamily="LineSeedBold"
                         FontAttributes="Bold"
                         FontSize="22"/>
 
@@ -103,7 +117,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                         FontSize="20"
                                         TextColor="Black"
                                         FontAttributes="Bold"
-                                        BackgroundColor="#feba4f"
+                                        BackgroundColor="#a0baa3"
+                                        FontFamily="LineSeedBold"
                                         BorderColor="Transparent"
                                         Text="Toimenpiteet" 
                                         Clicked="btnPopupButton_Clicked"
@@ -184,25 +199,27 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     HorizontalOptions="Center"
                     Margin="0,50,0,0">
                     <Button Grid.Column="0" 
-                            Text="Jaa kysely"
+                            Text="Jaa"
+                            FontFamily="LineSeedBold"
                             TextColor="Black"
                             FontAttributes="Bold"
                             Clicked="JaaClicked"
-                            FontSize="20"
+                            FontSize="16"
                             BorderColor="Transparent"
                             HeightRequest="65"
                             CornerRadius="10"
                             WidthRequest="160"
-                            BackgroundColor="#feba4e"/>
+                            BackgroundColor="#bfd3c1"/>
 
                     <Button Grid.Column="1" 
                             x:Name="MuokkaaButton"
 							Text="Muokkaa"
+                            FontFamily="LineSeedBold"
                             TextColor="Black"
                             FontAttributes="Bold"
-                            FontSize="20"
+                            FontSize="16"
                             Clicked="MuokkaaClicked"
-                            BackgroundColor="#feba4f"
+                            BackgroundColor="#bfd3c1"
                             BorderColor="Transparent"
                             HeightRequest="65"
                             WidthRequest="160"
@@ -225,7 +242,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <StackLayout
-                    BackgroundColor="#feba4f"
+                    BackgroundColor="#bfd3c1"
                     HeightRequest="165"
                     Orientation="Vertical"
                     WidthRequest="300">
@@ -239,16 +256,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                   HorizontalOptions="End"
                                   Clicked="X_Clicked"/>
 
-                    <Label Text="Poistetaanko kysely?" 
+                    <Label Text="Poistetaanko juttunurkka?" 
                            FontSize="24" 
-                           TextColor="Black" 
-                           Margin="0,10,0,0" 
+                           TextColor="Black"
+                           FontFamily="LineSeedBold" 
+                           Margin="0,10,0,4" 
                            HorizontalOptions="Center" 
-                           VerticalOptions="CenterAndExpand"/>
+                           VerticalOptions="Center"/>
 
-
-
-                    <AbsoluteLayout Margin="20"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                    <AbsoluteLayout Margin="20,0,20,12" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                         <Grid Margin="0,0,0,0">
                             <Button Grid.Column="1"   
                                      TextColor="Black"
@@ -256,15 +272,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                      BackgroundColor="Transparent"
                                      BorderColor="Transparent"                                  
                                      Text="Kyllä"
-                                     Margin="-50,10,10,10"
+                                     FontFamily="LineSeedBold"
+                                     Margin="-50,4,10,8"
                                      Clicked="Kyllä_Clicked"/>
                             <Button                               
                                      Text="Ei" 
                                      TextColor="Black"
                                      FontAttributes="Bold"
+                                     FontFamily="LineSeedBold"
                                      BackgroundColor="Transparent"
                                      BorderColor="Transparent"
-                                     Margin="50,10,10,10"
+                                     Margin="50,4,10,8"
                                      Clicked="Ei_Clicked" />
                         </Grid>
 

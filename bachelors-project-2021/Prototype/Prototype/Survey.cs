@@ -29,18 +29,18 @@ namespace Prototype
 		public List<Emoji> emojis { get; set; }
 		public string RoomCode { get; set; }
 		public string Name { get; set; }
-		
+
 		//empty constructor creates blank survey
 		public Survey() {
 			introMessage = null;
 			emojis = new List<Emoji>();
 
 			emojis.Add(new Emoji(0, "Iloinen", "neutral", false, new List<Activity>(), "emoji0lowres.png"));
-			emojis.Add(new Emoji(1, "H‰mm‰stynyt", "neutral", false, new List<Activity>(), "emoji1lowres.png"));
+			emojis.Add(new Emoji(1, "H√§mm√§stynyt", "neutral", false, new List<Activity>(), "emoji1lowres.png"));
 			emojis.Add(new Emoji(2, "Neutraali", "neutral", false, new List<Activity>(), "emoji2lowres.png"));
 			emojis.Add(new Emoji(3, "Vihainen", "neutral", false, new List<Activity>(), "emoji3lowres.png"));
-			emojis.Add(new Emoji(4, "V‰synyt", "neutral", false, new List<Activity>(), "emoji4lowres.png"));
-			emojis.Add(new Emoji(5, "Miettiv‰", "neutral", false, new List<Activity>(), "emoji5lowres.png"));
+			emojis.Add(new Emoji(4, "V√§synyt", "neutral", false, new List<Activity>(), "emoji4lowres.png"));
+			emojis.Add(new Emoji(5, "Miettiv√§", "neutral", false, new List<Activity>(), "emoji5lowres.png"));
 			emojis.Add(new Emoji(6, "Itkunauru", "neutral", false, new List<Activity>(), "emoji6lowres.png"));
             emojis.Add(new Emoji(7, "OmaEmoji", "neutral", false, new List<Activity>(), "emoji7lowres.png"));
 
@@ -69,7 +69,7 @@ namespace Prototype
 
 			Const.activities.TryGetValue(1, out activities);
 			activities = activities.GetRange(0, 2);
-			tempEmojis.Add(new Emoji(1, "H‰mm‰stynyt", "neutral", false, activities, "emoji1lowres.png"));
+			tempEmojis.Add(new Emoji(1, "H√§mm√§stynyt", "neutral", false, activities, "emoji1lowres.png"));
 
 			Const.activities.TryGetValue(2, out activities);
 			activities = activities.GetRange(0, 3);
@@ -81,11 +81,11 @@ namespace Prototype
 
 			Const.activities.TryGetValue(4, out activities);
 			activities = activities.GetRange(0, 2);
-			tempEmojis.Add(new Emoji(4, "V‰synyt", "neutral", false, activities, "emoji4lowres.png"));
+			tempEmojis.Add(new Emoji(4, "V√§synyt", "neutral", false, activities, "emoji4lowres.png"));
 
 			Const.activities.TryGetValue(5, out activities);
 			activities = activities.GetRange(0, 3);
-			tempEmojis.Add(new Emoji(5, "Miettiv‰", "neutral", false, activities, "emoji5lowres.png"));
+			tempEmojis.Add(new Emoji(5, "Miettiv√§", "neutral", false, activities, "emoji5lowres.png"));
 
 			Const.activities.TryGetValue(6, out activities);
 			activities = activities.GetRange(0, 3);
@@ -93,7 +93,7 @@ namespace Prototype
 
             Const.activities.TryGetValue(7, out activities);
             activities = activities.GetRange(0, 2);
-            tempEmojis.Add(new Emoji(7, "OmaEmoji", "neutral", false, activities, "blank_emoji_lowres.png"));
+            tempEmojis.Add(new Emoji(7, "OmaEmoji", "neutral", false, activities, "emoji7lowres.png"));
 
             string TempRoomCode = GenerateRandomCode();
 

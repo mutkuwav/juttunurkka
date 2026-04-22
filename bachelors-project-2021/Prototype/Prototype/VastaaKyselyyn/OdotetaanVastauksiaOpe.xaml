@@ -3,6 +3,7 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Emmi Poutanen, Riina Kaipia
+          2026 Mimosa Joenväärä
 
 This file is part of "Juttunurkka".
 
@@ -21,20 +22,36 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.OdotetaanVastauksiaOpe"
-             Title="Juttunurkka"
-             BackgroundColor="#ffea7f">
+             Title="Juttunurkka">
 
-    <ContentPage.Content>
-        <StackLayout>
-            <Label 
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Padding="0">
+
+        <!-- TAUSTAKUVA SIVULLE -->
+        <Image
+            Source="background3.png"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All" />
+
+        <StackLayout
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+
+            <Label
                 Text="Juttunurkka 1/2"
-                VerticalOptions="StartAndExpand" 
+                VerticalOptions="StartAndExpand"
                 HorizontalOptions="CenterAndExpand"
                 HorizontalTextAlignment="Center"
                 FontAttributes="Bold"
+                FontFamily="LineSeedBold"
                 FontSize="30"
                 TextColor="Black"
-                Margin="0,80,0,0"/>
+                Margin="0,10,0,0"/>
 
             <Grid Padding="50,0,70,20"
                   RowSpacing="20"
@@ -47,22 +64,27 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Label Text="Osallistujia:"
                        FontSize="25"
                        TextColor="Black"
+                       FontFamily="LineSeedRegular"
                        Grid.Row="1" Grid.Column="0" />
 
                 <Label Text="{Binding ParticipantsCount}"
                        FontSize="25"
                        TextColor="Black"
+                       FontFamily="LineSeedRegular"
                        Grid.Row="1" Grid.Column="1" 
                        HorizontalTextAlignment="End"/>
 
                 <Label Text="Vastanneita:"
                        FontSize="25"
+                       FontFamily="LineSeedRegular"
                        TextColor="Black"
+
                        Grid.Row="2" Grid.Column="0" />
 
                 <Label Text="{Binding RespondentsDisplay}"
                        FontSize="25"
                        TextColor="Black"
+                       FontFamily="LineSeedRegular"
                        Grid.Row="2" Grid.Column="1" 
                        HorizontalTextAlignment="End"/>
             </Grid>
@@ -78,6 +100,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         VerticalOptions="Center" 
                         HorizontalOptions="Start"
                         FontAttributes="Bold"
+                        FontFamily="LineSeedBold"
                         FontSize="25"
                         TextColor="Black"/>
 
@@ -88,6 +111,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         HorizontalOptions="Start"
                         FontSize="25"
                         FontAttributes="Bold"
+                        FontFamily="LineSeedBold"
                         TextColor="Black"
                         Margin="50,0,0,0"/>
                 </StackLayout>
@@ -98,7 +122,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                              HorizontalOptions="CenterAndExpand"
                              WidthRequest="300"
                              ScaleY="15"
-                             ProgressColor="#feba4e"
+                             ProgressColor="#f6c68a"
                              Margin="0,25,0,0"/>
             </StackLayout>
 
@@ -107,7 +131,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand"
                     FontAttributes="Bold"
-                    BackgroundColor="#feba4e"
+                    BackgroundColor="#bfd3c1"
+                    FontFamily="LineSeedBold"
                     TextColor="Black"
                     FontSize="20"
                     CornerRadius="10"
@@ -118,5 +143,5 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     Margin="0,60,0,30"
                     LineBreakMode="WordWrap"/>
         </StackLayout>
-    </ContentPage.Content>
+    </AbsoluteLayout>
 </ContentPage>

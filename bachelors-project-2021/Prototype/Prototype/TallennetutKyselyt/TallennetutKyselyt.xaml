@@ -3,115 +3,144 @@
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
           2025 Eemil Alamäki
-
+          2026 Mimosa Joenväärä
 This file is part of "Juttunurkka".
-
-Juttunurkka is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, version 3 of the License.
-
-Juttunurkka is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.TallennetutKyselyt"
-             BackgroundColor="#ffea7f">
+             BackgroundColor="Transparent"
+             Padding="0">
 
-    
-    <!-- custom back button solution -->
-    <NavigationPage.TitleView >
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-       
-        
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-            <ImageButton Source="backBtn.png"
-                         BackgroundColor="Transparent"
-                         HorizontalOptions="Start"
-                         Clicked="BackBtnClicked"
-                         Margin="0"
-                         HeightRequest="17"
-                         WidthRequest="17"/>
+        <!-- TAUSTAKUVA -->
+        <Image Source="background3.png"
+               Aspect="AspectFill"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"/>
 
-            <Label Text="Tallennetut kyselyt"
-                   Margin="20,0,0,0"
-                   FontSize="20" 
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"  
-                   VerticalOptions="Center"/>
+        <!-- PÄÄSISÄLTÖ -->
+        <StackLayout Spacing="15" Padding="20,20,20,20" VerticalOptions="FillAndExpand">
+
+            <!-- NAVIGATION / TAKAISIN-NAPPI JA OTSIKKO -->
+            <Grid HeightRequest="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- TAKAISIN-NAPPI vasemmassa yläkulmassa -->
+                <ImageButton Source="back_btn.png"
+                             BackgroundColor="Transparent"
+                             Clicked="BackBtnClicked"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Center"/>
+
+                <!-- OTSIKKO keskitetty -->
+                <Label Grid.Column="1"
+                       Text="Tallennetut juttunurkat"
+                       FontSize="30"
+                       FontFamily="LineSeedBold"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="0,-5,0,0"/>
+            </Grid>
+
+            <!-- OLETUSKYSELY -->
+            <Button Text="Oletus"
+                    Clicked="OletusClicked"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontFamily="LineSeedBold"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="300"
+                    HeightRequest="50"
+                    FontSize="20"
+                    BackgroundColor="#bfd3c1"
+                    BorderColor="Transparent"/>
+
+            <!-- COLLECTIONVIEW -->
+            <CollectionView x:Name="SurveyList"
+                            Margin="0"
+                            ItemsSource="{Binding Surveys}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnListSelection">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="1"
+                              RowDefinitions="Auto, *"
+                              ColumnDefinitions="Auto, *">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor"
+                                                    Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor"
+                                                    Value="#f6c68a" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Label Text="{Binding}"
+                                   FontSize="22"
+                                   FontFamily="LineSeedRegular"
+                                   HorizontalOptions="Start"/>
+                            <BoxView HeightRequest="1"
+                                     BackgroundColor="DarkGray"
+                                     Grid.ColumnSpan="2"
+                                     Grid.Row="1"
+                                     VerticalOptions="End"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Avaa-nappi -->
+            <Button x:Name="TButton"
+                    Text="Avaa"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontFamily="LineSeedBold"
+                    Clicked="AvaaClicked"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    FontSize="20"
+                    BackgroundColor="#bfd3c1"
+                    BorderColor="Transparent"
+                    BorderWidth="0.1"
+                    IsEnabled="False"/>
+
+            <!-- Poista kyselyitä -->
+            <Button x:Name="DeleteButton"
+                    Text="Poista juttunurkkia"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontFamily="LineSeedBold"
+                    Clicked="DeleteClicked"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="300"
+                    HeightRequest="50"
+                    FontSize="20"
+                    BackgroundColor="#bfd3c1"
+                    BorderColor="Transparent"
+                    BorderWidth="0.1"
+                    IsEnabled="True"/>
+
         </StackLayout>
 
-      
-        
-    </NavigationPage.TitleView>
-
-    <StackLayout>
-		<Button  Text="Oletuskysely"
-                 Clicked="OletusClicked" 
-                 Margin="20,20,20,20"
-                 TextColor="Black"
-                 FontAttributes="Bold"
-                 CornerRadius="10"
-                 HorizontalOptions="Center"
-                 WidthRequest="300"
-                 FontSize="20"
-                 HeightRequest="50"
-                 BackgroundColor="#feba4f"
-                 BorderColor="Transparent"
-                 IsEnabled="True"/>
-		
-        <CollectionView Margin="20"
-                        ItemsSource="{Binding Surveys}"
-                        SelectionMode="Single"
-                        SelectionChanged="OnListSelection">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="1"
-                          RowDefinitions="Auto, *"
-                          ColumnDefinitions="Auto, *"  >
-                        
-                        <Label 
-                               Text="{Binding}"
-                               FontSize="22"
-                               HorizontalOptions="Start"/>
-
-
-                        <!-- Separator -->
-                        <BoxView HeightRequest="1"
-                                BackgroundColor="DarkGray"
-                                Grid.ColumnSpan="2"
-                                Grid.Row="2"
-                                VerticalOptions="End"/>
-
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-
-        <Button  x:Name="TButton"
-                 Text="Avaa"
-                 TextColor="Black"
-                 FontAttributes="Bold"
-                 Clicked="AvaaClicked" 
-                 Margin="0,0,0,20"
-                 CornerRadius="10"
-                 HorizontalOptions="Center"
-                 WidthRequest="150"
-                 HeightRequest="50"
-                 FontSize="20"
-                 BackgroundColor="#feba4f"
-                 BorderColor="Transparent"
-                 BorderWidth="0.1"
-                 IsEnabled="False"/>
-
-
-    </StackLayout>
-
-
+    </Grid>
 </ContentPage>

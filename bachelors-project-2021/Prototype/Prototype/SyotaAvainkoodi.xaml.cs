@@ -63,8 +63,8 @@ namespace Prototype
             }
             else
             {
-                await DisplayAlert("Virheellinen avainkoodi", "Syöttämälläsi avainkoodilla ei löydy avointa kyselyä", "OK");
-                entry.Text = null;
+                await DisplayAlert("Virheellinen avainkoodi", "Syöttämälläsi avainkoodilla ei löydy avointa juttunurkkaa", "OK");
+                entry.Text = null; // Tyhjennetään kenttä virheen jälkeen
             }
 
             isProcessing = false;

@@ -53,7 +53,7 @@ namespace Prototype
 
             if (!Preferences.Get(onBoardingShownKey, false))
             {
-                OnBoardingBox.IsVisible = true;
+                Overlay.IsVisible = true;
 
                 Preferences.Set(onBoardingShownKey, true);
             }
@@ -133,12 +133,12 @@ namespace Prototype
 
         private void OnBoardingClicked(object sender, EventArgs e)
         {
-            OnBoardingBox.IsVisible = true;
+            Overlay.IsVisible = true;
         }
 
         private void CloseOnBoardingClicked(object sender, EventArgs e)
         {
-            OnBoardingBox.IsVisible = false;
+            Overlay.IsVisible = false;
         }
 
 

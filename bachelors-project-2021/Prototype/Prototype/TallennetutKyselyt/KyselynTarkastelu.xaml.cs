@@ -1,4 +1,4 @@
-﻿
+
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
@@ -136,14 +136,13 @@ namespace Prototype
         }
 
         async void Kyllä_Clicked(object sender, EventArgs e)
-        { 
+        {
+            popupSelection.IsVisible = false;
 
             //kyselyn Poistaminen!
             SurveyManager.GetInstance().DeleteSurvey(SurveyManager.GetInstance().GetSurvey().Name + ".txt");
-            // siirrytään Tallenetut kyselyt sivulle 
-           
-             await Navigation.PushAsync(new TallennetutKyselyt());
-
+            // siirrytään Tallennetut kyselyt -sivulle
+            await Navigation.PushAsync(new TallennetutKyselyt());
         }
 
 
